@@ -1,0 +1,217 @@
+import { PageTransition } from "@/components/animations/PageTransition";
+import Link from "next/link";
+import Image from "next/image";
+import { db } from "@/lib/db";
+import { Product } from "@/types";
+
+export default function Home() {
+  const config = db.homeConfig || {};
+  const getImg = (key: string, fallback: string) => config[key] || fallback;
+  return (
+    <PageTransition>
+      <main className="bg-cream w-full overflow-hidden">
+        
+        {/* Massive Brand Text - Absolutely positioned over the first two sections */}
+        <div className="absolute top-[35vh] md:top-[60vh] left-0 w-full z-20 pointer-events-none flex justify-centermix-blend-difference text-cream">
+          <h1 className="text-[14vw] font-display tracking-[0.15em] uppercase leading-none text-center w-full shadow-text">
+            Roselyra
+          </h1>
+        </div>
+
+        {/* --- ROW 1 --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="relative aspect-[3/4] md:aspect-auto md:h-[90vh] w-full group">
+            <Image
+              src={getImg('hero1', "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800")}
+              alt="Campaign Image 1"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div className="relative aspect-[3/4] md:aspect-auto md:h-[90vh] w-full group">
+             <Image
+              src={getImg('hero2', "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop")}
+              alt="Campaign Image 2"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </div>
+
+        {/* --- ROW 2 --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="relative aspect-square md:aspect-[4/3] w-full group bg-[#881416]">
+            {/* Custom deep red background with a product shot as seen in design */}
+            <Image
+              src={getImg('hero3', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
+              alt="Bags"
+              fill
+              className="object-cover mix-blend-overlay opacity-60"
+            />
+            <Link href="/collections/bags" className="absolute inset-0 z-10">
+              <span className="absolute bottom-1/4 right-8 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                Shop bags
+              </span>
+            </Link>
+          </div>
+          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+             <Image
+              src={getImg('hero4', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
+              alt="Sparkle"
+              fill
+              className="object-cover"
+            />
+            <Link href="/collections/new" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                Course in luxury
+              </span>
+            </Link>
+          </div>
+        </div>
+
+        {/* --- ROW 3 --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+            <Image
+              src={getImg('hero5', "https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?q=80&w=3148&auto=format&fit=crop")}
+              alt="Roses"
+              fill
+              className="object-cover"
+            />
+            <Link href="/collections/rose" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold">
+                Romance
+              </span>
+            </Link>
+          </div>
+          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+             <Image
+              src={getImg('hero6', "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=3270&auto=format&fit=crop")}
+              alt="Editorial"
+              fill
+              className="object-cover"
+            />
+            <Link href="/collections/editorial" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold">
+                Cruise In Focus
+              </span>
+            </Link>
+          </div>
+        </div>
+        
+        {/* --- ROW 4 --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="relative aspect-square md:aspect-[4/3] w-full group bg-noir">
+            <Image
+              src={getImg('hero7', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
+              alt="Black White Rose"
+              fill
+              className="object-cover mix-blend-luminosity opacity-80"
+            />
+            <Link href="/collections/dark" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                Summer Of Romance
+              </span>
+            </Link>
+          </div>
+          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+             <Image
+              src={getImg('hero8', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
+              alt="Minimal"
+              fill
+              className="object-cover"
+            />
+             <Link href="/collections/minimal" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                Course Luxury
+              </span>
+            </Link>
+          </div>
+        </div>
+
+        {/* --- ROW 5 --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+            <Image
+              src={getImg('hero9', "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2724&auto=format&fit=crop")}
+              alt="Crochet"
+              fill
+              className="object-cover"
+            />
+            <Link href="/collections/crochet" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold text-right">
+                Crochet Artifacts
+              </span>
+            </Link>
+          </div>
+          <div className="relative aspect-square md:aspect-[4/3] w-full group bg-[#111]">
+             <Image
+              src={getImg('hero10', "https://images.unsplash.com/photo-1645292155425-1126d1a03d21?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
+              alt="White Rose"
+              fill
+              className="object-cover opacity-80"
+            />
+            <Link href="/collections/artifacts" className="absolute inset-0 z-10">
+              <span className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                Art Pieces
+              </span>
+            </Link>
+          </div>
+        </div>
+
+        {/* --- Floating Product Row --- */}
+        <div className="py-32 px-4 md:px-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 items-end">
+            {/* Product 1 */}
+            <Link href="/products/bag" className="group flex flex-col items-center">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
+                <Image
+                  src={getImg('hero11', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
+                  alt="Product 1"
+                  fill
+                  className="object-contain mix-blend-multiply"
+                />
+              </div>
+              <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
+                Medium Rose Hobo Bag
+              </span>
+            </Link>
+
+            {/* Product 2 */}
+            <Link href="/products/dress" className="group flex flex-col items-center">
+              <div className="relative w-48 h-64 md:w-64 md:h-80 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
+                <Image
+                  src={getImg('hero12', "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2787&auto=format&fit=crop")}
+                  alt="Product 2"
+                  fill
+                  className="object-contain mix-blend-multiply"
+                />
+              </div>
+              <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
+                Long Sleeve Mini Dress
+              </span>
+            </Link>
+
+            {/* Product 3 */}
+            <Link href="/products/shoes" className="group flex flex-col items-center">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
+                 <Image
+                  src={getImg('hero13', "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=2960&auto=format&fit=crop")}
+                  alt="Product 3"
+                  fill
+                  className="object-contain mix-blend-multiply"
+                />
+              </div>
+              <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
+                Red Rose Heels
+              </span>
+            </Link>
+          </div>
+        </div>
+
+      </main>
+    </PageTransition>
+  );
+}

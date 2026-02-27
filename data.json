@@ -1,0 +1,1300 @@
+{
+  "products": [
+    {
+      "id": "prod_001",
+      "name": "Medium Rose Hobo Bag",
+      "slug": "medium-rose-hobo-bag",
+      "description": "A stunning hobo bag crafted from premium Italian leather with rose gold hardware. Features a spacious interior with multiple pockets.",
+      "longDesc": "This Medium Rose Hobo Bag is the epitome of understated luxury. Crafted from supple Italian leather, it features a unique rose silhouette that sets it apart. The bag includes a detachable shoulder strap, interior zip pocket, and magnetic closure. Perfect for day-to-night transitions.",
+      "price": 485,
+      "comparePrice": 650,
+      "sku": "BAG-ROSE-001",
+      "stock": 15,
+      "isFeatured": true,
+      "isArchived": true,
+      "isActive": false,
+      "order": 1,
+      "categoryId": "cat_002",
+      "collectionId": "col_002",
+      "category": {
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
+        "imageUrl": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+        "parentId": null,
+        "order": 2,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_002",
+        "name": "Rose Collection",
+        "slug": "rose",
+        "description": "Inspired by the beauty of roses",
+        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 2
+      },
+      "images": [
+        {
+          "id": "img_001_1",
+          "url": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+          "altText": "Rose Hobo Bag Front",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        },
+        {
+          "id": "img_001_2",
+          "url": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800",
+          "altText": "Rose Hobo Bag Side",
+          "order": 1,
+          "isPrimary": false,
+          "width": 800,
+          "height": 1000
+        },
+        {
+          "id": "img_001_3",
+          "url": "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800",
+          "altText": "Rose Hobo Bag Detail",
+          "order": 2,
+          "isPrimary": false,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "100% Italian Leather",
+      "fit": "Regular",
+      "care": "Store in dust bag. Clean by professional.",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Rose",
+        "Black",
+        "Tan"
+      ],
+      "tags": [
+        "bags",
+        "featured",
+        "new"
+      ],
+      "createdAt": "2026-01-15T00:00:00.000Z",
+      "updatedAt": "2026-01-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_002",
+      "name": "Long Sleeve Mini Dress",
+      "slug": "long-sleeve-mini-dress",
+      "description": "An elegant mini dress with long sleeves and a flattering silhouette. Perfect for both day and evening wear.",
+      "longDesc": "This Long Sleeve Mini Dress features a sophisticated mock neckline and bodycon fit. The stretch fabric ensures comfort while maintaining structure. Available in classic black and romantic blush pink.",
+      "price": 295,
+      "comparePrice": null,
+      "sku": "DRS-MINI-002",
+      "stock": 23,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 2,
+      "categoryId": "cat_001",
+      "collectionId": "col_001",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_001",
+        "name": "New Arrivals",
+        "slug": "new",
+        "description": "The latest additions to our collection",
+        "imageUrl": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 1
+      },
+      "images": [
+        {
+          "id": "img_002_1",
+          "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800",
+          "altText": "Long Sleeve Mini Dress",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        },
+        {
+          "id": "img_002_2",
+          "url": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+          "altText": "Long Sleeve Mini Dress Back",
+          "order": 1,
+          "isPrimary": false,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "95% Polyester, 5% Elastane",
+      "fit": "Slim",
+      "care": "Dry clean only",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Black",
+        "Blush Pink"
+      ],
+      "tags": [
+        "dresses",
+        "new",
+        "featured"
+      ],
+      "createdAt": "2026-01-10T00:00:00.000Z",
+      "updatedAt": "2026-01-10T00:00:00.000Z"
+    },
+    {
+      "id": "prod_003",
+      "name": "Red Rose Heels",
+      "slug": "red-rose-heels",
+      "description": "Stunning red heels with rose petal details. These statement shoes are perfect for special occasions.",
+      "longDesc": "These Red Rose Heels feature手工玫瑰装饰 at the toe, crafted from premium satin. The 4-inch stiletto heel provides height while maintaining comfort with cushioned insole.",
+      "price": 425,
+      "comparePrice": 550,
+      "sku": "SHO-HEEL-003",
+      "stock": 8,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 3,
+      "categoryId": "cat_003",
+      "collectionId": "col_002",
+      "category": {
+        "id": "cat_003",
+        "name": "Shoes",
+        "slug": "shoes",
+        "description": "Designer heels, boots, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800",
+        "parentId": null,
+        "order": 3,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_002",
+        "name": "Rose Collection",
+        "slug": "rose",
+        "description": "Inspired by the beauty of roses",
+        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 2
+      },
+      "images": [
+        {
+          "id": "img_003_1",
+          "url": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800",
+          "altText": "Red Rose Heels",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        },
+        {
+          "id": "img_003_2",
+          "url": "https://images.unsplash.com/photo-1515347619252-60a6bf4fffce?w=800",
+          "altText": "Red Rose Heels Side",
+          "order": 1,
+          "isPrimary": false,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "Satin Upper, Leather Sole",
+      "fit": "True to Size",
+      "care": "Store in box. Use shoe trees.",
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "colors": [
+        "Red",
+        "Nude",
+        "Black"
+      ],
+      "tags": [
+        "shoes",
+        "heels",
+        "featured"
+      ],
+      "createdAt": "2026-01-08T00:00:00.000Z",
+      "updatedAt": "2026-01-08T00:00:00.000Z"
+    },
+    {
+      "id": "prod_004",
+      "name": "Silk Blouse",
+      "slug": "silk-blouse",
+      "description": "Luxurious silk blouse with a relaxed fit. Perfect for layering or wearing alone.",
+      "longDesc": "This Silk Blouse is made from 100% mulberry silk with a beautiful drape. Features mother-of-pearl buttons and French seams for a polished finish.",
+      "price": 345,
+      "comparePrice": null,
+      "sku": "TOP-SILK-004",
+      "stock": 18,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 4,
+      "categoryId": "cat_004",
+      "collectionId": "col_005",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 5
+      },
+      "images": [
+        {
+          "id": "img_004_1",
+          "url": "https://images.unsplash.com/photo-1544441893-675973e31985?w=800",
+          "altText": "Silk Blouse",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "100% Mulberry Silk",
+      "fit": "Relaxed",
+      "care": "Dry clean recommended",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Ivory",
+        "Champagne",
+        "Navy"
+      ],
+      "tags": [
+        "tops",
+        "silk",
+        "minimal"
+      ],
+      "createdAt": "2025-12-20T00:00:00.000Z",
+      "updatedAt": "2025-12-20T00:00:00.000Z"
+    },
+    {
+      "id": "prod_005",
+      "name": "Leather Jacket",
+      "slug": "leather-jacket",
+      "description": "Classic leather jacket with modern details. A timeless wardrobe staple.",
+      "longDesc": "This Leather Jacket is crafted from buttery soft lambskin leather. Features asymmetric zip closure, silver hardware, and quilted lining. A true investment piece.",
+      "price": 895,
+      "comparePrice": 1200,
+      "sku": "OUT-LEATHER-005",
+      "stock": 7,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 5,
+      "categoryId": "cat_005",
+      "collectionId": "col_004",
+      "category": {
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+        "parentId": null,
+        "order": 5,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_004",
+        "name": "Dark Romance",
+        "slug": "dark",
+        "description": "Mysterious and alluring pieces",
+        "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+        "videoUrl": null,
+        "season": "Winter",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 4
+      },
+      "images": [
+        {
+          "id": "img_005_1",
+          "url": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+          "altText": "Leather Jacket",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "100% Lambskin Leather",
+      "fit": "Slim",
+      "care": "Professional leather cleaning",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Black",
+        "Brown"
+      ],
+      "tags": [
+        "outerwear",
+        "leather",
+        "winter"
+      ],
+      "createdAt": "2025-11-15T00:00:00.000Z",
+      "updatedAt": "2025-11-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_006",
+      "name": "Summer Floral Dress",
+      "slug": "summer-floral-dress",
+      "description": "Light and breezy summer dress with floral print. Perfect for warm days.",
+      "longDesc": "This Summer Floral Dress features a flattering A-line silhouette with adjustable straps. Made from breathable cotton blend with beautiful hand-drawn floral pattern.",
+      "price": 225,
+      "comparePrice": 0,
+      "sku": "DRS-FLORAL-006",
+      "stock": 30,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 6,
+      "categoryId": "cat_001",
+      "collectionId": "col_006",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_006",
+        "name": "Crochet Artifacts",
+        "slug": "crochet",
+        "description": "Handcrafted crochet pieces",
+        "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 6
+      },
+      "images": [
+        {
+          "id": "img_1772220893272_0",
+          "url": "/uploads/1772220887446-998972016-hero_img.jpg",
+          "altText": null,
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "70% Cotton, 30% Linen",
+      "fit": "Regular",
+      "care": "Machine wash cold",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Floral Blue",
+        "Floral Pink"
+      ],
+      "tags": [
+        "dresses",
+        "summer",
+        "floral"
+      ],
+      "createdAt": "2025-06-01T00:00:00.000Z",
+      "updatedAt": "2026-02-27T19:34:53.272Z"
+    },
+    {
+      "id": "prod_007",
+      "name": "Designer Crossbody Bag",
+      "slug": "designer-crossbody-bag",
+      "description": "Compact crossbody bag with chain strap. Elegant enough for evening wear.",
+      "longDesc": "This Designer Crossbody Bag features a sleek rectangular shape with interlocking clasp. The chain strap can be worn crossbody or doubled up as a shoulder bag.",
+      "price": 550,
+      "comparePrice": 700,
+      "sku": "BAG-CROSS-007",
+      "stock": 12,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 7,
+      "categoryId": "cat_002",
+      "collectionId": "col_008",
+      "category": {
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
+        "imageUrl": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+        "parentId": null,
+        "order": 2,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_008",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury bags collection",
+        "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+        "videoUrl": null,
+        "season": "Resort",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 8
+      },
+      "images": [
+        {
+          "id": "img_007_1",
+          "url": "https://images.unsplash.com/photo-1608234807905-4466023792f5?w=800",
+          "altText": "Designer Handbag",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "Leather with Gold Chain",
+      "fit": "Compact",
+      "care": "Store in dust bag",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Black",
+        "Silver",
+        "Gold"
+      ],
+      "tags": [
+        "bags",
+        "evening",
+        "featured"
+      ],
+      "createdAt": "2026-01-05T00:00:00.000Z",
+      "updatedAt": "2026-01-05T00:00:00.000Z"
+    },
+    {
+      "id": "prod_008",
+      "name": "Cashmere Sweater",
+      "slug": "cashmere-sweater",
+      "description": "Ultra-soft cashmere sweater. A winter essential.",
+      "longDesc": "This Cashmere Sweater is made from 100% Mongolian cashmere. Features ribbed cuffs and hem, crew neckline, and relaxed fit. Perfect for layering.",
+      "price": 395,
+      "comparePrice": null,
+      "sku": "TOP-CASH-008",
+      "stock": 20,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 8,
+      "categoryId": "cat_004",
+      "collectionId": "col_004",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_004",
+        "name": "Dark Romance",
+        "slug": "dark",
+        "description": "Mysterious and alluring pieces",
+        "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+        "videoUrl": null,
+        "season": "Winter",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 4
+      },
+      "images": [
+        {
+          "id": "img_008_1",
+          "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
+          "altText": "Cashmere Sweater",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "100% Cashmere",
+      "fit": "Relaxed",
+      "care": "Hand wash or dry clean",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Cream",
+        "Grey",
+        "Camel",
+        "Black"
+      ],
+      "tags": [
+        "tops",
+        "cashmere",
+        "winter"
+      ],
+      "createdAt": "2025-10-20T00:00:00.000Z",
+      "updatedAt": "2025-10-20T00:00:00.000Z"
+    },
+    {
+      "id": "prod_009",
+      "name": "Evening Gown",
+      "slug": "evening-gown",
+      "description": "Stunning evening gown with dramatic silhouette. Perfect for black-tie events.",
+      "longDesc": "This Evening Gown features a breathtaking floor-length silhouette with sheer illusion neckline and hand-sewn crystal embellishments. The velvet bodice flows into a dramatic tulle skirt.",
+      "price": 1850,
+      "comparePrice": null,
+      "sku": "DRS-EVE-009",
+      "stock": 3,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 9,
+      "categoryId": "cat_001",
+      "collectionId": "col_003",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_003",
+        "name": "Editorial",
+        "slug": "editorial",
+        "description": "Bold statements for the fearless",
+        "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
+        "videoUrl": null,
+        "season": "Fall",
+        "year": 2025,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 3
+      },
+      "images": [
+        {
+          "id": "img_009_1",
+          "url": "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=800",
+          "altText": "Evening Gown",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "Velvet, Tulle, Crystals",
+      "fit": "Slim",
+      "care": "Professional preservation",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Black",
+        "Burgundy"
+      ],
+      "tags": [
+        "dresses",
+        "evening",
+        "formal"
+      ],
+      "createdAt": "2025-09-10T00:00:00.000Z",
+      "updatedAt": "2025-09-10T00:00:00.000Z"
+    },
+    {
+      "id": "prod_010",
+      "name": "Classic Leather Boots",
+      "slug": "classic-leather-boots",
+      "description": "Timeless leather boots with comfortable block heel.",
+      "longDesc": "These Classic Leather Boots are crafted from premium leather with a comfortable 2-inch block heel. Features side zip closure and cushioned insole for all-day comfort.",
+      "price": 365,
+      "comparePrice": 450,
+      "sku": "SHO-BOOT-010",
+      "stock": 14,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 10,
+      "categoryId": "cat_003",
+      "collectionId": "col_005",
+      "category": {
+        "id": "cat_003",
+        "name": "Shoes",
+        "slug": "shoes",
+        "description": "Designer heels, boots, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800",
+        "parentId": null,
+        "order": 3,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 5
+      },
+      "images": [
+        {
+          "id": "img_010_1",
+          "url": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800",
+          "altText": "Classic Boots",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "Leather Upper, Rubber Sole",
+      "fit": "True to Size",
+      "care": "Condition regularly",
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "colors": [
+        "Black",
+        "Brown",
+        "Tan"
+      ],
+      "tags": [
+        "shoes",
+        "boots",
+        "minimal"
+      ],
+      "createdAt": "2025-08-15T00:00:00.000Z",
+      "updatedAt": "2025-08-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_011",
+      "name": "Essential Cotton T-Shirt",
+      "slug": "essential-cotton-tshirt",
+      "description": "Perfect everyday t-shirt in premium cotton.",
+      "longDesc": "This Essential Cotton T-Shirt is made from the finest pima cotton for exceptional softness and durability. Features relaxed fit and crew neck.",
+      "price": 85,
+      "comparePrice": null,
+      "sku": "TOP-TSHIRT-011",
+      "stock": 50,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 11,
+      "categoryId": "cat_004",
+      "collectionId": "col_005",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 5
+      },
+      "images": [
+        {
+          "id": "img_011_1",
+          "url": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800",
+          "altText": "Cotton T-Shirt",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "100% Pima Cotton",
+      "fit": "Relaxed",
+      "care": "Machine wash cold",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "White",
+        "Black",
+        "Grey",
+        "Navy"
+      ],
+      "tags": [
+        "tops",
+        "essentials",
+        "minimal"
+      ],
+      "createdAt": "2025-07-01T00:00:00.000Z",
+      "updatedAt": "2025-07-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod_012",
+      "name": "Tailored Wool Blazer",
+      "slug": "tailored-wool-blazer",
+      "description": "Sharp tailored blazer in premium wool.",
+      "longDesc": "This Tailored Wool Blazer features a structured silhouette with peak lapels and double-breasted closure. Made from Italian wool with subtle texture.",
+      "price": 675,
+      "comparePrice": 850,
+      "sku": "OUT-BLAZER-012",
+      "stock": 10,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 12,
+      "categoryId": "cat_005",
+      "collectionId": "col_003",
+      "category": {
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+        "parentId": null,
+        "order": 5,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_003",
+        "name": "Editorial",
+        "slug": "editorial",
+        "description": "Bold statements for the fearless",
+        "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
+        "videoUrl": null,
+        "season": "Fall",
+        "year": 2025,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 3
+      },
+      "images": [
+        {
+          "id": "img_012_1",
+          "url": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800",
+          "altText": "Tailored Blazer",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "100% Italian Wool",
+      "fit": "Slim",
+      "care": "Dry clean only",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Charcoal",
+        "Navy",
+        "Black"
+      ],
+      "tags": [
+        "outerwear",
+        "blazer",
+        "featured"
+      ],
+      "createdAt": "2025-11-01T00:00:00.000Z",
+      "updatedAt": "2025-11-01T00:00:00.000Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_001",
+      "name": "Dresses",
+      "slug": "dresses",
+      "description": "Elegant dresses for every occasion",
+      "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "parentId": null,
+      "order": 1,
+      "isActive": true
+    },
+    {
+      "id": "cat_002",
+      "name": "Bags",
+      "slug": "bags",
+      "description": "Luxury handbags and accessories",
+      "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "parentId": null,
+      "order": 2,
+      "isActive": true
+    },
+    {
+      "id": "cat_003",
+      "name": "Shoes",
+      "slug": "shoes",
+      "description": "Designer heels, boots, and more",
+      "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+      "parentId": null,
+      "order": 3,
+      "isActive": true
+    },
+    {
+      "id": "cat_004",
+      "name": "Tops",
+      "slug": "tops",
+      "description": "Blouses, shirts, and sweaters",
+      "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+      "parentId": null,
+      "order": 4,
+      "isActive": true
+    },
+    {
+      "id": "cat_005",
+      "name": "Outerwear",
+      "slug": "outerwear",
+      "description": "Jackets, coats, and blazers",
+      "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+      "parentId": null,
+      "order": 5,
+      "isActive": true
+    },
+    {
+      "id": "cat_006",
+      "name": "Accessories",
+      "slug": "accessories",
+      "description": "Jewelry, scarves, and more",
+      "imageUrl": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800",
+      "parentId": null,
+      "order": 6,
+      "isActive": true
+    }
+  ],
+  "collections": [
+    {
+      "id": "col_001",
+      "name": "New Arrivals",
+      "slug": "new",
+      "description": "The latest additions to our collection",
+      "imageUrl": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200",
+      "videoUrl": null,
+      "season": "Spring",
+      "year": 2026,
+      "isFeatured": true,
+      "isActive": true,
+      "order": 1
+    },
+    {
+      "id": "col_002",
+      "name": "Rose Collection",
+      "slug": "rose",
+      "description": "Inspired by the beauty of roses",
+      "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+      "videoUrl": null,
+      "season": "Spring",
+      "year": 2026,
+      "isFeatured": true,
+      "isActive": true,
+      "order": 2
+    },
+    {
+      "id": "col_003",
+      "name": "Editorial",
+      "slug": "editorial",
+      "description": "Bold statements for the fearless",
+      "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
+      "videoUrl": null,
+      "season": "Fall",
+      "year": 2025,
+      "isFeatured": true,
+      "isActive": true,
+      "order": 3
+    },
+    {
+      "id": "col_004",
+      "name": "Dark Romance",
+      "slug": "dark",
+      "description": "Mysterious and alluring pieces",
+      "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+      "videoUrl": null,
+      "season": "Winter",
+      "year": 2025,
+      "isFeatured": false,
+      "isActive": true,
+      "order": 4
+    },
+    {
+      "id": "col_005",
+      "name": "Minimal",
+      "slug": "minimal",
+      "description": "Clean lines and timeless elegance",
+      "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+      "videoUrl": null,
+      "season": "Summer",
+      "year": 2025,
+      "isFeatured": false,
+      "isActive": true,
+      "order": 5
+    },
+    {
+      "id": "col_006",
+      "name": "Crochet Artifacts",
+      "slug": "crochet",
+      "description": "Handcrafted crochet pieces",
+      "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
+      "videoUrl": null,
+      "season": "Summer",
+      "year": 2025,
+      "isFeatured": false,
+      "isActive": true,
+      "order": 6
+    },
+    {
+      "id": "col_007",
+      "name": "Art Pieces",
+      "slug": "artifacts",
+      "description": "Wearable art",
+      "imageUrl": "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1200",
+      "videoUrl": null,
+      "season": "Spring",
+      "year": 2025,
+      "isFeatured": false,
+      "isActive": true,
+      "order": 7
+    },
+    {
+      "id": "col_008",
+      "name": "Bags",
+      "slug": "bags",
+      "description": "Luxury bags collection",
+      "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+      "videoUrl": null,
+      "season": "Resort",
+      "year": 2026,
+      "isFeatured": true,
+      "isActive": true,
+      "order": 8
+    }
+  ],
+  "users": [
+    {
+      "id": "user_001",
+      "email": "admin@roselyra.com",
+      "name": "Admin User",
+      "role": "ADMIN",
+      "avatar": null,
+      "password": "$2a$10$kp.X.P0PsO7pLT5LZzV0V.5rO/rWq3UqXGfKNMiFYiKM7P5xYxYx",
+      "createdAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1772221098603",
+      "orderNumber": "RL-MM5AONE3-S5OF",
+      "userId": null,
+      "status": "PENDING",
+      "total": 272.5,
+      "subtotal": 225,
+      "shippingCost": 25,
+      "tax": 22.5,
+      "discount": 0,
+      "firstName": "Miraz",
+      "lastName": "Ahmed",
+      "email": "5346789rtyyhjgjh@gmail.com",
+      "phone": "123345678978654",
+      "address": "West High Level Road,Lalkhan Bazar, Chittagong",
+      "city": "Chittagong",
+      "state": "",
+      "postalCode": "4000",
+      "country": "United States",
+      "items": [
+        {
+          "id": "orderitem_1772221098603_dh88",
+          "productId": "prod_006",
+          "product": {
+            "id": "prod_006",
+            "name": "Summer Floral Dress",
+            "slug": "summer-floral-dress",
+            "description": "Light and breezy summer dress with floral print. Perfect for warm days.",
+            "longDesc": "This Summer Floral Dress features a flattering A-line silhouette with adjustable straps. Made from breathable cotton blend with beautiful hand-drawn floral pattern.",
+            "price": 225,
+            "comparePrice": 0,
+            "sku": "DRS-FLORAL-006",
+            "stock": 30,
+            "isFeatured": false,
+            "isArchived": false,
+            "isActive": true,
+            "order": 6,
+            "categoryId": "cat_001",
+            "collectionId": "col_006",
+            "category": {
+              "id": "cat_001",
+              "name": "Dresses",
+              "slug": "dresses",
+              "description": "Elegant dresses for every occasion",
+              "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+              "parentId": null,
+              "order": 1,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_006",
+              "name": "Crochet Artifacts",
+              "slug": "crochet",
+              "description": "Handcrafted crochet pieces",
+              "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
+              "videoUrl": null,
+              "season": "Summer",
+              "year": 2025,
+              "isFeatured": false,
+              "isActive": true,
+              "order": 6
+            },
+            "images": [
+              {
+                "id": "img_1772220893272_0",
+                "url": "/uploads/1772220887446-998972016-hero_img.jpg",
+                "altText": null,
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "70% Cotton, 30% Linen",
+            "fit": "Regular",
+            "care": "Machine wash cold",
+            "sizes": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "colors": [
+              "Floral Blue",
+              "Floral Pink"
+            ],
+            "tags": [
+              "dresses",
+              "summer",
+              "floral"
+            ],
+            "createdAt": "2025-06-01T00:00:00.000Z",
+            "updatedAt": "2026-02-27T19:34:53.272Z"
+          },
+          "quantity": 1,
+          "price": 225,
+          "size": "M",
+          "color": "Floral Blue"
+        }
+      ],
+      "createdAt": "2026-02-27T19:38:18.603Z"
+    }
+  ],
+  "media": [
+    {
+      "id": "media_1772220887447",
+      "url": "/uploads/1772220887446-998972016-hero_img.jpg",
+      "altText": "hero_img.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 585770,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-27T19:34:47.447Z"
+    },
+    {
+      "id": "media_1772221565513",
+      "url": "/uploads/1772221565513-209391530-hero_img.jpg",
+      "altText": "hero_img.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 585770,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-27T19:46:05.513Z"
+    },
+    {
+      "id": "media_1772221622156",
+      "url": "/uploads/1772221622155-72710278-raamin-ka-xqjvj7MvGcg-unsplash.jpg",
+      "altText": "raamin-ka-xqjvj7MvGcg-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 785483,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-27T19:47:02.156Z"
+    },
+    {
+      "id": "media_1772221629488",
+      "url": "/uploads/1772221629485-941947073-jon-ly-ADBOC3UP4eQ-unsplash.jpg",
+      "altText": "jon-ly-ADBOC3UP4eQ-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 1965148,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-27T19:47:09.488Z"
+    },
+    {
+      "id": "media_1772221634527",
+      "url": "/uploads/1772221634526-980703127-gelmis-bartulis-sWfNvRb_usU-unsplash.jpg",
+      "altText": "gelmis-bartulis-sWfNvRb_usU-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 2958149,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-27T19:47:14.527Z"
+    },
+    {
+      "id": "media_1772221646163",
+      "url": "/uploads/1772221646162-297870073-ivan-kazlouskij-jws2sj-f4eQ-unsplash.jpg",
+      "altText": "ivan-kazlouskij-jws2sj-f4eQ-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 2222455,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-27T19:47:26.163Z"
+    }
+  ],
+  "seoData": {},
+  "homeConfig": {
+    "hero": {
+      "row1": {
+        "title": "Ethereal Elegance",
+        "subtitle": "Discover our new Spring/Summer collection",
+        "links": [
+          {
+            "label": "Shop Now",
+            "url": "/shop"
+          }
+        ],
+        "images": [
+          "/uploads/1772219774543-991945229-calvin-visuals--yPg8cusGD8-unsplash.jpg",
+          "/uploads/1772219381398-768091209-hero_img.jpg"
+        ]
+      },
+      "row2": {
+        "images": [
+          "/uploads/1772219886792-754625846-calvin-visuals--yPg8cusGD8-unsplash.jpg"
+        ]
+      }
+    },
+    "hero1": "/uploads/1772221565513-209391530-hero_img.jpg",
+    "hero4": "/uploads/1772221622155-72710278-raamin-ka-xqjvj7MvGcg-unsplash.jpg",
+    "hero7": "/uploads/1772221629485-941947073-jon-ly-ADBOC3UP4eQ-unsplash.jpg",
+    "hero8": "/uploads/1772221634526-980703127-gelmis-bartulis-sWfNvRb_usU-unsplash.jpg",
+    "hero3": "/uploads/1772221646162-297870073-ivan-kazlouskij-jws2sj-f4eQ-unsplash.jpg"
+  },
+  "productImages": {}
+}

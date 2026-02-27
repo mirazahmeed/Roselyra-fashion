@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 35 30% 96%;
+		--foreground: 0 0% 4%;
+		--card: 35 30% 98%;
+		--card-foreground: 0 0% 4%;
+		--popover: 35 30% 98%;
+		--popover-foreground: 0 0% 4%;
+		--primary: 0 0% 4%;
+		--primary-foreground: 35 30% 96%;
+		--secondary: 30 20% 92%;
+		--secondary-foreground: 0 0% 4%;
+		--muted: 30 15% 90%;
+		--muted-foreground: 25 10% 40%;
+		--accent: 15 25% 80%;
+		--accent-foreground: 0 0% 4%;
+		--destructive: 0 84% 60%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 30 20% 85%;
+		--input: 30 20% 85%;
+		--ring: 0 0% 4%;
+		--radius: 0.25rem;
+	}
+
+	* {
+		@apply border-border;
+	}
+
+	html {
+		@apply scroll-smooth;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		@apply bg-cream text-noir font-sans;
+		overflow-x: hidden;
+	}
+
+	/* Lenis smooth scroll */
+	html.lenis {
+		height: auto;
+	}
+
+	.lenis.lenis-smooth {
+		scroll-behavior: auto !important;
+	}
+
+	.lenis.lenis-smooth [data-lenis-prevent] {
+		overscroll-behavior: contain;
+	}
+
+	.lenis.lenis-stopped {
+		overflow: hidden;
+	}
+
+	.lenis.lenis-scrolling iframe {
+		pointer-events: none;
+	}
+}
+
+@layer components {
+	/* Typography */
+	.font-display {
+		font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+		letter-spacing: -0.02em;
+	}
+
+	.text-brand {
+		font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+	}
+
+	/* Editorial grid */
+	.editorial-grid {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		gap: 1px;
+		background-color: theme("colors.noir");
+	}
+
+	.editorial-grid > * {
+		background-color: theme("colors.cream");
+	}
+
+	/* Image hover overlay */
+	.img-hover-zoom {
+		overflow: hidden;
+	}
+
+	.img-hover-zoom img {
+		transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.img-hover-zoom:hover img {
+		transform: scale(1.05);
+	}
+
+	/* Luxury button */
+	.btn-luxury {
+		@apply relative inline-flex items-center justify-center px-8 py-3 text-sm tracking-widest uppercase font-medium overflow-hidden;
+		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.btn-luxury-dark {
+		@apply btn-luxury bg-noir text-cream border border-noir;
+	}
+
+	.btn-luxury-dark:hover {
+		@apply bg-cream text-noir;
+	}
+
+	.btn-luxury-outline {
+		@apply btn-luxury bg-transparent text-noir border border-noir;
+	}
+
+	.btn-luxury-outline:hover {
+		@apply bg-noir text-cream;
+	}
+
+	/* Divider */
+	.divider-luxury {
+		@apply w-12 h-px bg-noir/30 mx-auto my-8;
+	}
+
+	/* Product card */
+	.product-card {
+		@apply cursor-pointer;
+	}
+
+	.product-card-image {
+		@apply relative overflow-hidden bg-cream-dark aspect-[3/4];
+	}
+
+	.product-card-image img {
+		@apply w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105;
+	}
+
+	/* Admin sidebar link */
+	.admin-link {
+		@apply flex items-center gap-3 px-4 py-2.5 text-sm text-muted-foreground rounded-sm hover:bg-secondary hover:text-foreground transition-colors duration-200;
+	}
+
+	.admin-link.active {
+		@apply bg-secondary text-foreground font-medium;
+	}
+
+	/* Skeleton shimmer */
+	.skeleton {
+		@apply bg-cream-dark relative overflow-hidden;
+	}
+
+	.skeleton::after {
+		content: "";
+		@apply absolute inset-0;
+		background: linear-gradient(
+			90deg,
+			transparent 0%,
+			rgba(255, 255, 255, 0.4) 50%,
+			transparent 100%
+		);
+		background-size: 200% 100%;
+		animation: shimmer 1.5s infinite;
+	}
+}
+
+@layer utilities {
+	/* Scrollbar */
+	.scrollbar-thin::-webkit-scrollbar {
+		width: 4px;
+		height: 4px;
+	}
+
+	.scrollbar-thin::-webkit-scrollbar-track {
+		@apply bg-cream-dark;
+	}
+
+	.scrollbar-thin::-webkit-scrollbar-thumb {
+		@apply bg-muted rounded-full;
+	}
+
+	/* Text balance */
+	.text-balance {
+		text-wrap: balance;
+	}
+
+	/* No scrollbar */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	/* Clip paths for editorial sections */
+	.clip-diagonal {
+		clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+	}
+
+	.clip-diagonal-reverse {
+		clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%);
+	}
+}
