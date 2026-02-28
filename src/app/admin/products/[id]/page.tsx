@@ -56,6 +56,15 @@ interface ProductImage {
   isPrimary: boolean;
 }
 
+interface ProductVariant {
+  id: string;
+  color: string;
+  size: string;
+  sku: string | null;
+  stock: number;
+  price: number | null;
+}
+
 export default function ProductForm() {
   const router = useRouter();
   const params = useParams();
@@ -67,10 +76,12 @@ export default function ProductForm() {
   const [images, setImages] = useState<ProductImage[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [sizes, setSizes] = useState<string[]>(["XS", "S", "M", "L", "XL"]);
+  const [newSize, setNewSize] = useState("");
   const [colors, setColors] = useState<string[]>([]);
   const [newColor, setNewColor] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState("");
+  const [variants, setVariants] = useState<ProductVariant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(isEditing);
 
@@ -136,6 +147,7 @@ export default function ProductForm() {
           setSizes(product.sizes || ["XS", "S", "M", "L", "XL"]);
           setColors(product.colors || []);
           setTags(product.tags || []);
+          setVariants(product.variants || []);
         }
       } catch (error) {
         toast.error("Failed to fetch product");
@@ -200,12 +212,55 @@ export default function ProductForm() {
   const addColor = () => {
     if (newColor && !colors.includes(newColor)) {
       setColors([...colors, newColor]);
+      generateVariants([...colors, newColor], sizes);
       setNewColor("");
     }
   };
 
   const removeColor = (color: string) => {
     setColors(colors.filter((c) => c !== color));
+    generateVariants(colors.filter((c) => c !== color), sizes);
+  };
+
+  const addSize = () => {
+    if (newSize && !sizes.includes(newSize)) {
+      setSizes([...sizes, newSize]);
+      generateVariants(colors, [...sizes, newSize]);
+      setNewSize("");
+    }
+  };
+
+  const removeSize = (size: string) => {
+    setSizes(sizes.filter((s) => s !== size));
+    generateVariants(colors, sizes.filter((s) => s !== size));
+  };
+
+  const generateVariants = (productColors: string[], productSizes: string[]) => {
+    const newVariants: ProductVariant[] = [];
+    productColors.forEach((color) => {
+      productSizes.forEach((size) => {
+        const existing = variants.find((v) => v.color === color && v.size === size);
+        if (existing) {
+          newVariants.push(existing);
+        } else {
+          newVariants.push({
+            id: `var_${Date.now()}_${color}_${size}`,
+            color,
+            size,
+            sku: null,
+            stock: 0,
+            price: null,
+          });
+        }
+      });
+    });
+    setVariants(newVariants);
+  };
+
+  const updateVariantStock = (variantId: string, stock: number) => {
+    setVariants(variants.map((v) => 
+      v.id === variantId ? { ...v, stock } : v
+    ));
   };
 
   const addTag = () => {
@@ -242,6 +297,7 @@ export default function ProductForm() {
           sizes,
           colors,
           tags,
+          variants,
         }),
       });
 
@@ -455,6 +511,68 @@ export default function ProductForm() {
                 </Button>
               </div>
             </div>
+
+            <div>
+              <Label>Sizes</Label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {sizes.map((size) => (
+                  <span
+                    key={size}
+                    className="inline-flex items-center gap-1 px-3 py-1 bg-secondary rounded-full text-sm"
+                  >
+                    {size}
+                    <button type="button" onClick={() => removeSize(size)} className="hover:text-destructive">
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-2 mt-3">
+                <Input
+                  value={newSize}
+                  onChange={(e) => setNewSize(e.target.value)}
+                  placeholder="Add size"
+                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addSize())}
+                />
+                <Button type="button" variant="outline" onClick={addSize}>
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+
+            {variants.length > 0 && (
+              <div>
+                <Label>Inventory by Color & Size</Label>
+                <div className="mt-2 border rounded-md overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="bg-muted">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium">Color</th>
+                        <th className="px-3 py-2 text-left font-medium">Size</th>
+                        <th className="px-3 py-2 text-left font-medium">Stock</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {variants.map((variant) => (
+                        <tr key={variant.id} className="border-t">
+                          <td className="px-3 py-2">{variant.color}</td>
+                          <td className="px-3 py-2">{variant.size}</td>
+                          <td className="px-3 py-2">
+                            <Input
+                              type="number"
+                              min="0"
+                              value={variant.stock}
+                              onChange={(e) => updateVariantStock(variant.id, parseInt(e.target.value) || 0)}
+                              className="h-8 w-24"
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
 
             <div>
               <Label>Tags</Label>

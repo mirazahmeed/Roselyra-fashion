@@ -48,6 +48,13 @@ export async function GET(req: NextRequest) {
 		const { searchParams } = new URL(req.url);
 		const page = parseInt(searchParams.get("page") ?? "1");
 		const perPage = parseInt(searchParams.get("perPage") ?? "20");
+		const orderNumber = searchParams.get("orderNumber");
+
+		if (orderNumber) {
+			const order = db.orders.find(o => o.orderNumber === orderNumber);
+			if (!order) return errorResponse("Order not found", 404);
+			return successResponse(order);
+		}
 
 		const result = db.getOrders({ page, perPage });
 		return successResponse(result);

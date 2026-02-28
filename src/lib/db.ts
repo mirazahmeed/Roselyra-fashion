@@ -1,5 +1,5 @@
-import type { Product, Category, Collection, Order, User, Media, ProductImage } from "@/types";
-import type { Role, OrderStatus } from "@/types";
+import type { Product, Category, Collection, Order, User, Media, ProductImage, ProductVariant, Payment, SiteSettings, EmailVerification } from "@/types";
+import type { Role, OrderStatus, PaymentType, PaymentMethod, PaymentStatus } from "@/types";
 import fs from "fs";
 import path from "path";
 
@@ -10,12 +10,49 @@ try {
   if (fs.existsSync(DATA_FILE)) {
     state = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
   } else {
-    // Failsafe empty state
-    state = { productImages: {}, categories: [], collections: [], products: [], users: [], orders: [], media: [], seoData: {}, homeConfig: {} };
+    state = { 
+      productImages: {}, 
+      categories: [], 
+      collections: [], 
+      products: [], 
+      users: [], 
+      orders: [], 
+      media: [], 
+      seoData: {}, 
+      homeConfig: {},
+      emailVerifications: [],
+      payments: [],
+      settings: {
+        bkashNumber: "",
+        bkashMerchantNumber: "",
+        deliveryCharge: 100,
+        minAdvanceAmount: 100,
+        codEnabled: true,
+        storeName: "Roselyra",
+        storeLogo: null,
+        storeEmail: "contact@roselyra.com",
+        storePhone: "+8801XXXXXXXXX",
+        storeAddress: "",
+        footerText: "© 2026 Roselyra. All rights reserved."
+      }
+    };
   }
 } catch (e) {
   console.error("Error loading DB", e);
-  state = { productImages: {}, categories: [], collections: [], products: [], users: [], orders: [], media: [], seoData: {}, homeConfig: {} };
+  state = { 
+    productImages: {}, 
+    categories: [], 
+    collections: [], 
+    products: [], 
+    users: [], 
+    orders: [], 
+    media: [], 
+    seoData: {}, 
+    homeConfig: {},
+    emailVerifications: [],
+    payments: [],
+    settings: {}
+  };
 }
 
 export const productImages: Record<string, ProductImage[]> = state.productImages || {};
@@ -26,7 +63,22 @@ export const users: User[] = state.users || [];
 export const orders: Order[] = state.orders || [];
 export const media: Media[] = state.media || [];
 export const seoData: any = state.seoData || {};
-export const homeConfig: any = state.homeConfig || { hero: null };
+export const homeConfig: any = state.homeConfig || {};
+export const emailVerifications: EmailVerification[] = state.emailVerifications || [];
+export const payments: Payment[] = state.payments || [];
+export const settings: SiteSettings = state.settings || {
+  bkashNumber: "",
+  bkashMerchantNumber: "",
+  deliveryCharge: 100,
+  minAdvanceAmount: 100,
+  codEnabled: true,
+  storeName: "Roselyra",
+  storeLogo: null,
+  storeEmail: "contact@roselyra.com",
+  storePhone: "+8801XXXXXXXXX",
+  storeAddress: "",
+  footerText: "© 2026 Roselyra. All rights reserved."
+};
 
 export function saveDB() {
   state.products = products;
@@ -38,6 +90,9 @@ export function saveDB() {
   state.seoData = seoData;
   state.productImages = productImages;
   state.homeConfig = homeConfig;
+  state.emailVerifications = emailVerifications;
+  state.payments = payments;
+  state.settings = settings;
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2));
   } catch (err) {
@@ -55,6 +110,7 @@ export const db = {
   orders,
   media,
   seoData,
+  settings,
 
   productImages,
 
@@ -182,6 +238,7 @@ export const db = {
       role: data.role || "CUSTOMER",
       avatar: data.avatar || null,
       password: data.password,
+      emailVerified: false,
       createdAt: new Date(),
     };
 
@@ -203,25 +260,35 @@ export const db = {
     country: string;
     shippingCost?: number;
     discount?: number;
+    paymentType?: PaymentType;
+    paymentMethod?: PaymentMethod;
+    paidAmount?: number;
+    userId?: string | null;
+    guestEmail?: string | null;
   }) {
     const subtotal = data.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const tax = subtotal * 0.1;
     const shippingCost = data.shippingCost || 0;
     const discount = data.discount || 0;
-    const total = subtotal + shippingCost + tax - discount;
+    const paidAmount = data.paidAmount || 0;
+    const dueAmount = subtotal + shippingCost + tax - discount - paidAmount;
 
     const orderNumber = `RL-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
     const order: Order = {
       id: `order_${Date.now()}`,
       orderNumber,
-      userId: null,
+      userId: data.userId || null,
+      guestEmail: data.guestEmail || null,
       status: "PENDING" as OrderStatus,
-      total,
+      paymentType: data.paymentType || "FULL",
+      paymentMethod: data.paymentMethod || "BKASH",
       subtotal,
       shippingCost,
       tax,
       discount,
+      paidAmount,
+      dueAmount,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -231,6 +298,7 @@ export const db = {
       state: data.state ?? null,
       postalCode: data.postalCode,
       country: data.country,
+      adminNotes: null,
       items: data.items.map(item => {
         const product = products.find(p => p.id === item.productId)!;
         return {
@@ -244,6 +312,7 @@ export const db = {
         };
       }),
       createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
     orders.push(order);
@@ -301,6 +370,7 @@ export const db = {
     colors?: string[];
     tags?: string[];
     images?: string[];
+    variants?: ProductVariant[];
   }) {
     const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
     
@@ -347,6 +417,7 @@ export const db = {
       sizes: data.sizes || [],
       colors: data.colors || [],
       tags: data.tags || [],
+      variants: data.variants || [],
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -443,5 +514,135 @@ export const db = {
     collections.push(collection);
     saveDB();
     return collection;
+  },
+
+  // ─── Email Verification ─────────────────────────────
+  createEmailVerification(email: string) {
+    const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    const verification: EmailVerification = {
+      id: `ev_${Date.now()}`,
+      email,
+      token,
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      createdAt: new Date(),
+    };
+    emailVerifications.push(verification);
+    saveDB();
+    return verification;
+  },
+
+  verifyEmail(token: string) {
+    const verification = emailVerifications.find(v => v.token === token);
+    if (!verification) {
+      return { success: false, error: "Invalid token" };
+    }
+    if (verification.expiresAt < new Date()) {
+      return { success: false, error: "Token expired" };
+    }
+    
+    // Mark user as verified
+    const user = users.find(u => u.email === verification.email);
+    if (user) {
+      user.emailVerified = true;
+    }
+    
+    // Remove verification record
+    const index = emailVerifications.indexOf(verification);
+    emailVerifications.splice(index, 1);
+    saveDB();
+    
+    return { success: true, email: verification.email };
+  },
+
+  getEmailVerification(email: string) {
+    return emailVerifications.find(v => v.email === email) || null;
+  },
+
+  // ─── Payment Management ─────────────────────────────
+  createPayment(data: {
+    orderId: string;
+    method: PaymentMethod;
+    senderNumber?: string;
+    transactionId?: string;
+    amount: number;
+  }) {
+    const payment: Payment = {
+      id: `pay_${Date.now()}`,
+      orderId: data.orderId,
+      method: data.method,
+      senderNumber: data.senderNumber || null,
+      transactionId: data.transactionId || null,
+      amount: data.amount,
+      status: "PENDING" as PaymentStatus,
+      adminNotes: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    payments.push(payment);
+    
+    // Update order status
+    const order = orders.find(o => o.id === data.orderId);
+    if (order) {
+      order.status = "PAYMENT_SUBMITTED" as OrderStatus;
+      order.paidAmount = data.amount;
+      order.dueAmount = order.subtotal + order.shippingCost + order.tax - order.discount - data.amount;
+      order.updatedAt = new Date();
+    }
+    
+    saveDB();
+    return payment;
+  },
+
+  updatePaymentStatus(paymentId: string, status: PaymentStatus, adminNotes?: string) {
+    const payment = payments.find(p => p.id === paymentId);
+    if (!payment) return null;
+    
+    payment.status = status;
+    if (adminNotes) payment.adminNotes = adminNotes;
+    payment.updatedAt = new Date();
+    
+    // Update order status based on payment status
+    const order = orders.find(o => o.id === payment.orderId);
+    if (order) {
+      if (status === "APPROVED") {
+        order.status = "CONFIRMED" as OrderStatus;
+        order.paymentMethod = payment.method;
+      } else if (status === "REJECTED") {
+        order.status = "PENDING" as OrderStatus;
+        order.paidAmount = 0;
+        order.dueAmount = order.subtotal + order.shippingCost + order.tax - order.discount;
+      }
+      order.updatedAt = new Date();
+    }
+    
+    saveDB();
+    return payment;
+  },
+
+  getPaymentByOrderId(orderId: string) {
+    return payments.find(p => p.orderId === orderId) || null;
+  },
+
+  // ─── Settings Management ─────────────────────────────
+  getSettings() {
+    return settings;
+  },
+
+  updateSettings(data: Partial<SiteSettings>) {
+    Object.assign(settings, data);
+    saveDB();
+    return settings;
+  },
+
+  // ─── Update Order ────────────────────────────────
+  updateOrderStatus(orderId: string, status: OrderStatus, adminNotes?: string) {
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return null;
+    
+    order.status = status;
+    if (adminNotes) order.adminNotes = adminNotes;
+    order.updatedAt = new Date();
+    saveDB();
+    return order;
   },
 };

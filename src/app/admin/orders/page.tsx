@@ -18,6 +18,7 @@ import Image from "next/image";
 
 const statusConfig: Record<OrderStatus, { label: string; color: string; icon: typeof Clock }> = {
   PENDING: { label: "Pending", color: "bg-yellow-100 text-yellow-800", icon: Clock },
+  PAYMENT_SUBMITTED: { label: "Payment Submitted", color: "bg-orange-100 text-orange-800", icon: Clock },
   CONFIRMED: { label: "Confirmed", color: "bg-blue-100 text-blue-800", icon: CheckCircle },
   PROCESSING: { label: "Processing", color: "bg-purple-100 text-purple-800", icon: Package },
   SHIPPED: { label: "Shipped", color: "bg-indigo-100 text-indigo-800", icon: Truck },
@@ -160,7 +161,7 @@ export default function AdminOrders() {
                         {order.items?.length || 0} item(s)
                       </td>
                       <td className="p-4 align-middle text-right font-medium">
-                        ${order.total.toFixed(2)}
+                        ${(order.subtotal + order.shippingCost + order.tax - order.discount).toFixed(2)}
                       </td>
                       <td className="p-4 align-middle text-muted-foreground">
                         {new Date(order.createdAt).toLocaleDateString()}
@@ -238,7 +239,7 @@ export default function AdminOrders() {
                     )}
                     <div className="flex justify-between font-medium pt-2 border-t">
                       <span>Total</span>
-                      <span>${selectedOrder.total.toFixed(2)}</span>
+                      <span>${(selectedOrder.subtotal + selectedOrder.shippingCost + selectedOrder.tax - selectedOrder.discount).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>

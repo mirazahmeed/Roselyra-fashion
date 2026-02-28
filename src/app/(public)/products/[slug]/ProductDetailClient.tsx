@@ -24,6 +24,23 @@ export default function ProductDetailClient({ product }: { product: Product }) {
     product.colors?.[0] || null
   );
 
+  const getAvailableStock = () => {
+    if (!selectedColor && !selectedSize) {
+      return product.stock;
+    }
+    if (product.variants && product.variants.length > 0) {
+      const variant = product.variants.find(
+        (v) => v.color === selectedColor && v.size === selectedSize
+      );
+      if (variant) {
+        return variant.stock;
+      }
+    }
+    return product.stock;
+  };
+
+  const availableStock = getAvailableStock();
+
   const handleAddToCart = () => {
     if (product.sizes?.length && !selectedSize) {
       toast.error("Please select a size");
@@ -33,8 +50,8 @@ export default function ProductDetailClient({ product }: { product: Product }) {
       toast.error("Please select a color");
       return;
     }
-    if (product.stock < 1) {
-      toast.error("Product is sold out");
+    if (availableStock < 1) {
+      toast.error("Selected variant is sold out");
       return;
     }
 
@@ -83,12 +100,27 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 </h1>
                 
                 {/* Price */}
-                <div className="flex items-center gap-4 text-xs tracking-widest mb-10 text-noir/80">
+                <div className="flex items-center gap-4 text-xs tracking-widest mb-4 text-noir/80">
                   {product.comparePrice && product.comparePrice > product.price && (
                     <span className="line-through">${product.comparePrice.toFixed(2)}</span>
                   )}
                   <span>${product.price.toFixed(2)}</span>
                 </div>
+
+                {/* Stock indicator */}
+                {(product.colors?.length || product.sizes?.length) && (
+                  <div className="text-xs tracking-widest mb-8">
+                    {availableStock > 0 ? (
+                      <span className="text-green-600">
+                        {availableStock} in stock
+                      </span>
+                    ) : (
+                      <span className="text-red-500">
+                        Out of stock
+                      </span>
+                    )}
+                  </div>
+                )}
 
                 {/* Description */}
                 <div className="prose prose-sm prose-p:text-noir/60 max-w-sm mb-12 leading-relaxed text-[11px] md:text-xs">
@@ -162,9 +194,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                     variant="luxury"
                     className="flex-1 h-12 text-[10px] tracking-[0.2em] uppercase"
                     onClick={handleAddToCart}
-                    disabled={product.stock < 1}
+                    disabled={availableStock < 1}
                   >
-                    {product.stock < 1 ? "Sold Out" : "Add to Bag"}
+                    {availableStock < 1 ? "Sold Out" : "Add to Bag"}
                   </Button>
                   
                   <button

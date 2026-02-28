@@ -139,7 +139,7 @@ export default function AdminDashboard() {
                     <p className="text-xs text-muted-foreground">{order.firstName} {order.lastName}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium text-sm">${order.total.toFixed(2)}</p>
+                    <p className="font-medium text-sm">${(order.subtotal + order.shippingCost + order.tax - order.discount).toFixed(2)}</p>
                     <p className="text-xs text-muted-foreground">{new Date(order.createdAt).toLocaleDateString()}</p>
                   </div>
                 </div>

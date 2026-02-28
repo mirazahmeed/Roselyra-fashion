@@ -4,12 +4,25 @@ export type Role = "CUSTOMER" | "EDITOR" | "ADMIN";
 
 export type OrderStatus =
 	| "PENDING"
+	| "PAYMENT_SUBMITTED"
 	| "CONFIRMED"
 	| "PROCESSING"
 	| "SHIPPED"
 	| "DELIVERED"
 	| "CANCELLED"
 	| "REFUNDED";
+
+export type PaymentType = "COD" | "FULL" | "ADVANCE";
+export type PaymentMethod = "BKASH" | "COD" | "CARD";
+export type PaymentStatus = "PENDING" | "APPROVED" | "REJECTED";
+
+export interface EmailVerification {
+	id: string;
+	email: string;
+	token: string;
+	expiresAt: Date;
+	createdAt: Date;
+}
 
 // ─── User ─────────────────────────────────────────
 export interface User {
@@ -19,6 +32,7 @@ export interface User {
 	role: Role;
 	avatar: string | null;
 	password?: string;
+	emailVerified: boolean;
 	createdAt: Date;
 }
 
@@ -59,6 +73,16 @@ export interface Collection {
 	order: number;
 }
 
+// ─── Product Variant ───────────────────────────────
+export interface ProductVariant {
+	id: string;
+	color: string;
+	size: string;
+	sku: string | null;
+	stock: number;
+	price: number | null;
+}
+
 // ─── Product ──────────────────────────────────────
 export interface ProductImage {
 	id: string;
@@ -95,6 +119,7 @@ export interface Product {
 	sizes: string[];
 	colors: string[];
 	tags: string[];
+	variants: ProductVariant[];
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -132,12 +157,16 @@ export interface Order {
 	id: string;
 	orderNumber: string;
 	userId: string | null;
+	guestEmail: string | null;
 	status: OrderStatus;
-	total: number;
+	paymentType: PaymentType;
+	paymentMethod: PaymentMethod;
 	subtotal: number;
 	shippingCost: number;
 	tax: number;
 	discount: number;
+	paidAmount: number;
+	dueAmount: number;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -148,7 +177,38 @@ export interface Order {
 	postalCode: string;
 	country: string;
 	items: OrderItem[];
+	adminNotes: string | null;
 	createdAt: Date;
+	updatedAt: Date;
+}
+
+// ─── Payment ────────────────────────────────────────
+export interface Payment {
+	id: string;
+	orderId: string;
+	method: PaymentMethod;
+	senderNumber: string | null;
+	transactionId: string | null;
+	amount: number;
+	status: PaymentStatus;
+	adminNotes: string | null;
+	createdAt: Date;
+	updatedAt: Date;
+}
+
+// ─── Settings ────────────────────────────────────────
+export interface SiteSettings {
+	bkashNumber: string;
+	bkashMerchantNumber: string;
+	deliveryCharge: number;
+	minAdvanceAmount: number;
+	codEnabled: boolean;
+	storeName: string;
+	storeLogo: string | null;
+	storeEmail: string;
+	storePhone: string;
+	storeAddress: string;
+	footerText: string;
 }
 
 // ─── Media ────────────────────────────────────────
