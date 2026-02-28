@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Loader2, Eye, Package, Truck, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Search, Loader2, Eye, Package, Truck, CheckCircle, XCircle, Clock, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Order, OrderStatus } from "@/types";
+import { Order, OrderStatus, Payment, PaymentStatus } from "@/types";
 import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
 import Image from "next/image";
@@ -32,6 +32,8 @@ export default function AdminOrders() {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+  const [payment, setPayment] = useState<Payment | null>(null);
+  const [isLoadingPayment, setIsLoadingPayment] = useState(false);
 
   const fetchOrders = async () => {
     setIsLoading(true);
@@ -55,6 +57,34 @@ export default function AdminOrders() {
     fetchOrders();
   }, []);
 
+  const fetchPayment = async (orderId: string) => {
+    setIsLoadingPayment(true);
+    try {
+      const token = useAuthStore.getState().accessToken;
+      const res = await fetch(`/api/payments?orderId=${orderId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const json = await res.json();
+      if (json.success) {
+        setPayment(json.data);
+      } else {
+        setPayment(null);
+      }
+    } catch (error) {
+      setPayment(null);
+    } finally {
+      setIsLoadingPayment(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedOrder) {
+      fetchPayment(selectedOrder.id);
+    } else {
+      setPayment(null);
+    }
+  }, [selectedOrder]);
+
   const updateOrderStatus = async (orderId: string, status: OrderStatus) => {
     try {
       const token = useAuthStore.getState().accessToken;
@@ -73,6 +103,54 @@ export default function AdminOrders() {
         setSelectedOrder(null);
       } else {
         toast.error("Failed to update order");
+      }
+    } catch (error) {
+      toast.error("An error occurred");
+    }
+  };
+
+  const deleteOrder = async (orderId: string) => {
+    if (!window.confirm("Are you sure you want to delete this order?")) return;
+    try {
+      const token = useAuthStore.getState().accessToken;
+      const res = await fetch(`/api/orders/${orderId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (res.ok) {
+        toast.success("Order deleted");
+        fetchOrders();
+        if (selectedOrder?.id === orderId) {
+          setSelectedOrder(null);
+        }
+      } else {
+        toast.error("Failed to delete order");
+      }
+    } catch (error) {
+      toast.error("An error occurred");
+    }
+  };
+
+  const updatePaymentStatus = async (status: PaymentStatus) => {
+    if (!payment) return;
+    try {
+      const token = useAuthStore.getState().accessToken;
+      const res = await fetch("/api/payments", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ paymentId: payment.id, status }),
+      });
+
+      if (res.ok) {
+        toast.success(`Payment ${status.toLowerCase()}`);
+        fetchPayment(selectedOrder!.id);
+        fetchOrders();
+      } else {
+        toast.error("Failed to update payment");
       }
     } catch (error) {
       toast.error("An error occurred");
@@ -143,7 +221,7 @@ export default function AdminOrders() {
                 filteredOrders.map((order) => {
                   const StatusIcon = statusConfig[order.status].icon;
                   return (
-                    <tr key={order.id} className="border-b transition-colors hover:bg-muted/30">
+                    <tr key={order.id} className="border-b transition-colors hover:bg-muted/30 cursor-pointer" onClick={() => setSelectedOrder(order)}>
                       <td className="p-4 align-middle font-medium">
                         {order.orderNumber}
                       </td>
@@ -167,13 +245,23 @@ export default function AdminOrders() {
                         {new Date(order.createdAt).toLocaleDateString()}
                       </td>
                       <td className="p-4 align-middle">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => setSelectedOrder(order)}
-                        >
-                          <Eye className="w-4 h-4" />
-                        </Button>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={(e) => { e.stopPropagation(); setSelectedOrder(order); }}
+                          >
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="text-red-500 hover:text-red-600 hover:bg-red-50"
+                            onClick={(e) => { e.stopPropagation(); deleteOrder(order.id); }}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -243,6 +331,68 @@ export default function AdminOrders() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div>
+                <h3 className="text-sm font-medium uppercase tracking-wider mb-3">Payment Information</h3>
+                {isLoadingPayment ? (
+                  <div className="text-sm text-muted-foreground">Loading payment info...</div>
+                ) : payment ? (
+                  <div className="bg-muted/30 rounded-md p-4 space-y-3">
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <span className="text-muted-foreground">Method</span>
+                        <p className="font-medium">{payment.method}</p>
+                      </div>
+                      <div>
+                        <span className="text-muted-foreground">Amount</span>
+                        <p className="font-medium">${payment.amount.toFixed(2)}</p>
+                      </div>
+                      {payment.senderNumber && (
+                        <div>
+                          <span className="text-muted-foreground">Sender Number</span>
+                          <p className="font-medium">{payment.senderNumber}</p>
+                        </div>
+                      )}
+                      {payment.transactionId && (
+                        <div>
+                          <span className="text-muted-foreground">Transaction ID</span>
+                          <p className="font-medium">{payment.transactionId}</p>
+                        </div>
+                      )}
+                      <div>
+                        <span className="text-muted-foreground">Status</span>
+                        <p className={`font-medium ${
+                          payment.status === "APPROVED" ? "text-green-600" :
+                          payment.status === "REJECTED" ? "text-red-600" :
+                          "text-yellow-600"
+                        }`}>
+                          {payment.status}
+                        </p>
+                      </div>
+                    </div>
+                    {payment.status === "PENDING" && (
+                      <div className="flex gap-2 pt-2 border-t">
+                        <Button
+                          size="sm"
+                          className="bg-green-600 hover:bg-green-700"
+                          onClick={() => updatePaymentStatus("APPROVED")}
+                        >
+                          Approve Payment
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => updatePaymentStatus("REJECTED")}
+                        >
+                          Reject Payment
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-sm text-muted-foreground">No payment record found</div>
+                )}
               </div>
 
               <div>

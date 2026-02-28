@@ -1181,214 +1181,7 @@
       "createdAt": "2026-02-28T07:42:04.076Z"
     }
   ],
-  "orders": [
-    {
-      "id": "order_1772221098603",
-      "orderNumber": "RL-MM5AONE3-S5OF",
-      "userId": null,
-      "status": "PENDING",
-      "total": 272.5,
-      "subtotal": 225,
-      "shippingCost": 25,
-      "tax": 22.5,
-      "discount": 0,
-      "firstName": "Miraz",
-      "lastName": "Ahmed",
-      "email": "5346789rtyyhjgjh@gmail.com",
-      "phone": "123345678978654",
-      "address": "West High Level Road,Lalkhan Bazar, Chittagong",
-      "city": "Chittagong",
-      "state": "",
-      "postalCode": "4000",
-      "country": "United States",
-      "items": [
-        {
-          "id": "orderitem_1772221098603_dh88",
-          "productId": "prod_006",
-          "product": {
-            "id": "prod_006",
-            "name": "Summer Floral Dress",
-            "slug": "summer-floral-dress",
-            "description": "Light and breezy summer dress with floral print. Perfect for warm days.",
-            "longDesc": "This Summer Floral Dress features a flattering A-line silhouette with adjustable straps. Made from breathable cotton blend with beautiful hand-drawn floral pattern.",
-            "price": 225,
-            "comparePrice": 0,
-            "sku": "DRS-FLORAL-006",
-            "stock": 30,
-            "isFeatured": false,
-            "isArchived": false,
-            "isActive": true,
-            "order": 6,
-            "categoryId": "cat_001",
-            "collectionId": "col_006",
-            "category": {
-              "id": "cat_001",
-              "name": "Dresses",
-              "slug": "dresses",
-              "description": "Elegant dresses for every occasion",
-              "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
-              "parentId": null,
-              "order": 1,
-              "isActive": true
-            },
-            "collection": {
-              "id": "col_006",
-              "name": "Crochet Artifacts",
-              "slug": "crochet",
-              "description": "Handcrafted crochet pieces",
-              "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
-              "videoUrl": null,
-              "season": "Summer",
-              "year": 2025,
-              "isFeatured": false,
-              "isActive": true,
-              "order": 6
-            },
-            "images": [
-              {
-                "id": "img_1772220893272_0",
-                "url": "/uploads/1772220887446-998972016-hero_img.jpg",
-                "altText": null,
-                "order": 0,
-                "isPrimary": true,
-                "width": 800,
-                "height": 1000
-              }
-            ],
-            "material": "70% Cotton, 30% Linen",
-            "fit": "Regular",
-            "care": "Machine wash cold",
-            "sizes": [
-              "XS",
-              "S",
-              "M",
-              "L",
-              "XL"
-            ],
-            "colors": [
-              "Floral Blue",
-              "Floral Pink"
-            ],
-            "tags": [
-              "dresses",
-              "summer",
-              "floral"
-            ],
-            "createdAt": "2025-06-01T00:00:00.000Z",
-            "updatedAt": "2026-02-27T19:34:53.272Z"
-          },
-          "quantity": 1,
-          "price": 225,
-          "size": "M",
-          "color": "Floral Blue"
-        }
-      ],
-      "createdAt": "2026-02-27T19:38:18.603Z"
-    },
-    {
-      "id": "order_1772266794585",
-      "orderNumber": "RL-MM61W2MX-6452",
-      "userId": null,
-      "status": "PENDING",
-      "total": 272.5,
-      "subtotal": 225,
-      "shippingCost": 25,
-      "tax": 22.5,
-      "discount": 0,
-      "firstName": "Miraz",
-      "lastName": "Ahmed",
-      "email": "mirazahmed31@gmail.com",
-      "phone": "326256725",
-      "address": "West Level Road,Bazar, Chittagong",
-      "city": "Chittagong",
-      "state": "",
-      "postalCode": "4000",
-      "country": "United States",
-      "items": [
-        {
-          "id": "orderitem_1772266794585_rw03",
-          "productId": "prod_006",
-          "product": {
-            "id": "prod_006",
-            "name": "Summer Floral Dress",
-            "slug": "summer-floral-dress",
-            "description": "Light and breezy summer dress with floral print. Perfect for warm days.",
-            "longDesc": "This Summer Floral Dress features a flattering A-line silhouette with adjustable straps. Made from breathable cotton blend with beautiful hand-drawn floral pattern.",
-            "price": 225,
-            "comparePrice": 0,
-            "sku": "DRS-FLORAL-006",
-            "stock": 30,
-            "isFeatured": false,
-            "isArchived": false,
-            "isActive": true,
-            "order": 6,
-            "categoryId": "cat_001",
-            "collectionId": "col_006",
-            "category": {
-              "id": "cat_001",
-              "name": "Dresses",
-              "slug": "dresses",
-              "description": "Elegant dresses for every occasion",
-              "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
-              "parentId": null,
-              "order": 1,
-              "isActive": true
-            },
-            "collection": {
-              "id": "col_006",
-              "name": "Crochet Artifacts",
-              "slug": "crochet",
-              "description": "Handcrafted crochet pieces",
-              "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
-              "videoUrl": null,
-              "season": "Summer",
-              "year": 2025,
-              "isFeatured": false,
-              "isActive": true,
-              "order": 6
-            },
-            "images": [
-              {
-                "id": "img_1772220893272_0",
-                "url": "/uploads/1772220887446-998972016-hero_img.jpg",
-                "altText": null,
-                "order": 0,
-                "isPrimary": true,
-                "width": 800,
-                "height": 1000
-              }
-            ],
-            "material": "70% Cotton, 30% Linen",
-            "fit": "Regular",
-            "care": "Machine wash cold",
-            "sizes": [
-              "XS",
-              "S",
-              "M",
-              "L",
-              "XL"
-            ],
-            "colors": [
-              "Floral Blue",
-              "Floral Pink"
-            ],
-            "tags": [
-              "dresses",
-              "summer",
-              "floral"
-            ],
-            "createdAt": "2025-06-01T00:00:00.000Z",
-            "updatedAt": "2026-02-27T19:34:53.272Z"
-          },
-          "quantity": 1,
-          "price": 225,
-          "size": "XS",
-          "color": "Floral Blue"
-        }
-      ],
-      "createdAt": "2026-02-28T08:19:54.585Z"
-    }
-  ],
+  "orders": [],
   "media": [
     {
       "id": "media_1772220887447",
@@ -1528,7 +1321,32 @@
   },
   "productImages": {},
   "emailVerifications": [],
-  "payments": [],
+  "payments": [
+    {
+      "id": "pay_1772298716012",
+      "orderId": "order_1772298715780",
+      "method": "BKASH",
+      "senderNumber": "12345654323456",
+      "transactionId": "cxce23hgj2h3g",
+      "amount": 572,
+      "status": "APPROVED",
+      "adminNotes": null,
+      "createdAt": "2026-02-28T17:11:56.012Z",
+      "updatedAt": "2026-02-28T17:27:13.741Z"
+    },
+    {
+      "id": "pay_1772300181539",
+      "orderId": "order_1772300181337",
+      "method": "BKASH",
+      "senderNumber": "54665432465",
+      "transactionId": "4g455t45ttg54",
+      "amount": 424,
+      "status": "PENDING",
+      "adminNotes": null,
+      "createdAt": "2026-02-28T17:36:21.539Z",
+      "updatedAt": "2026-02-28T17:36:21.539Z"
+    }
+  ],
   "settings": {
     "bkashNumber": "0123456789",
     "bkashMerchantNumber": "",

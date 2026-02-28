@@ -29,7 +29,7 @@ export function Navbar() {
   const cartItemsCount = useCartStore((s) => s.totalItems());
   const { openCart } = useCartStore();
   const { isNavOpen, toggleNav, closeNav } = useUIStore();
-  const { user } = useAuthStore();
+  const { user, isAdmin } = useAuthStore();
 
   useEffect(() => {
     setMounted(true);
@@ -117,11 +117,11 @@ export function Navbar() {
               <span className="hidden lg:block">Search</span>
             </button>
             <Link
-              href={user ? "/account" : "/login"}
+              href={user && !isAdmin() ? "/account" : "/login"}
               className="hover:opacity-60 transition-opacity whitespace-nowrap"
               aria-label="Account"
             >
-              {user ? "Account" : "Sign In"}
+              {user && !isAdmin() ? "Account" : "Sign In"}
             </Link>
             <button
               onClick={openCart}
@@ -181,9 +181,11 @@ export function Navbar() {
                 transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
                 className="mt-8 flex gap-8 text-sm uppercase tracking-widest text-cream/60"
               >
-                <Link href={user ? "/account" : "/login"} onClick={closeNav} className="hover:text-cream transition-colors">
-                  Account
-                </Link>
+                {user && !isAdmin() && (
+                  <Link href="/account" onClick={closeNav} className="hover:text-cream transition-colors">
+                    Account
+                  </Link>
+                )}
                 <Link href="/wishlist" onClick={closeNav} className="hover:text-cream transition-colors">
                   Wishlist
                 </Link>

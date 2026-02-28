@@ -4,8 +4,6 @@ import Image from "next/image";
 import { db } from "@/lib/db";
 import { Product } from "@/types";
 
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   const config = db.homeConfig || {};
   const products = db.products || [];

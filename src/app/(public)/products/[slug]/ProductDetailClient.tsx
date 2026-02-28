@@ -2,19 +2,23 @@
 
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
+import { useAuthStore } from "@/store/authStore";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { Product } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Heart, Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 
 export default function ProductDetailClient({ product }: { product: Product }) {
+  const router = useRouter();
   const { addItem, openCart } = useCartStore();
   const { toggleItem, isWishlisted } = useWishlistStore();
+  const { user } = useAuthStore();
 
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState<string | null>(
@@ -58,6 +62,29 @@ export default function ProductDetailClient({ product }: { product: Product }) {
     addItem(product, quantity, selectedSize, selectedColor);
     toast.success("Added to bag");
     openCart();
+  };
+
+  const handleBuyNow = () => {
+    if (product.sizes?.length && !selectedSize) {
+      toast.error("Please select a size");
+      return;
+    }
+    if (product.colors?.length && !selectedColor) {
+      toast.error("Please select a color");
+      return;
+    }
+    if (availableStock < 1) {
+      toast.error("Selected variant is sold out");
+      return;
+    }
+
+    addItem(product, 1, selectedSize, selectedColor);
+    
+    if (!user) {
+      router.push("/login?redirect=/checkout");
+    } else {
+      router.push("/checkout");
+    }
   };
 
   const images = [...(product.images || [])].sort((a, b) => a.order - b.order);
@@ -197,6 +224,14 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                     disabled={availableStock < 1}
                   >
                     {availableStock < 1 ? "Sold Out" : "Add to Bag"}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="flex-1 h-12 text-[10px] tracking-[0.2em] uppercase border-noir text-noir hover:bg-noir hover:text-cream"
+                    onClick={handleBuyNow}
+                    disabled={availableStock < 1}
+                  >
+                    {availableStock < 1 ? "Sold Out" : "Buy Now"}
                   </Button>
                   
                   <button

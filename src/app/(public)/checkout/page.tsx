@@ -11,7 +11,7 @@ import { PageTransition } from "@/components/animations/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Lock, CreditCard, Wallet, Phone } from "lucide-react";
+import { Loader2, Lock, CreditCard, Wallet, Phone, Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
@@ -41,7 +41,7 @@ type PaymentOption = "FULL" | "COD" | "ADVANCE";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, subtotal, clearCart } = useCartStore();
+  const { items, subtotal, clearCart, updateQuantity, removeItem } = useCartStore();
   const { user } = useAuthStore();
   const [isProcessing, setIsProcessing] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -451,24 +451,42 @@ export default function CheckoutPage() {
 
                 <div className="space-y-4 max-h-[300px] overflow-y-auto mb-6">
                   {cartItems.map((item) => (
-                    <div key={`${item.product.id}-${item.size}-${item.color}`} className="flex gap-4">
+                    <div key={`${item.product.id}-${item.size}-${item.color}`} className="flex gap-3">
                       <div className="w-20 h-24 relative bg-muted rounded overflow-hidden flex-shrink-0">
                         {item.product.images?.[0] ? (
                           <Image src={item.product.images[0].url} alt={item.product.name} fill className="object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">No Img</div>
                         )}
-                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-noir text-cream rounded-full text-xs flex items-center justify-center">
-                          {item.quantity}
-                        </span>
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="font-medium text-sm line-clamp-2">{item.product.name}</p>
                         <p className="text-xs text-muted-foreground">
                           {item.color && `${item.color}`}
                           {item.size && ` / ${item.size}`}
                         </p>
-                        <p className="text-sm mt-1">${(item.product.price * item.quantity).toFixed(2)}</p>
+                        <p className="text-sm mt-1 font-medium">${(item.product.price * item.quantity).toFixed(2)}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            onClick={() => updateQuantity(item.product.id, item.quantity - 1, item.size, item.color)}
+                            className="w-7 h-7 border rounded flex items-center justify-center hover:bg-muted transition-colors"
+                          >
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="text-sm w-6 text-center">{item.quantity}</span>
+                          <button
+                            onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.size, item.color)}
+                            className="w-7 h-7 border rounded flex items-center justify-center hover:bg-muted transition-colors"
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                          <button
+                            onClick={() => removeItem(item.product.id, item.size, item.color)}
+                            className="ml-auto w-7 h-7 text-red-500 hover:bg-red-50 rounded flex items-center justify-center transition-colors"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}

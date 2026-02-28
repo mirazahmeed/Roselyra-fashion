@@ -1,14 +1,18 @@
 "use client";
 
 import { useCartStore } from "@/store/cartStore";
+import { useAuthStore } from "@/store/authStore";
 import { X, Minus, Plus, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export function CartDrawer() {
+  const router = useRouter();
   const { items, isOpen, closeCart, updateQuantity, removeItem, subtotal } = useCartStore();
+  const { user } = useAuthStore();
 
   // Prevent background scrolling when cart is open
   useEffect(() => {
@@ -153,13 +157,19 @@ export function CartDrawer() {
                 <p className="text-[9px] text-noir/40 text-center tracking-widest uppercase">
                   Shipping and taxes calculated at checkout.
                 </p>
-                <Link 
-                  href="/checkout"
-                  onClick={closeCart}
+                <button 
+                  onClick={() => {
+                    closeCart();
+                    if (!user) {
+                      router.push("/login?redirect=/checkout");
+                    } else {
+                      router.push("/checkout");
+                    }
+                  }}
                   className="block w-full bg-noir text-cream border border-noir text-center py-4 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-cream hover:text-noir transition-colors"
                 >
                   Proceed to Checkout
-                </Link>
+                </button>
               </div>
             )}
           </motion.div>
