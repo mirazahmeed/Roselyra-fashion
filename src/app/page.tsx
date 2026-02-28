@@ -6,7 +6,19 @@ import { Product } from "@/types";
 
 export default function Home() {
   const config = db.homeConfig || {};
+  const products = db.products || [];
+  const featuredProducts = products.filter(p => p.isFeatured && p.isActive && !p.isArchived).slice(0, 3);
   const getImg = (key: string, fallback: string) => config[key] || fallback;
+  const getProduct = (key: string) => {
+    const productId = config[key];
+    if (!productId) return null;
+    return products.find(p => p.id === productId) || null;
+  };
+  
+  const hero1Product = getProduct('hero1Product');
+  const hero2Product = getProduct('hero2Product');
+  const hero1Image = hero1Product?.images?.[0]?.url || getImg('hero1', "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800");
+  const hero2Image = hero2Product?.images?.[0]?.url || getImg('hero2', "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop");
   return (
     <PageTransition>
       <main className="bg-cream w-full overflow-hidden">
@@ -21,22 +33,56 @@ export default function Home() {
         {/* --- ROW 1 --- */}
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative aspect-[3/4] md:aspect-auto md:h-[90vh] w-full group">
-            <Image
-              src={getImg('hero1', "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800")}
-              alt="Campaign Image 1"
-              fill
-              className="object-cover"
-              priority
-            />
+            {hero1Product ? (
+              <Link href={`/products/${hero1Product.slug}`} className="block w-full h-full">
+                <Image
+                  src={hero1Image}
+                  alt={hero1Product.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute bottom-8 left-8 z-10">
+                  <p className="text-cream text-xs uppercase tracking-widest font-bold mb-2">Shop Now</p>
+                  <h3 className="text-cream text-2xl font-display">{hero1Product.name}</h3>
+                  <p className="text-cream/80">${hero1Product.price}</p>
+                </div>
+              </Link>
+            ) : (
+              <Image
+                src={hero1Image}
+                alt="Campaign Image 1"
+                fill
+                className="object-cover"
+                priority
+              />
+            )}
           </div>
           <div className="relative aspect-[3/4] md:aspect-auto md:h-[90vh] w-full group">
-             <Image
-              src={getImg('hero2', "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop")}
-              alt="Campaign Image 2"
-              fill
-              className="object-cover"
-              priority
-            />
+            {hero2Product ? (
+              <Link href={`/products/${hero2Product.slug}`} className="block w-full h-full">
+                <Image
+                  src={hero2Image}
+                  alt={hero2Product.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute bottom-8 left-8 z-10">
+                  <p className="text-cream text-xs uppercase tracking-widest font-bold mb-2">Shop Now</p>
+                  <h3 className="text-cream text-2xl font-display">{hero2Product.name}</h3>
+                  <p className="text-cream/80">${hero2Product.price}</p>
+                </div>
+              </Link>
+            ) : (
+              <Image
+                src={hero2Image}
+                alt="Campaign Image 2"
+                fill
+                className="object-cover"
+                priority
+              />
+            )}
           </div>
         </div>
 
@@ -164,8 +210,26 @@ export default function Home() {
         {/* --- Floating Product Row --- */}
         <div className="py-32 px-4 md:px-12 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 items-end">
+            {featuredProducts.length > 0 ? (
+              featuredProducts.map((product) => (
+                <Link key={product.id} href={`/products/${product.slug}`} className="group flex flex-col items-center">
+                  <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
+                    <Image
+                      src={product.images?.[0]?.url || "/placeholder.jpg"}
+                      alt={product.name}
+                      fill
+                      className="object-contain mix-blend-multiply"
+                    />
+                  </div>
+                  <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
+                    {product.name}
+                  </span>
+                </Link>
+              ))
+            ) : (
+              <>
             {/* Product 1 */}
-            <Link href="/products/bag" className="group flex flex-col items-center">
+            <Link href="/products/medium-rose-hobo-bag" className="group flex flex-col items-center">
               <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
                 <Image
                   src={getImg('hero11', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
@@ -180,7 +244,7 @@ export default function Home() {
             </Link>
 
             {/* Product 2 */}
-            <Link href="/products/dress" className="group flex flex-col items-center">
+            <Link href="/products/long-sleeve-mini-dress" className="group flex flex-col items-center">
               <div className="relative w-48 h-64 md:w-64 md:h-80 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
                 <Image
                   src={getImg('hero12', "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2787&auto=format&fit=crop")}
@@ -195,10 +259,10 @@ export default function Home() {
             </Link>
 
             {/* Product 3 */}
-            <Link href="/products/shoes" className="group flex flex-col items-center">
+            <Link href="/products/red-rose-heels" className="group flex flex-col items-center">
               <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
                  <Image
-                  src={getImg('hero13', "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=2960&auto=format&fit=crop")}
+                  src={getImg('hero13', "https://images.unsplash.com/photo-1543163521-1bf2?q=80539c55dd&w=2960&auto=format&fit=crop")}
                   alt="Product 3"
                   fill
                   className="object-contain mix-blend-multiply"
@@ -208,6 +272,8 @@ export default function Home() {
                 Red Rose Heels
               </span>
             </Link>
+              </>
+            )}
           </div>
         </div>
 

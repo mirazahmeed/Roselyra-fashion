@@ -6,11 +6,13 @@ import { Loader2, Save, Image as ImageIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { useAuthStore } from "@/store/authStore";
+import { Product } from "@/types";
 
 export default function AdminHome() {
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState<Record<string, boolean>>({});
   const [config, setConfig] = useState<Record<string, string>>({});
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     fetch("/api/home-config")
@@ -18,6 +20,14 @@ export default function AdminHome() {
       .then((data) => {
         if (data.success) {
           setConfig(data.data || {});
+        }
+      });
+    
+    fetch("/api/products?perPage=100")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setProducts(data.data?.items || []);
         }
       });
   }, []);
@@ -85,7 +95,12 @@ export default function AdminHome() {
     }
   };
 
-  const renderSlot = (title: string, key: string, fallback: string) => (
+  const renderSlot = (title: string, key: string, fallback: string, productKey?: string) => {
+    const selectedProductId = config[productKey || ""] || "";
+    const selectedProduct = products.find(p => p.id === selectedProductId);
+    const displayImage = selectedProduct?.images?.[0]?.url || config[key] || fallback;
+
+    return (
     <div className="bg-card border rounded-lg p-6 space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold">{title}</h3>
@@ -93,7 +108,7 @@ export default function AdminHome() {
       
       <div className="relative aspect-[3/4] md:aspect-video w-full bg-muted rounded-md overflow-hidden border">
         <Image
-          src={config[key] || fallback}
+          src={displayImage}
           alt={title}
           fill
           className="object-cover"
@@ -106,28 +121,49 @@ export default function AdminHome() {
         )}
       </div>
 
-      <div>
-        <input
-          type="file"
-          id={`upload-${key}`}
-          className="hidden"
-          accept="image/*"
-          onChange={(e) => handleImageUpload(e, key)}
-          disabled={isUploading[key]}
-        />
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full gap-2"
-          onClick={() => document.getElementById(`upload-${key}`)?.click()}
-          disabled={isUploading[key]}
-        >
-          <ImageIcon className="w-4 h-4" />
-          Change Image
-        </Button>
+      <div className="space-y-3">
+        <div>
+          <label className="text-sm font-medium mb-1 block">Link to Product (Optional)</label>
+          <select
+            value={selectedProductId}
+            onChange={(e) => setConfig(prev => ({ ...prev, [productKey || ""]: e.target.value }))}
+            className="w-full border rounded-md px-3 py-2 text-sm"
+          >
+            <option value="">No product selected</option>
+            {products.map(product => (
+              <option key={product.id} value={product.id}>
+                {product.name} - ${product.price}
+              </option>
+            ))}
+          </select>
+          {selectedProduct && (
+            <p className="text-xs text-green-600 mt-1">✓ Product linked: {selectedProduct.name}</p>
+          )}
+        </div>
+
+        <div>
+          <input
+            type="file"
+            id={`upload-${key}`}
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => handleImageUpload(e, key)}
+            disabled={isUploading[key]}
+          />
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full gap-2"
+            onClick={() => document.getElementById(`upload-${key}`)?.click()}
+            disabled={isUploading[key]}
+          >
+            <ImageIcon className="w-4 h-4" />
+            Change Image
+          </Button>
+        </div>
       </div>
     </div>
-  );
+  )};
 
   return (
     <div className="space-y-8 pb-12">
@@ -148,8 +184,8 @@ export default function AdminHome() {
         {/* Row 1 */}
         <div className="space-y-6">
           <h2 className="text-xl font-display uppercase tracking-wider border-b pb-2">Top Hero Section (Row 1)</h2>
-          {renderSlot("Left Hero Image", "hero1", "https://images.unsplash.com/photo-1550614000-4b9ebd3df917?q=80&w=2803&auto=format&fit=crop")}
-          {renderSlot("Right Hero Image", "hero2", "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop")}
+          {renderSlot("Left Hero Image", "hero1", "https://images.unsplash.com/photo-1550614000-4b9ebd3df917?q=80&w=2803&auto=format&fit=crop", "hero1Product")}
+          {renderSlot("Right Hero Image", "hero2", "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop", "hero2Product")}
         </div>
 
         {/* Row 2 */}

@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { CartDrawer } from "@/components/ui/CartDrawer";
-import { LenisProvider } from "@/components/animations/LenisProvider";
-import { Toaster } from "react-hot-toast";
-import { SearchModal } from "@/components/ui/SearchModal";
+import { ClientLayout } from "@/components/layout/ClientLayout";
 
 export const dynamic = "force-dynamic";
 
@@ -56,26 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="bg-cream text-noir">
-        <LenisProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <CartDrawer />
-          <SearchModal />
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                background: "#0A0A0A",
-                color: "#F5F0EB",
-                fontFamily: "var(--font-inter)",
-                fontSize: "0.8125rem",
-                letterSpacing: "0.03em",
-                borderRadius: "2px",
-              },
-            }}
-          />
-        </LenisProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

@@ -901,6 +901,82 @@
       ],
       "createdAt": "2025-11-01T00:00:00.000Z",
       "updatedAt": "2025-11-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod_1772244078078",
+      "name": "Black and White Strip bikini with red flag",
+      "slug": "black-and-white-strip-bikini-with-red-flag",
+      "description": "COmfortable, stylish, An elegant mini dress with long sleeves and a flattering silhouette. Perfect for both day and evening wear.",
+      "longDesc": "This bikini features a sophisticated mock neckline and bodycon fit. The stretch fabric ensures comfort while maintaining structure. Available in classic black and romantic blush pink.",
+      "price": 200,
+      "comparePrice": 190,
+      "sku": null,
+      "stock": 4,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 13,
+      "categoryId": "cat_1772243766304",
+      "collectionId": "col_1772243821382",
+      "category": {
+        "id": "cat_1772243766304",
+        "name": "Bikini",
+        "slug": "bikini",
+        "description": null,
+        "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "parentId": null,
+        "order": 7,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_1772243821382",
+        "name": "Bikini",
+        "slug": "bikini",
+        "description": null,
+        "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 0,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 9
+      },
+      "images": [
+        {
+          "id": "img_1772244078078_0",
+          "url": "/uploads/1772244068087-795913244-jernej-graj-AqBLbbqPDMM-unsplash.jpg",
+          "altText": "Black and White Strip bikini with red flag",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        },
+        {
+          "id": "img_1772244078078_1",
+          "url": "/uploads/1772244068084-103309898-jernej-graj-L-ROTbBDgTc-unsplash.jpg",
+          "altText": "Black and White Strip bikini with red flag",
+          "order": 1,
+          "isPrimary": false,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "70% Cotton, 30% Linen",
+      "fit": "Regular",
+      "care": "Store in dust bag",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "blank And white"
+      ],
+      "tags": [],
+      "createdAt": "2026-02-28T02:01:18.078Z",
+      "updatedAt": "2026-02-28T02:01:18.078Z"
     }
   ],
   "categories": [
@@ -962,6 +1038,16 @@
       "imageUrl": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800",
       "parentId": null,
       "order": 6,
+      "isActive": true
+    },
+    {
+      "id": "cat_1772243766304",
+      "name": "Bikini",
+      "slug": "bikini",
+      "description": null,
+      "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "parentId": null,
+      "order": 7,
       "isActive": true
     }
   ],
@@ -1069,6 +1155,19 @@
       "isFeatured": true,
       "isActive": true,
       "order": 8
+    },
+    {
+      "id": "col_1772243821382",
+      "name": "Bikini",
+      "slug": "bikini",
+      "description": null,
+      "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "videoUrl": null,
+      "season": "Spring",
+      "year": 0,
+      "isFeatured": true,
+      "isActive": true,
+      "order": 9
     }
   ],
   "users": [
@@ -1265,6 +1364,32 @@
       "mimeType": "image/jpeg",
       "folder": null,
       "createdAt": "2026-02-27T19:47:26.163Z"
+    },
+    {
+      "id": "media_1772244068090",
+      "url": "/uploads/1772244068087-795913244-jernej-graj-AqBLbbqPDMM-unsplash.jpg",
+      "altText": "jernej-graj-AqBLbbqPDMM-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 4027766,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-28T02:01:08.090Z"
+    },
+    {
+      "id": "media_1772244068098",
+      "url": "/uploads/1772244068084-103309898-jernej-graj-L-ROTbBDgTc-unsplash.jpg",
+      "altText": "jernej-graj-L-ROTbBDgTc-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 3952909,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-02-28T02:01:08.098Z"
     }
   ],
   "seoData": {},
@@ -1294,7 +1419,9 @@
     "hero4": "/uploads/1772221622155-72710278-raamin-ka-xqjvj7MvGcg-unsplash.jpg",
     "hero7": "/uploads/1772221629485-941947073-jon-ly-ADBOC3UP4eQ-unsplash.jpg",
     "hero8": "/uploads/1772221634526-980703127-gelmis-bartulis-sWfNvRb_usU-unsplash.jpg",
-    "hero3": "/uploads/1772221646162-297870073-ivan-kazlouskij-jws2sj-f4eQ-unsplash.jpg"
+    "hero3": "/uploads/1772221646162-297870073-ivan-kazlouskij-jws2sj-f4eQ-unsplash.jpg",
+    "hero1Product": "prod_002",
+    "hero2Product": "prod_006"
   },
   "productImages": {}
 }
