@@ -24,11 +24,16 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const cartItemsCount = useCartStore((s) => s.totalItems());
   const { openCart } = useCartStore();
   const { isNavOpen, toggleNav, closeNav } = useUIStore();
   const { user } = useAuthStore();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -124,7 +129,7 @@ export function Navbar() {
               aria-label="Cart"
             >
               <ShoppingBag className="w-4 h-4 hidden lg:block" strokeWidth={1.5} />
-              <span>Bag {cartItemsCount > 0 ? `(${cartItemsCount})` : ""}</span>
+              <span>Bag {mounted && cartItemsCount > 0 ? `(${cartItemsCount})` : ""}</span>
             </button>
           </div>
         </div>

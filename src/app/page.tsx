@@ -4,10 +4,12 @@ import Image from "next/image";
 import { db } from "@/lib/db";
 import { Product } from "@/types";
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   const config = db.homeConfig || {};
   const products = db.products || [];
-  const featuredProducts = products.filter(p => p.isFeatured && p.isActive && !p.isArchived).slice(0, 3);
+  const featuredProducts = products.filter(p => p.isFeatured && p.isActive && !p.isArchived);
   const getImg = (key: string, fallback: string) => config[key] || fallback;
   const getProduct = (key: string) => {
     const productId = config[key];
@@ -207,8 +209,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* --- Floating Product Row --- */}
+        {/* --- Featured Products --- */}
         <div className="py-32 px-4 md:px-12 max-w-7xl mx-auto">
+          <h2 className="text-center text-xl font-display uppercase tracking-widest mb-12">Featured Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 items-end">
             {featuredProducts.length > 0 ? (
               featuredProducts.map((product) => (
