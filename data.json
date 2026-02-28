@@ -1179,6 +1179,15 @@
       "avatar": null,
       "password": "$2a$10$kp.X.P0PsO7pLT5LZzV0V.5rO/rWq3UqXGfKNMiFYiKM7P5xYxYx",
       "createdAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "user_1772264524076",
+      "email": "mirazahmed0619@gmail.com",
+      "name": "Miraz Ahmed",
+      "role": "CUSTOMER",
+      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocLf2xYZ61jS9_2irusFJ16xMhrrjknlr5Bt-mSDmkhihl57wIA=s96-c",
+      "password": "",
+      "createdAt": "2026-02-28T07:42:04.076Z"
     }
   ],
   "orders": [

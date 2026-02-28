@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useCartStore } from "@/store/cartStore";
+import { useAuthStore } from "@/store/authStore";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,8 +36,19 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, clearCart } = useCartStore();
+  const { user } = useAuthStore();
   const [isProcessing, setIsProcessing] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted && !user) {
+      router.push("/login?redirect=/checkout");
+    }
+  }, [mounted, user, router]);
 
   const cartItems = items;
   const subtotalTotal = subtotal();
@@ -51,10 +63,6 @@ export default function CheckoutPage() {
   } = useForm<CheckoutFormData>({
     resolver: zodResolver(checkoutSchema),
   });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const onSubmit = async (data: CheckoutFormData) => {
     if (cartItems.length === 0) {

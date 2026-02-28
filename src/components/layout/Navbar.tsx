@@ -75,17 +75,17 @@ export function Navbar() {
           scrolled ? "bg-cream/90 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"
         } ${isLight && !scrolled ? "text-cream" : "text-noir"}`}
       >
-        <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
+        <div className="container mx-auto px-4 md:px-8 flex items-center justify-between relative">
           {/* Left: Mobile Menu Toggle / Desktop Links */}
-          <div className="w-1/3 flex items-center">
+          <div className="flex items-center">
             <button
               onClick={toggleNav}
-              className="md:hidden flex items-center gap-2 text-sm uppercase tracking-widest"
+              className="lg:hidden flex items-center gap-2 text-sm uppercase tracking-widest"
               aria-label="Toggle Menu"
             >
               <Menu className="w-5 h-5" strokeWidth={1.5} />
             </button>
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -98,32 +98,32 @@ export function Navbar() {
             </nav>
           </div>
 
-          {/* Center: Logo (Subtle on desktop, or hidden if we want pure minimal) */}
-          <div className="w-1/3 flex justify-center">
-            <Link href="/" className="text-sm md:text-base font-display tracking-[0.3em] uppercase hover:opacity-60 transition-opacity">
+          {/* Center: Logo — absolutely centered so it never overlaps nav items */}
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <Link href="/" className="text-sm md:text-base font-display tracking-[0.3em] uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
               Roselyra
             </Link>
           </div>
 
           {/* Right: Actions */}
-          <div className="w-1/3 flex justify-end items-center gap-4 md:gap-6 text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium">
+          <div className="flex items-center gap-4 md:gap-6 text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium">
             <button onClick={() => router.push("/search")} className="hover:opacity-60 transition-opacity flex items-center gap-2" aria-label="Search">
-              <Search className="w-4 h-4 hidden md:block" strokeWidth={1.5} />
-              <span className="hidden md:block">Search</span>
+              <Search className="w-4 h-4 hidden lg:block" strokeWidth={1.5} />
+              <span className="hidden lg:block">Search</span>
             </button>
             <Link
               href={user ? "/account" : "/login"}
-              className="hidden md:block hover:opacity-60 transition-opacity"
+              className="hover:opacity-60 transition-opacity whitespace-nowrap"
               aria-label="Account"
             >
-              Sign In
+              {user ? "Account" : "Sign In"}
             </Link>
             <button
               onClick={openCart}
               className="relative hover:opacity-60 transition-opacity flex items-center gap-2"
               aria-label="Cart"
             >
-              <ShoppingBag className="w-4 h-4 hidden md:block" strokeWidth={1.5} />
+              <ShoppingBag className="w-4 h-4 hidden lg:block" strokeWidth={1.5} />
               <span>Bag {cartItemsCount > 0 ? `(${cartItemsCount})` : ""}</span>
             </button>
           </div>
