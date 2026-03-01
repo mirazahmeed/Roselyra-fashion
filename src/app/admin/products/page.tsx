@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Product } from "@/types";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/authStore";
+import { getAuthToken } from "@/lib/authToken";
 
 export default function AdminProducts() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -43,7 +43,7 @@ export default function AdminProducts() {
       const res = await fetch(`/api/products/${id}`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${useAuthStore.getState().accessToken}`,
+          Authorization: `Bearer ${getAuthToken()}`,
         },
       });
       if (res.ok) {

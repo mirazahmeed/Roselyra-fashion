@@ -1,10 +1,13 @@
 import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
-import { requireEditor } from "@/lib/apiMiddleware";
+import { requireEditor, requireAuth } from "@/lib/apiMiddleware";
 
 export async function POST(req: NextRequest) {
   try {
+    const authError = requireAuth(req);
+    if (authError) return authError;
+
     const body = await req.json();
     const { orderId, method, senderNumber, transactionId, amount } = body;
 
@@ -91,6 +94,19 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const orderId = searchParams.get("orderId");
+    const orderNumber = searchParams.get("orderNumber");
+
+    if (orderNumber) {
+      const order = db.orders.find(o => o.orderNumber === orderNumber);
+      if (!order) {
+        return errorResponse("Order not found", 404);
+      }
+      const payment = db.getPaymentByOrderId(order.id);
+      if (!payment) {
+        return successResponse(null);
+      }
+      return successResponse(payment);
+    }
 
     if (orderId) {
       const payment = db.getPaymentByOrderId(orderId);
@@ -100,7 +116,7 @@ export async function GET(req: NextRequest) {
       return successResponse(payment);
     }
 
-    return errorResponse("Order ID is required", 400);
+    return errorResponse("Order ID or Order Number is required", 400);
   } catch (err) {
     console.error("[GET_PAYMENT]", err);
     return errorResponse("Internal server error", 500);

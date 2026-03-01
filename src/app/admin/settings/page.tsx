@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAuthStore } from "@/store/authStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Save } from "lucide-react";
 import toast from "react-hot-toast";
+import { getAuthToken } from "@/lib/authToken";
 
 interface Settings {
   bkashNumber: string;
@@ -23,7 +23,6 @@ interface Settings {
 }
 
 export default function SettingsPage() {
-  const { isEditor } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
   const [settings, setSettings] = useState<Settings>({
     bkashNumber: "",
@@ -52,7 +51,7 @@ export default function SettingsPage() {
   const onSubmit = async () => {
     setIsLoading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch("/api/settings", {
         method: "PUT",
         headers: {

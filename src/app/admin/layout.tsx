@@ -1,49 +1,20 @@
 "use client";
 
-import { useAuthStore } from "@/store/authStore";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
-import { Loader2 } from "lucide-react";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { user } = useAuthStore();
-  const router = useRouter();
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
+  const isLoginPage = pathname === "/admin/login" || pathname === "/admin/login/";
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isEditor = user?.role === "ADMIN" || user?.role === "EDITOR";
-
-  useEffect(() => {
-    if (mounted && !isEditor && pathname !== "/admin/login") {
-      router.replace("/admin/login");
-    }
-  }, [mounted, isEditor, pathname, router]);
-
-  if (!mounted) {
+  if (isLoginPage) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-cream">
-        <Loader2 className="w-8 h-8 animate-spin text-noir" />
-      </div>
-    );
-  }
-
-  if (pathname === "/admin/login") {
-    return <>{children}</>;
-  }
-
-  if (!isEditor) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-cream">
-        <Loader2 className="w-8 h-8 animate-spin text-noir" />
+      <div className="min-h-screen bg-cream flex items-center justify-center p-4">
+        {children}
       </div>
     );
   }

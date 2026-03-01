@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useAuthStore } from "@/store/authStore";
+import { getAuthToken } from "@/lib/authToken";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
@@ -43,7 +43,7 @@ export default function AdminMedia() {
   const fetchMedia = async () => {
     setIsLoading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch("/api/media", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -68,7 +68,7 @@ export default function AdminMedia() {
 
     setIsUploading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
 
       for (const file of Array.from(files)) {
         const formData = new FormData();
@@ -103,7 +103,7 @@ export default function AdminMedia() {
 
     setIsUploading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch("/api/media", {
         method: "POST",
         headers: {
@@ -137,7 +137,7 @@ export default function AdminMedia() {
     if (!confirm("Are you sure you want to delete this media?")) return;
 
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch(`/api/media/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },

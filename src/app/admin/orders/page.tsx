@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getAuthToken } from "@/lib/authToken";
 import { Search, Loader2, Eye, Package, Truck, CheckCircle, XCircle, Clock, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +13,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Order, OrderStatus, Payment, PaymentStatus } from "@/types";
-import { useAuthStore } from "@/store/authStore";
 import toast from "react-hot-toast";
 import Image from "next/image";
 
@@ -38,7 +38,7 @@ export default function AdminOrders() {
   const fetchOrders = async () => {
     setIsLoading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch("/api/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -60,7 +60,7 @@ export default function AdminOrders() {
   const fetchPayment = async (orderId: string) => {
     setIsLoadingPayment(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch(`/api/payments?orderId=${orderId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -87,7 +87,7 @@ export default function AdminOrders() {
 
   const updateOrderStatus = async (orderId: string, status: OrderStatus) => {
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch(`/api/orders/${orderId}`, {
         method: "PATCH",
         headers: {
@@ -112,7 +112,7 @@ export default function AdminOrders() {
   const deleteOrder = async (orderId: string) => {
     if (!window.confirm("Are you sure you want to delete this order?")) return;
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch(`/api/orders/${orderId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -135,7 +135,7 @@ export default function AdminOrders() {
   const updatePaymentStatus = async (status: PaymentStatus) => {
     if (!payment) return;
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch("/api/payments", {
         method: "PUT",
         headers: {

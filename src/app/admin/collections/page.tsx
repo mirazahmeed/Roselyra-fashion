@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
-import { useAuthStore } from "@/store/authStore";
+import { getAuthToken } from "@/lib/authToken";
 import Image from "next/image";
 
 const collectionSchema = z.object({
@@ -79,7 +79,7 @@ export default function AdminCollections() {
     if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
 
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch(`/api/collections/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -277,7 +277,7 @@ function CollectionForm({
 
   const onSubmit = async (data: CollectionFormData) => {
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const method = collection ? "PUT" : "POST";
       const url = collection
         ? `/api/collections/${collection.id}`

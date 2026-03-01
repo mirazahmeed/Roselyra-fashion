@@ -3,9 +3,13 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { PageTransition } from "@/components/animations/PageTransition";
-import { Loader2, CheckCircle, Clock, Package, Truck, XCircle } from "lucide-react";
+import { Loader2, CheckCircle, Clock, Package, Truck, XCircle, CreditCard, Phone, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import { useAuthStore } from "@/store/authStore";
 
 const statusSteps = [
   { status: "PENDING", label: "Order Placed", icon: Clock },
@@ -19,23 +23,122 @@ const statusSteps = [
 export default function OrderPage() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get("order");
+  const { user, accessToken } = useAuthStore();
   const [order, setOrder] = useState<any>(null);
+  const [payment, setPayment] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [paymentData, setPaymentData] = useState({
+    senderNumber: "",
+    transactionId: "",
+    amount: "",
+  });
 
   useEffect(() => {
     if (orderNumber) {
-      fetch(`/api/orders?orderNumber=${orderNumber}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            setOrder(data.data);
-          }
-        })
-        .finally(() => setLoading(false));
+      fetchData();
     } else {
       setLoading(false);
     }
   }, [orderNumber]);
+
+  const fetchData = () => {
+    if (!orderNumber) return;
+    Promise.all([
+      fetch(`/api/orders?orderNumber=${orderNumber}`).then((res) => res.json()),
+      fetch(`/api/payments?orderNumber=${orderNumber}`).then((res) => res.json()),
+    ])
+      .then(([orderData, paymentData]) => {
+        if (orderData.success) {
+          setOrder(orderData.data);
+          const total = (orderData.data.subtotal || 0) + (orderData.data.shippingCost || 0) + (orderData.data.tax || 0) - (orderData.data.discount || 0);
+          const paidAmount = orderData.data.paidAmount || 0;
+          setPaymentData({
+            senderNumber: "",
+            transactionId: "",
+            amount: (total - paidAmount).toString(),
+          });
+        }
+        if (paymentData.success && paymentData.data) {
+          setPayment(paymentData.data);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+        setRefreshing(false);
+      });
+  };
+
+  const handleRefresh = () => {
+    setRefreshing(true);
+    fetchData();
+  };
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        fetchData();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [orderNumber]);
+
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!accessToken) {
+      toast.error("Please login to submit payment");
+      return;
+    }
+    if (!paymentData.senderNumber || !paymentData.transactionId || !paymentData.amount) {
+      toast.error("Please fill in all payment details");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/payments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          orderId: order.id,
+          method: "BKASH",
+          senderNumber: paymentData.senderNumber,
+          transactionId: paymentData.transactionId,
+          amount: parseFloat(paymentData.amount),
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Payment submitted successfully!");
+        setShowPaymentForm(false);
+        
+        const updatedOrder = { ...order, status: "PAYMENT_SUBMITTED" };
+        setOrder(updatedOrder);
+        
+        if (orderNumber) {
+          fetch(`/api/payments?orderNumber=${orderNumber}`)
+            .then((res) => res.json())
+            .then((paymentData) => {
+              if (paymentData.success && paymentData.data) {
+                setPayment(paymentData.data);
+              }
+            });
+        }
+      } else {
+        toast.error(data.error || "Failed to submit payment");
+      }
+    } catch (err) {
+      toast.error("Failed to submit payment");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -72,8 +175,16 @@ export default function OrderPage() {
             <h1 className="text-3xl font-display uppercase tracking-wider mb-2">
               Thank You!
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground flex items-center justify-center gap-2">
               Order #{order.orderNumber} has been placed successfully.
+              <button
+                onClick={handleRefresh}
+                disabled={refreshing}
+                className="p-1 hover:bg-muted rounded-full transition-colors"
+                title="Refresh order status"
+              >
+                <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+              </button>
             </p>
           </div>
 
@@ -186,6 +297,196 @@ export default function OrderPage() {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="bg-white border rounded-lg p-6 mb-8">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-lg font-display uppercase tracking-wider">Payment Information</h2>
+              <div className="flex gap-2 items-center">
+                <span className="text-xs text-gray-400">
+                  Status: {payment?.status?.toUpperCase() || "NO_PAYMENT"}
+                </span>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    if (orderNumber) {
+                      fetch(`/api/payments?orderNumber=${orderNumber}`)
+                        .then((res) => res.json())
+                        .then((data) => {
+                          if (data.success && data.data) {
+                            setPayment(data.data);
+                          } else {
+                            setPayment(null);
+                          }
+                        });
+                    }
+                  }}
+                >
+                  Refresh
+                </Button>
+              </div>
+            </div>
+
+            {showPaymentForm ? (
+              <form onSubmit={handlePaymentSubmit} className="space-y-4">
+                <div>
+                  <Label htmlFor="senderNumber">bKash Sender Number</Label>
+                  <Input
+                    id="senderNumber"
+                    placeholder="01XXXXXXXXX"
+                    value={paymentData.senderNumber}
+                    onChange={(e) => setPaymentData({ ...paymentData, senderNumber: e.target.value })}
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="transactionId">Transaction ID</Label>
+                  <Input
+                    id="transactionId"
+                    placeholder="XXXXXXXXXXXX"
+                    value={paymentData.transactionId}
+                    onChange={(e) => setPaymentData({ ...paymentData, transactionId: e.target.value })}
+                    className="mt-1"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="amount">Amount (৳)</Label>
+                  <Input
+                    id="amount"
+                    type="number"
+                    placeholder="0.00"
+                    value={paymentData.amount}
+                    onChange={(e) => setPaymentData({ ...paymentData, amount: e.target.value })}
+                    className="mt-1"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <Button type="submit" disabled={submitting} className="flex-1">
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit Payment"
+                    )}
+                  </Button>
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => setShowPaymentForm(false)}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+              ) : (
+                <div className="space-y-4">
+                  {(() => {
+                    const status = payment?.status?.toUpperCase();
+                    const hasPayment = !!payment;
+                    const isApproved = status === "APPROVED";
+                    const isPending = status === "PENDING";
+                    const isRejected = status === "REJECTED";
+                    const isUnpaid = !hasPayment || status === "UNPAID";
+                    const orderIsPending = order?.status === "PENDING";
+                    
+                    if (isRejected || (hasPayment && orderIsPending)) {
+                      return (
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-red-600 mb-2">
+                            <XCircle className="w-5 h-5" />
+                            <span className="font-medium">Payment Rejected</span>
+                          </div>
+                          <p className="text-sm text-red-600 mb-4">
+                            Your payment was rejected. Please check your transaction details and submit again.
+                          </p>
+                          <Button 
+                            onClick={() => setShowPaymentForm(true)}
+                            className="w-full bg-red-600 hover:bg-red-700"
+                          >
+                            Submit New Payment
+                          </Button>
+                        </div>
+                      );
+                    }
+                    
+                    if (isApproved && order.paidAmount > 0) {
+                      return (
+                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-green-600 mb-2">
+                            <CheckCircle className="w-5 h-5" />
+                            <span className="font-medium">Payment Verified</span>
+                          </div>
+                          <p className="text-sm text-green-600">
+                            Payment of ৳{order.paidAmount.toFixed(2)} has been verified. Thank you!
+                          </p>
+                        </div>
+                      );
+                    }
+                    
+                    if (isPending) {
+                      return (
+                        <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-yellow-600 mb-2">
+                            <Clock className="w-5 h-5" />
+                            <span className="font-medium">Payment Pending Verification</span>
+                          </div>
+                          <p className="text-sm text-yellow-600 mb-4">
+                            Your payment is being verified. Please wait for admin approval.
+                          </p>
+                          <Button 
+                            variant="outline" 
+                            onClick={() => setShowPaymentForm(true)}
+                            className="w-full"
+                          >
+                            Update Payment Details
+                          </Button>
+                        </div>
+                      );
+                    }
+                    
+                    if (hasPayment && !isApproved) {
+                      return (
+                        <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-orange-600 mb-2">
+                            <CreditCard className="w-5 h-5" />
+                            <span className="font-medium">Payment Required</span>
+                          </div>
+                          <p className="text-sm text-orange-600 mb-4">
+                            Please complete your payment to confirm your order. Total due: ৳{((order.subtotal || 0) + (order.shippingCost || 0) + (order.tax || 0) - (order.discount || 0) - (order.paidAmount || 0)).toFixed(2)}
+                          </p>
+                          <Button 
+                            onClick={() => setShowPaymentForm(true)}
+                            className="w-full bg-orange-600 hover:bg-orange-700"
+                          >
+                            Pay Now
+                          </Button>
+                        </div>
+                      );
+                    }
+                    
+                    return (
+                      <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                        <div className="flex items-center gap-2 text-orange-600 mb-2">
+                          <CreditCard className="w-5 h-5" />
+                          <span className="font-medium">Payment Required</span>
+                        </div>
+                        <p className="text-sm text-orange-600 mb-4">
+                          Please complete your payment to confirm your order. Total due: ৳{((order.subtotal || 0) + (order.shippingCost || 0) + (order.tax || 0) - (order.discount || 0) - (order.paidAmount || 0)).toFixed(2)}
+                        </p>
+                        <Button 
+                          onClick={() => setShowPaymentForm(true)}
+                          className="w-full bg-orange-600 hover:bg-orange-700"
+                        >
+                          Pay Now
+                        </Button>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
           </div>
 
           <div className="text-center">

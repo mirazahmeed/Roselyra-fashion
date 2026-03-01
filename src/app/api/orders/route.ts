@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
-import { authenticate } from "@/lib/apiMiddleware";
+import { authenticate, requireAuth } from "@/lib/apiMiddleware";
 
 const orderSchema = z.object({
 	items: z.array(
@@ -29,12 +29,16 @@ const orderSchema = z.object({
 
 export async function POST(req: NextRequest) {
 	try {
+		const authError = requireAuth(req);
+		if (authError) return authError;
+
+		const user = authenticate(req);
 		const body = await req.json();
 		const parsed = orderSchema.safeParse(body);
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
 		const data = parsed.data;
-		const order = db.createOrder(data);
+		const order = db.createOrder({ ...data, userId: user?.userId });
 
 		return successResponse(order, 201);
 	} catch (err) {
@@ -49,11 +53,30 @@ export async function GET(req: NextRequest) {
 		const page = parseInt(searchParams.get("page") ?? "1");
 		const perPage = parseInt(searchParams.get("perPage") ?? "20");
 		const orderNumber = searchParams.get("orderNumber");
+		const myOrders = searchParams.get("myOrders");
 
 		if (orderNumber) {
 			const order = db.orders.find(o => o.orderNumber === orderNumber);
 			if (!order) return errorResponse("Order not found", 404);
 			return successResponse(order);
+		}
+
+		if (myOrders === "true") {
+			const authError = requireAuth(req);
+			if (authError) return authError;
+
+			const user = authenticate(req);
+			const result = db.getOrders({ userId: user?.userId, page, perPage });
+			
+			const ordersWithPayment = result.items.map((order: any) => {
+				const payment = db.getPaymentByOrderId(order.id);
+				return {
+					...order,
+					paymentStatus: payment ? payment.status : "UNPAID",
+				};
+			});
+			
+			return successResponse({ ...result, items: ordersWithPayment });
 		}
 
 		const result = db.getOrders({ page, perPage });

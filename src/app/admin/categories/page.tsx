@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
-import { useAuthStore } from "@/store/authStore";
+import { getAuthToken } from "@/lib/authToken";
 import Image from "next/image";
 
 const categorySchema = z.object({
@@ -75,7 +75,7 @@ export default function AdminCategories() {
     if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
 
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch(`/api/categories/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
@@ -265,7 +265,7 @@ function CategoryForm({
 
   const onSubmit = async (data: CategoryFormData) => {
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const method = category ? "PUT" : "POST";
       const url = category ? `/api/categories/${category.id}` : "/api/categories";
 

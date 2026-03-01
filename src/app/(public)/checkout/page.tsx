@@ -16,6 +16,14 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 
+const useHydrated = () => {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  return hydrated;
+};
+
 const checkoutSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
@@ -42,9 +50,10 @@ type PaymentOption = "FULL" | "COD" | "ADVANCE";
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, clearCart, updateQuantity, removeItem } = useCartStore();
-  const { user } = useAuthStore();
+  const { user, accessToken } = useAuthStore();
   const [isProcessing, setIsProcessing] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const hydrated = useHydrated();
   const [settings, setSettings] = useState<Settings>({
     bkashNumber: "",
     deliveryCharge: 100,
@@ -72,10 +81,10 @@ export default function CheckoutPage() {
   }, []);
 
   useEffect(() => {
-    if (mounted && !user) {
+    if (hydrated && !user) {
       router.push("/login?redirect=/checkout");
     }
-  }, [mounted, user, router]);
+  }, [hydrated, user, router]);
 
   const cartItems = items;
   const subtotalTotal = subtotal();
@@ -128,7 +137,10 @@ export default function CheckoutPage() {
     try {
       const response = await fetch("/api/orders", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        },
         body: JSON.stringify(orderData),
       });
 

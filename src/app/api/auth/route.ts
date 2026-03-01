@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import {
@@ -71,14 +71,20 @@ export async function POST(req: NextRequest) {
 				role: user!.role,
 				avatar: user!.avatar,
 			};
-			return successResponse({
-				user: safeUser,
-				accessToken: access,
-				refreshToken: refresh,
-			});
-		}
-		
-		if (!user || !user.password) return errorResponse("Invalid credentials", 401);
+			const response = NextResponse.json(
+				{ success: true, data: { user: safeUser, accessToken: access, refreshToken: refresh } },
+				{ status: 200 }
+			);
+		response.cookies.set("access_token", access, {
+			path: "/",
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "lax",
+			maxAge: 60 * 60 * 24 * 7, // 7 days
+		});
+		return response;
+	}
+	
+	if (!user || !user.password) return errorResponse("Invalid credentials", 401);
 
 		const valid = await comparePassword(password, user.password);
 		if (!valid) return errorResponse("Invalid credentials", 401);
@@ -94,13 +100,48 @@ export async function POST(req: NextRequest) {
 			role: user.role,
 			avatar: user.avatar,
 		};
-		return successResponse({
-			user: safeUser,
-			accessToken: access,
-			refreshToken: refresh,
+		const response = NextResponse.json(
+			{ success: true, data: { user: safeUser, accessToken: access, refreshToken: refresh } },
+			{ status: 200 }
+		);
+		response.cookies.set("access_token", access, {
+			path: "/",
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "lax",
+			maxAge: 60 * 60 * 24 * 7, // 7 days
 		});
+		return response;
 	} catch (err) {
 		console.error("[AUTH]", err);
+		return errorResponse("Internal server error", 500);
+	}
+}
+
+export async function GET(req: NextRequest) {
+	try {
+		const { authenticate } = await import("@/lib/apiMiddleware");
+		const user = authenticate(req);
+
+		if (!user) {
+			return errorResponse("Not authenticated", 401);
+		}
+
+		const dbUser = db.users.find((u) => u.id === user.userId);
+		if (!dbUser) {
+			return errorResponse("User not found", 404);
+		}
+
+		const safeUser = {
+			id: dbUser.id,
+			email: dbUser.email,
+			name: dbUser.name,
+			role: dbUser.role,
+			avatar: dbUser.avatar,
+		};
+
+		return successResponse({ user: safeUser });
+	} catch (err) {
+		console.error("[AUTH GET]", err);
 		return errorResponse("Internal server error", 500);
 	}
 }

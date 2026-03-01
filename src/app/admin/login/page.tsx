@@ -53,9 +53,6 @@ export default function AdminLogin() {
       setUser(json.data.user);
       setAccessToken(json.data.accessToken);
       
-      // Store token in cookie for middleware
-      document.cookie = `access_token=${json.data.accessToken}; path=/; max-age=604800; samesite=lax`;
-
       toast.success(`Welcome back, ${json.data.user.name || "Admin"}`);
       router.push("/admin");
     } catch (error: any) {

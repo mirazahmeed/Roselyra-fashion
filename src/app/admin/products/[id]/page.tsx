@@ -14,7 +14,7 @@ import { Plus, X, Upload, Image as ImageIcon, Loader2, Save } from "lucide-react
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/authStore";
+import { getAuthToken } from "@/lib/authToken";
 
 const productSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -163,7 +163,7 @@ export default function ProductForm() {
     if (!files || files.length === 0) return;
 
     setIsUploading(true);
-    const token = useAuthStore.getState().accessToken;
+    const token = getAuthToken();
 
     try {
       await Promise.all(
@@ -281,7 +281,7 @@ export default function ProductForm() {
     }
     setIsLoading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const method = isEditing ? "PUT" : "POST";
       const url = isEditing ? `/api/products/${productId}` : "/api/products";
       

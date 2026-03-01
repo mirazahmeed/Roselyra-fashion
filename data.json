@@ -1181,7 +1181,560 @@
       "createdAt": "2026-02-28T07:42:04.076Z"
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "order_1772342742431",
+      "orderNumber": "RL-MM7B3WDB-H9F1",
+      "userId": "user_1772264524076",
+      "guestEmail": null,
+      "status": "PENDING",
+      "paymentType": "FULL",
+      "paymentMethod": "BKASH",
+      "subtotal": 225,
+      "shippingCost": 100,
+      "tax": 22.5,
+      "discount": 0,
+      "paidAmount": 0,
+      "dueAmount": 347.5,
+      "firstName": "Miraz",
+      "lastName": "Ahmed",
+      "email": "mirazahmed31@gmail.com",
+      "phone": "+2342432432432432",
+      "address": "West , Chittagong",
+      "city": "Chittagong",
+      "state": "",
+      "postalCode": "4000",
+      "country": "Bangladesh",
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "orderitem_1772342742431_e9qf",
+          "productId": "prod_006",
+          "product": {
+            "id": "prod_006",
+            "name": "Summer Floral Dress",
+            "slug": "summer-floral-dress",
+            "description": "Light and breezy summer dress with floral print. Perfect for warm days.",
+            "longDesc": "This Summer Floral Dress features a flattering A-line silhouette with adjustable straps. Made from breathable cotton blend with beautiful hand-drawn floral pattern.",
+            "price": 225,
+            "comparePrice": 0,
+            "sku": "DRS-FLORAL-006",
+            "stock": 30,
+            "isFeatured": false,
+            "isArchived": false,
+            "isActive": true,
+            "order": 6,
+            "categoryId": "cat_001",
+            "collectionId": "col_006",
+            "category": {
+              "id": "cat_001",
+              "name": "Dresses",
+              "slug": "dresses",
+              "description": "Elegant dresses for every occasion",
+              "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+              "parentId": null,
+              "order": 1,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_006",
+              "name": "Crochet Artifacts",
+              "slug": "crochet",
+              "description": "Handcrafted crochet pieces",
+              "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
+              "videoUrl": null,
+              "season": "Summer",
+              "year": 2025,
+              "isFeatured": false,
+              "isActive": true,
+              "order": 6
+            },
+            "images": [
+              {
+                "id": "img_1772220893272_0",
+                "url": "/uploads/1772220887446-998972016-hero_img.jpg",
+                "altText": null,
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "70% Cotton, 30% Linen",
+            "fit": "Regular",
+            "care": "Machine wash cold",
+            "sizes": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "colors": [
+              "Floral Blue",
+              "Floral Pink"
+            ],
+            "tags": [
+              "dresses",
+              "summer",
+              "floral"
+            ],
+            "createdAt": "2025-06-01T00:00:00.000Z",
+            "updatedAt": "2026-02-27T19:34:53.272Z"
+          },
+          "quantity": 1,
+          "price": 225,
+          "size": "XS",
+          "color": "Floral Blue"
+        }
+      ],
+      "createdAt": "2026-03-01T05:25:42.431Z",
+      "updatedAt": "2026-03-01T05:25:42.431Z"
+    },
+    {
+      "id": "order_1772342835546",
+      "orderNumber": "RL-MM7B5W7U-MBE7",
+      "userId": "user_1772264524076",
+      "guestEmail": null,
+      "status": "PROCESSING",
+      "paymentType": "FULL",
+      "paymentMethod": "BKASH",
+      "subtotal": 1100,
+      "shippingCost": 0,
+      "tax": 110,
+      "discount": 0,
+      "paidAmount": 45435,
+      "dueAmount": -44225,
+      "firstName": "Miraz",
+      "lastName": "Ahmed",
+      "email": "mirazahmed31@gmail.com",
+      "phone": "43543543543543",
+      "address": "West  Chittagong",
+      "city": "Chittagong",
+      "state": "",
+      "postalCode": "4000",
+      "country": "Bangladesh",
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "orderitem_1772342835546_9f5p",
+          "productId": "prod_007",
+          "product": {
+            "id": "prod_007",
+            "name": "Designer Crossbody Bag",
+            "slug": "designer-crossbody-bag",
+            "description": "Compact crossbody bag with chain strap. Elegant enough for evening wear.",
+            "longDesc": "This Designer Crossbody Bag features a sleek rectangular shape with interlocking clasp. The chain strap can be worn crossbody or doubled up as a shoulder bag.",
+            "price": 550,
+            "comparePrice": 700,
+            "sku": "BAG-CROSS-007",
+            "stock": 12,
+            "isFeatured": true,
+            "isArchived": false,
+            "isActive": true,
+            "order": 7,
+            "categoryId": "cat_002",
+            "collectionId": "col_008",
+            "category": {
+              "id": "cat_002",
+              "name": "Bags",
+              "slug": "bags",
+              "description": "Luxury handbags and accessories",
+              "imageUrl": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+              "parentId": null,
+              "order": 2,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_008",
+              "name": "Bags",
+              "slug": "bags",
+              "description": "Luxury bags collection",
+              "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+              "videoUrl": null,
+              "season": "Resort",
+              "year": 2026,
+              "isFeatured": true,
+              "isActive": true,
+              "order": 8
+            },
+            "images": [
+              {
+                "id": "img_007_1",
+                "url": "https://images.unsplash.com/photo-1608234807905-4466023792f5?w=800",
+                "altText": "Designer Handbag",
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "Leather with Gold Chain",
+            "fit": "Compact",
+            "care": "Store in dust bag",
+            "sizes": [
+              "One Size"
+            ],
+            "colors": [
+              "Black",
+              "Silver",
+              "Gold"
+            ],
+            "tags": [
+              "bags",
+              "evening",
+              "featured"
+            ],
+            "createdAt": "2026-01-05T00:00:00.000Z",
+            "updatedAt": "2026-01-05T00:00:00.000Z"
+          },
+          "quantity": 2,
+          "price": 550,
+          "size": "One Size",
+          "color": "Black"
+        }
+      ],
+      "createdAt": "2026-03-01T05:27:15.546Z",
+      "updatedAt": "2026-03-01T05:57:52.247Z"
+    },
+    {
+      "id": "order_1772346199703",
+      "orderNumber": "RL-MM7D600N-SF3F",
+      "userId": "user_1772264524076",
+      "guestEmail": null,
+      "status": "PENDING",
+      "paymentType": "FULL",
+      "paymentMethod": "BKASH",
+      "subtotal": 200,
+      "shippingCost": 100,
+      "tax": 20,
+      "discount": 0,
+      "paidAmount": 0,
+      "dueAmount": 320,
+      "firstName": "Shah",
+      "lastName": "Rukh",
+      "email": "shah@gmail.com",
+      "phone": "324343765687",
+      "address": "Dhaka, Bangladesh",
+      "city": "Dhaka",
+      "state": "",
+      "postalCode": "4000",
+      "country": "Bangladesh",
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "orderitem_1772346199703_6mlb",
+          "productId": "prod_1772244078078",
+          "product": {
+            "id": "prod_1772244078078",
+            "name": "Black and White Strip bikini with red flag",
+            "slug": "black-and-white-strip-bikini-with-red-flag",
+            "description": "COmfortable, stylish, An elegant mini dress with long sleeves and a flattering silhouette. Perfect for both day and evening wear.",
+            "longDesc": "This bikini features a sophisticated mock neckline and bodycon fit. The stretch fabric ensures comfort while maintaining structure. Available in classic black and romantic blush pink.",
+            "price": 200,
+            "comparePrice": 190,
+            "sku": "",
+            "stock": 4,
+            "isFeatured": true,
+            "isArchived": false,
+            "isActive": true,
+            "order": 13,
+            "categoryId": "cat_1772243766304",
+            "collectionId": "col_1772243821382",
+            "category": {
+              "id": "cat_1772243766304",
+              "name": "Bikini",
+              "slug": "bikini",
+              "description": null,
+              "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "parentId": null,
+              "order": 7,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_1772243821382",
+              "name": "Bikini",
+              "slug": "bikini",
+              "description": null,
+              "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              "videoUrl": null,
+              "season": "Spring",
+              "year": 0,
+              "isFeatured": true,
+              "isActive": true,
+              "order": 9
+            },
+            "images": [
+              {
+                "id": "img_1772269046057_0",
+                "url": "/uploads/1772244068087-795913244-jernej-graj-AqBLbbqPDMM-unsplash.jpg",
+                "altText": null,
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              },
+              {
+                "id": "img_1772269046057_1",
+                "url": "/uploads/1772244068084-103309898-jernej-graj-L-ROTbBDgTc-unsplash.jpg",
+                "altText": null,
+                "order": 1,
+                "isPrimary": false,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "70% Cotton, 30% Linen",
+            "fit": "Regular",
+            "care": "Store in dust bag",
+            "sizes": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "colors": [
+              "blank And white"
+            ],
+            "tags": [],
+            "createdAt": "2026-02-28T02:01:18.078Z",
+            "updatedAt": "2026-02-28T08:57:26.057Z"
+          },
+          "quantity": 1,
+          "price": 200,
+          "size": "XS",
+          "color": "blank And white"
+        }
+      ],
+      "createdAt": "2026-03-01T06:23:19.703Z",
+      "updatedAt": "2026-03-01T07:04:59.407Z"
+    },
+    {
+      "id": "order_1772352481736",
+      "orderNumber": "RL-MM7GWN9K-BQKL",
+      "userId": "user_001",
+      "guestEmail": null,
+      "status": "PAYMENT_SUBMITTED",
+      "paymentType": "FULL",
+      "paymentMethod": "BKASH",
+      "subtotal": 295,
+      "shippingCost": 100,
+      "tax": 29.5,
+      "discount": 0,
+      "paidAmount": 1000,
+      "dueAmount": -575.5,
+      "firstName": "Miraz",
+      "lastName": "Ahmed",
+      "email": "mirazahmed31@gmail.com",
+      "phone": "+8801991457292",
+      "address": "West High Level Road,Lalkhan Bazar, Chittagong",
+      "city": "Chittagong",
+      "state": "",
+      "postalCode": "4000",
+      "country": "Bangladesh",
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "orderitem_1772352481736_9evz",
+          "productId": "prod_002",
+          "product": {
+            "id": "prod_002",
+            "name": "Long Sleeve Mini Dress",
+            "slug": "long-sleeve-mini-dress",
+            "description": "An elegant mini dress with long sleeves and a flattering silhouette. Perfect for both day and evening wear.",
+            "longDesc": "This Long Sleeve Mini Dress features a sophisticated mock neckline and bodycon fit. The stretch fabric ensures comfort while maintaining structure. Available in classic black and romantic blush pink.",
+            "price": 295,
+            "comparePrice": null,
+            "sku": "DRS-MINI-002",
+            "stock": 23,
+            "isFeatured": true,
+            "isArchived": false,
+            "isActive": true,
+            "order": 2,
+            "categoryId": "cat_001",
+            "collectionId": "col_001",
+            "category": {
+              "id": "cat_001",
+              "name": "Dresses",
+              "slug": "dresses",
+              "description": "Elegant dresses for every occasion",
+              "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+              "parentId": null,
+              "order": 1,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_001",
+              "name": "New Arrivals",
+              "slug": "new",
+              "description": "The latest additions to our collection",
+              "imageUrl": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200",
+              "videoUrl": null,
+              "season": "Spring",
+              "year": 2026,
+              "isFeatured": true,
+              "isActive": true,
+              "order": 1
+            },
+            "images": [
+              {
+                "id": "img_002_1",
+                "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800",
+                "altText": "Long Sleeve Mini Dress",
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              },
+              {
+                "id": "img_002_2",
+                "url": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+                "altText": "Long Sleeve Mini Dress Back",
+                "order": 1,
+                "isPrimary": false,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "95% Polyester, 5% Elastane",
+            "fit": "Slim",
+            "care": "Dry clean only",
+            "sizes": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "colors": [
+              "Black",
+              "Blush Pink"
+            ],
+            "tags": [
+              "dresses",
+              "new",
+              "featured"
+            ],
+            "createdAt": "2026-01-10T00:00:00.000Z",
+            "updatedAt": "2026-01-10T00:00:00.000Z"
+          },
+          "quantity": 1,
+          "price": 295,
+          "size": "XS",
+          "color": "Black"
+        }
+      ],
+      "createdAt": "2026-03-01T08:08:01.736Z",
+      "updatedAt": "2026-03-01T08:08:01.747Z"
+    },
+    {
+      "id": "order_1772352813656",
+      "orderNumber": "RL-MM7H3RDK-8E4G",
+      "userId": "user_1772264524076",
+      "guestEmail": null,
+      "status": "PENDING",
+      "paymentType": "FULL",
+      "paymentMethod": "BKASH",
+      "subtotal": 550,
+      "shippingCost": 0,
+      "tax": 55,
+      "discount": 0,
+      "paidAmount": 0,
+      "dueAmount": 605,
+      "firstName": "Miraz",
+      "lastName": "Ahmed",
+      "email": "mirazahmed31@gmail.com",
+      "phone": "+8801991457292",
+      "address": "West High Level Road,Lalkhan Bazar, Chittagong",
+      "city": "Chittagong",
+      "state": "",
+      "postalCode": "4000",
+      "country": "Bangladesh",
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "orderitem_1772352813656_zdml",
+          "productId": "prod_007",
+          "product": {
+            "id": "prod_007",
+            "name": "Designer Crossbody Bag",
+            "slug": "designer-crossbody-bag",
+            "description": "Compact crossbody bag with chain strap. Elegant enough for evening wear.",
+            "longDesc": "This Designer Crossbody Bag features a sleek rectangular shape with interlocking clasp. The chain strap can be worn crossbody or doubled up as a shoulder bag.",
+            "price": 550,
+            "comparePrice": 700,
+            "sku": "BAG-CROSS-007",
+            "stock": 12,
+            "isFeatured": true,
+            "isArchived": false,
+            "isActive": true,
+            "order": 7,
+            "categoryId": "cat_002",
+            "collectionId": "col_008",
+            "category": {
+              "id": "cat_002",
+              "name": "Bags",
+              "slug": "bags",
+              "description": "Luxury handbags and accessories",
+              "imageUrl": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+              "parentId": null,
+              "order": 2,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_008",
+              "name": "Bags",
+              "slug": "bags",
+              "description": "Luxury bags collection",
+              "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+              "videoUrl": null,
+              "season": "Resort",
+              "year": 2026,
+              "isFeatured": true,
+              "isActive": true,
+              "order": 8
+            },
+            "images": [
+              {
+                "id": "img_007_1",
+                "url": "https://images.unsplash.com/photo-1608234807905-4466023792f5?w=800",
+                "altText": "Designer Handbag",
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "Leather with Gold Chain",
+            "fit": "Compact",
+            "care": "Store in dust bag",
+            "sizes": [
+              "One Size"
+            ],
+            "colors": [
+              "Black",
+              "Silver",
+              "Gold"
+            ],
+            "tags": [
+              "bags",
+              "evening",
+              "featured"
+            ],
+            "createdAt": "2026-01-05T00:00:00.000Z",
+            "updatedAt": "2026-01-05T00:00:00.000Z"
+          },
+          "quantity": 1,
+          "price": 550,
+          "size": "One Size",
+          "color": "Black"
+        }
+      ],
+      "createdAt": "2026-03-01T08:13:33.656Z",
+      "updatedAt": "2026-03-01T19:03:20.702Z"
+    }
+  ],
   "media": [
     {
       "id": "media_1772220887447",
@@ -1345,6 +1898,54 @@
       "adminNotes": null,
       "createdAt": "2026-02-28T17:36:21.539Z",
       "updatedAt": "2026-02-28T17:36:21.539Z"
+    },
+    {
+      "id": "pay_1772342835562",
+      "orderId": "order_1772342835546",
+      "method": "BKASH",
+      "senderNumber": "436545643545",
+      "transactionId": "ggffh5565h6545",
+      "amount": 45435,
+      "status": "APPROVED",
+      "adminNotes": null,
+      "createdAt": "2026-03-01T05:27:15.562Z",
+      "updatedAt": "2026-03-01T05:27:42.756Z"
+    },
+    {
+      "id": "pay_1772346199946",
+      "orderId": "order_1772346199703",
+      "method": "BKASH",
+      "senderNumber": "564536453456",
+      "transactionId": "3rr3r43rr34t454r",
+      "amount": 320,
+      "status": "REJECTED",
+      "adminNotes": null,
+      "createdAt": "2026-03-01T06:23:19.946Z",
+      "updatedAt": "2026-03-01T07:04:59.407Z"
+    },
+    {
+      "id": "pay_1772352481747",
+      "orderId": "order_1772352481736",
+      "method": "BKASH",
+      "senderNumber": "43534253423",
+      "transactionId": "ree34rt4r",
+      "amount": 1000,
+      "status": "PENDING",
+      "adminNotes": null,
+      "createdAt": "2026-03-01T08:08:01.747Z",
+      "updatedAt": "2026-03-01T08:08:01.747Z"
+    },
+    {
+      "id": "pay_1772352813668",
+      "orderId": "order_1772352813656",
+      "method": "BKASH",
+      "senderNumber": "76545",
+      "transactionId": "tr5rt44545t",
+      "amount": 110,
+      "status": "REJECTED",
+      "adminNotes": null,
+      "createdAt": "2026-03-01T08:13:33.668Z",
+      "updatedAt": "2026-03-01T19:03:20.702Z"
     }
   ],
   "settings": {

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Save, Image as ImageIcon } from "lucide-react";
 import toast from "react-hot-toast";
 import Image from "next/image";
-import { useAuthStore } from "@/store/authStore";
+import { getAuthToken } from "@/lib/authToken";
 import { Product } from "@/types";
 
 export default function AdminHome() {
@@ -37,7 +37,7 @@ export default function AdminHome() {
     if (!file) return;
 
     setIsUploading((prev) => ({ ...prev, [key]: true }));
-    const token = useAuthStore.getState().accessToken;
+    const token = getAuthToken();
 
     const formData = new FormData();
     formData.append("file", file);
@@ -73,7 +73,7 @@ export default function AdminHome() {
 
     setIsLoading(true);
     try {
-      const token = useAuthStore.getState().accessToken;
+      const token = getAuthToken();
       const res = await fetch("/api/home-config", {
         method: "PUT",
         headers: {
