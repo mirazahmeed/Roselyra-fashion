@@ -9,6 +9,7 @@ import { signOut as firebaseSignOut } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 import { Loader2, Package, MapPin, CreditCard, ChevronRight, Eye, Clock, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -327,9 +328,11 @@ export default function AccountPage() {
               <div>
                 <div className="flex items-center gap-4 mb-8">
                   {user?.avatar ? (
-                    <img
+                    <Image
                       src={user.avatar}
                       alt={user.name || "User"}
+                      width={80}
+                      height={80}
                       className="w-20 h-20 rounded-full object-cover"
                     />
                   ) : (
