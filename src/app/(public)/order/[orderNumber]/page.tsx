@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { Loader2, CheckCircle, Clock, Package, Truck, XCircle, CreditCard, Phone, RefreshCw } from "lucide-react";
@@ -20,7 +20,7 @@ const statusSteps = [
   { status: "DELIVERED", label: "Delivered", icon: CheckCircle },
 ];
 
-export default function OrderPage() {
+function OrderContent() {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get("order");
   const { user, accessToken } = useAuthStore();
@@ -42,6 +42,7 @@ export default function OrderPage() {
     } else {
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderNumber]);
 
   const fetchData = () => {
@@ -84,6 +85,7 @@ export default function OrderPage() {
     };
     document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderNumber]);
 
   const handlePaymentSubmit = async (e: React.FormEvent) => {
@@ -421,7 +423,7 @@ export default function OrderPage() {
                             <span className="font-medium">Awaiting Verification</span>
                           </div>
                           <p className="text-sm text-yellow-700 mb-1">
-                            Your payment of <strong>৳{payment.amount.toFixed(2)}</strong> has been received and is under review. We'll confirm it shortly.
+                            Your payment of <strong>৳{payment.amount.toFixed(2)}</strong> has been received and is under review. We&apos;ll confirm it shortly.
                           </p>
                           {payment.transactionId && (
                             <p className="text-xs text-yellow-600 mb-4">Transaction ID: {payment.transactionId}</p>
@@ -532,5 +534,27 @@ export default function OrderPage() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+function OrderFallback() {
+  return (
+    <PageTransition>
+      <div className="pt-32 pb-24 min-h-screen">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="flex items-center justify-center py-32">
+            <Loader2 className="w-8 h-8 animate-spin" />
+          </div>
+        </div>
+      </div>
+    </PageTransition>
+  );
+}
+
+export default function OrderPage() {
+  return (
+    <Suspense fallback={<OrderFallback />}>
+      <OrderContent />
+    </Suspense>
   );
 }

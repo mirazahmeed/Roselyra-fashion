@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { PageTransition } from "@/components/animations/PageTransition";
@@ -10,7 +10,7 @@ import { Product } from "@/types";
 
 export const dynamic = "force-dynamic";
 
-export default function SearchPage() {
+function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
@@ -96,5 +96,33 @@ export default function SearchPage() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+function SearchFallback() {
+  return (
+    <div className="pt-32 pb-24 min-h-screen">
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Search className="w-5 h-5 text-muted-foreground" />
+            <span className="text-sm uppercase tracking-widest text-muted-foreground">Search Results</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-display uppercase tracking-wider">Search</h1>
+          <p className="text-muted-foreground mt-2">Loading...</p>
+        </div>
+        <div className="flex items-center justify-center py-32">
+          <Loader2 className="w-8 h-8 animate-spin" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<SearchFallback />}>
+      <SearchContent />
+    </Suspense>
   );
 }

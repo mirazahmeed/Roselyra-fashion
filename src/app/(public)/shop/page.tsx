@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { PageTransition } from "@/components/animations/PageTransition";
@@ -19,7 +19,7 @@ const sortOptions = [
   { value: "price_desc", label: "Price: High to Low" },
 ];
 
-export default function ShopPage() {
+function ShopContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
@@ -279,5 +279,28 @@ export default function ShopPage() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+function ShopFallback() {
+  return (
+    <div className="pt-32 pb-24 min-h-screen">
+      <div className="container mx-auto px-4 md:px-8">
+        <h1 className="text-4xl md:text-6xl font-display uppercase tracking-wider mb-6 text-center">
+          Shop
+        </h1>
+        <div className="flex items-center justify-center py-32">
+          <Loader2 className="w-8 h-8 animate-spin" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={<ShopFallback />}>
+      <ShopContent />
+    </Suspense>
   );
 }

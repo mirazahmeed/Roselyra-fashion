@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, CheckCircle, XCircle } from "lucide-react";
 
-export default function VerifyPage() {
+function VerifyContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -72,5 +72,24 @@ export default function VerifyPage() {
         )}
       </div>
     </div>
+  );
+}
+
+function VerifyFallback() {
+  return (
+    <div className="min-h-screen bg-cream flex items-center justify-center p-4">
+      <div className="text-center">
+        <Loader2 className="w-12 h-12 animate-spin text-noir mx-auto mb-4" />
+        <p className="text-lg">Loading...</p>
+      </div>
+    </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={<VerifyFallback />}>
+      <VerifyContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useUIStore } from "@/store/uiStore";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -10,7 +10,7 @@ import { Loader2, Search, X } from "lucide-react";
 import { Product } from "@/types";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function SearchModal() {
+function SearchModalContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isSearchOpen, closeSearch } = useUIStore();
@@ -123,5 +123,17 @@ export function SearchModal() {
         </div>
       </DialogContent>
     </Dialog>
+  );
+}
+
+function SearchModalFallback() {
+  return null;
+}
+
+export function SearchModal() {
+  return (
+    <Suspense fallback={<SearchModalFallback />}>
+      <SearchModalContent />
+    </Suspense>
   );
 }
