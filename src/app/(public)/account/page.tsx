@@ -9,7 +9,7 @@ import { signOut as firebaseSignOut } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Package, MapPin, CreditCard, ChevronRight, Eye } from "lucide-react";
+import { Loader2, Package, MapPin, CreditCard, ChevronRight, Eye, Clock, CheckCircle } from "lucide-react";
 import toast from "react-hot-toast";
 
 const useHydrated = () => {
@@ -274,14 +274,47 @@ export default function AccountPage() {
                               ৳{((order.total || order.subtotal || 0) + (order.shippingCost || 0) + (order.tax || 0)).toFixed(2)}
                             </p>
                           </div>
-                          <Link
-                            href={`/order/${order.orderNumber}`}
-                            className="flex items-center gap-1 text-noir hover:underline"
-                          >
-                            <Eye className="w-4 h-4" />
-                            View Details
-                            <ChevronRight className="w-4 h-4" />
-                          </Link>
+                          <div className="flex items-center gap-2 flex-wrap justify-end">
+                            {/* Dynamic payment action button */}
+                            {order.paymentStatus === "UNPAID" && (
+                              <Link
+                                href={`/order/${order.orderNumber}`}
+                                className="flex items-center gap-1 px-3 py-1.5 bg-orange-600 text-white text-xs uppercase tracking-wide rounded hover:bg-orange-700 transition-colors font-medium"
+                              >
+                                <CreditCard className="w-3.5 h-3.5" />
+                                Pay Now
+                              </Link>
+                            )}
+                            {order.paymentStatus === "REJECTED" && (
+                              <Link
+                                href={`/order/${order.orderNumber}`}
+                                className="flex items-center gap-1 px-3 py-1.5 bg-red-600 text-white text-xs uppercase tracking-wide rounded hover:bg-red-700 transition-colors font-medium"
+                              >
+                                <CreditCard className="w-3.5 h-3.5" />
+                                Re-submit Payment
+                              </Link>
+                            )}
+                            {order.paymentStatus === "PENDING" && (
+                              <span className="flex items-center gap-1 px-3 py-1.5 bg-yellow-100 text-yellow-700 text-xs uppercase tracking-wide rounded font-medium">
+                                <Clock className="w-3.5 h-3.5" />
+                                Pending Review
+                              </span>
+                            )}
+                            {order.paymentStatus === "PAID" && (
+                              <span className="flex items-center gap-1 px-3 py-1.5 bg-green-100 text-green-700 text-xs uppercase tracking-wide rounded font-medium">
+                                <CheckCircle className="w-3.5 h-3.5" />
+                                Paid
+                              </span>
+                            )}
+                            <Link
+                              href={`/order/${order.orderNumber}`}
+                              className="flex items-center gap-1 text-noir hover:underline text-sm"
+                            >
+                              <Eye className="w-4 h-4" />
+                              View Details
+                              <ChevronRight className="w-4 h-4" />
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     ))}

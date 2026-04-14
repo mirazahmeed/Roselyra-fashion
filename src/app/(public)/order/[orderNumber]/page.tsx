@@ -384,80 +384,25 @@ export default function OrderPage() {
               ) : (
                 <div className="space-y-4">
                   {(() => {
-                    const status = payment?.status?.toUpperCase();
+                    const paymentStatus = payment?.status?.toUpperCase() as string | undefined;
                     const hasPayment = !!payment;
-                    const isApproved = status === "APPROVED";
-                    const isPending = status === "PENDING";
-                    const isRejected = status === "REJECTED";
-                    const isUnpaid = !hasPayment || status === "UNPAID";
-                    const orderIsPending = order?.status === "PENDING";
-                    
-                    if (isRejected || (hasPayment && orderIsPending)) {
-                      return (
-                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                          <div className="flex items-center gap-2 text-red-600 mb-2">
-                            <XCircle className="w-5 h-5" />
-                            <span className="font-medium">Payment Rejected</span>
-                          </div>
-                          <p className="text-sm text-red-600 mb-4">
-                            Your payment was rejected. Please check your transaction details and submit again.
-                          </p>
-                          <Button 
-                            onClick={() => setShowPaymentForm(true)}
-                            className="w-full bg-red-600 hover:bg-red-700"
-                          >
-                            Submit New Payment
-                          </Button>
-                        </div>
-                      );
-                    }
-                    
-                    if (isApproved && order.paidAmount > 0) {
-                      return (
-                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                          <div className="flex items-center gap-2 text-green-600 mb-2">
-                            <CheckCircle className="w-5 h-5" />
-                            <span className="font-medium">Payment Verified</span>
-                          </div>
-                          <p className="text-sm text-green-600">
-                            Payment of ৳{order.paidAmount.toFixed(2)} has been verified. Thank you!
-                          </p>
-                        </div>
-                      );
-                    }
-                    
-                    if (isPending) {
-                      return (
-                        <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                          <div className="flex items-center gap-2 text-yellow-600 mb-2">
-                            <Clock className="w-5 h-5" />
-                            <span className="font-medium">Payment Pending Verification</span>
-                          </div>
-                          <p className="text-sm text-yellow-600 mb-4">
-                            Your payment is being verified. Please wait for admin approval.
-                          </p>
-                          <Button 
-                            variant="outline" 
-                            onClick={() => setShowPaymentForm(true)}
-                            className="w-full"
-                          >
-                            Update Payment Details
-                          </Button>
-                        </div>
-                      );
-                    }
-                    
-                    if (hasPayment && !isApproved) {
+                    const dueAmount = (order.subtotal || 0) + (order.shippingCost || 0) + (order.tax || 0) - (order.discount || 0) - (order.paidAmount || 0);
+
+                    // ── CASE 1: No payment submitted yet ─────────────────────
+                    if (!hasPayment) {
                       return (
                         <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
                           <div className="flex items-center gap-2 text-orange-600 mb-2">
                             <CreditCard className="w-5 h-5" />
                             <span className="font-medium">Payment Required</span>
                           </div>
-                          <p className="text-sm text-orange-600 mb-4">
-                            Please complete your payment to confirm your order. Total due: ৳{((order.subtotal || 0) + (order.shippingCost || 0) + (order.tax || 0) - (order.discount || 0) - (order.paidAmount || 0)).toFixed(2)}
+                          <p className="text-sm text-orange-600 mb-1">
+                            Your order is pending payment. Please send the full amount via bKash and submit your transaction details.
                           </p>
-                          <Button 
+                          <p className="text-sm font-bold text-orange-700 mb-4">
+                            Total Due: ৳{dueAmount.toFixed(2)}
+                          </p>
+                          <Button
                             onClick={() => setShowPaymentForm(true)}
                             className="w-full bg-orange-600 hover:bg-orange-700"
                           >
@@ -466,21 +411,111 @@ export default function OrderPage() {
                         </div>
                       );
                     }
-                    
-                    return (
-                      <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
-                        <div className="flex items-center gap-2 text-orange-600 mb-2">
-                          <CreditCard className="w-5 h-5" />
-                          <span className="font-medium">Payment Required</span>
+
+                    // ── CASE 2: Payment submitted, awaiting admin review ──────
+                    if (paymentStatus === "PENDING") {
+                      return (
+                        <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-yellow-700 mb-2">
+                            <Clock className="w-5 h-5" />
+                            <span className="font-medium">Awaiting Verification</span>
+                          </div>
+                          <p className="text-sm text-yellow-700 mb-1">
+                            Your payment of <strong>৳{payment.amount.toFixed(2)}</strong> has been received and is under review. We'll confirm it shortly.
+                          </p>
+                          {payment.transactionId && (
+                            <p className="text-xs text-yellow-600 mb-4">Transaction ID: {payment.transactionId}</p>
+                          )}
+                          <Button
+                            variant="outline"
+                            onClick={() => setShowPaymentForm(true)}
+                            className="w-full border-yellow-400 text-yellow-700 hover:bg-yellow-100"
+                          >
+                            Update Payment Details
+                          </Button>
                         </div>
-                        <p className="text-sm text-orange-600 mb-4">
-                          Please complete your payment to confirm your order. Total due: ৳{((order.subtotal || 0) + (order.shippingCost || 0) + (order.tax || 0) - (order.discount || 0) - (order.paidAmount || 0)).toFixed(2)}
+                      );
+                    }
+
+                    // ── CASE 3: Payment rejected by admin ─────────────────────
+                    if (paymentStatus === "REJECTED") {
+                      return (
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-red-600 mb-2">
+                            <XCircle className="w-5 h-5" />
+                            <span className="font-medium">Payment Rejected</span>
+                          </div>
+                          <p className="text-sm text-red-600 mb-2">
+                            Your payment information was incorrect or could not be verified. Please re-submit with correct details.
+                          </p>
+                          {payment.adminNotes && (
+                            <p className="text-xs bg-red-100 text-red-700 rounded p-2 mb-4">
+                              <strong>Admin note:</strong> {payment.adminNotes}
+                            </p>
+                          )}
+                          <p className="text-sm font-bold text-red-700 mb-4">
+                            Amount Due: ৳{dueAmount.toFixed(2)}
+                          </p>
+                          <Button
+                            onClick={() => setShowPaymentForm(true)}
+                            className="w-full bg-red-600 hover:bg-red-700"
+                          >
+                            Re-submit Payment
+                          </Button>
+                        </div>
+                      );
+                    }
+
+                    // ── CASE 4a: Payment approved — fully paid ────────────────
+                    if (paymentStatus === "APPROVED" && dueAmount <= 0) {
+                      return (
+                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-green-600 mb-2">
+                            <CheckCircle className="w-5 h-5" />
+                            <span className="font-medium">Payment Complete</span>
+                          </div>
+                          <p className="text-sm text-green-600">
+                            Your payment of <strong>৳{payment.amount.toFixed(2)}</strong> has been verified. Your order is confirmed!
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    // ── CASE 4b: Payment approved — partial (due amount remains) ─
+                    if (paymentStatus === "APPROVED" && dueAmount > 0) {
+                      return (
+                        <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                          <div className="flex items-center gap-2 text-blue-600 mb-2">
+                            <CheckCircle className="w-5 h-5" />
+                            <span className="font-medium">Advance Payment Verified</span>
+                          </div>
+                          <p className="text-sm text-blue-600 mb-1">
+                            Payment of <strong>৳{payment.amount.toFixed(2)}</strong> has been confirmed.
+                          </p>
+                          <p className="text-sm font-bold text-blue-700 mb-4">
+                            Remaining Balance: ৳{dueAmount.toFixed(2)}
+                          </p>
+                          <Button
+                            onClick={() => setShowPaymentForm(true)}
+                            className="w-full bg-blue-600 hover:bg-blue-700"
+                          >
+                            Pay Remaining Balance
+                          </Button>
+                        </div>
+                      );
+                    }
+
+                    // ── FALLBACK: Unknown state ────────────────────────────────
+                    return (
+                      <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                        <p className="text-sm text-gray-600 mb-4">
+                          Payment status: {paymentStatus || "Unknown"}
                         </p>
-                        <Button 
+                        <Button
                           onClick={() => setShowPaymentForm(true)}
-                          className="w-full bg-orange-600 hover:bg-orange-700"
+                          className="w-full"
                         >
-                          Pay Now
+                          Submit Payment
                         </Button>
                       </div>
                     );

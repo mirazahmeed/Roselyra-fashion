@@ -968,6 +968,77 @@
       "tags": [],
       "createdAt": "2026-02-28T02:01:18.078Z",
       "updatedAt": "2026-02-28T08:57:26.057Z"
+    },
+    {
+      "id": "prod_1776149451057",
+      "name": "Black Full Sleve Top",
+      "slug": "black-full-sleve-top",
+      "description": "Cotton silky luxary fabric. ",
+      "longDesc": "Cotton silky luxary fabric. with high quality ",
+      "price": 1223,
+      "comparePrice": 1200,
+      "sku": "BLACK-Silky-005",
+      "stock": 20,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 14,
+      "categoryId": "cat_004",
+      "collectionId": "col_004",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_004",
+        "name": "Dark Romance",
+        "slug": "dark",
+        "description": "Mysterious and alluring pieces",
+        "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+        "videoUrl": null,
+        "season": "Winter",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 4
+      },
+      "images": [
+        {
+          "id": "img_1776149451057_0",
+          "url": "/uploads/1776149246645-85524802-ivan-kazlouskij-1dkUMKQAEm0-unsplash.jpg",
+          "altText": "Black Full Sleve Top",
+          "order": 0,
+          "isPrimary": true,
+          "width": 800,
+          "height": 1000
+        }
+      ],
+      "material": "70% Cotton, 30% Linen",
+      "fit": "Regular",
+      "care": "Machine wash cold",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "black"
+      ],
+      "tags": [
+        "black",
+        "luxary"
+      ],
+      "variants": [],
+      "createdAt": "2026-04-14T06:50:51.057Z",
+      "updatedAt": "2026-04-14T06:50:51.057Z"
     }
   ],
   "categories": [
@@ -1733,6 +1804,114 @@
       ],
       "createdAt": "2026-03-01T08:13:33.656Z",
       "updatedAt": "2026-03-01T19:03:20.702Z"
+    },
+    {
+      "id": "order_1776149538504",
+      "orderNumber": "RL-MNY9KR0O-A0S8",
+      "userId": "user_001",
+      "guestEmail": null,
+      "status": "CONFIRMED",
+      "paymentType": "FULL",
+      "paymentMethod": "BKASH",
+      "subtotal": 1223,
+      "shippingCost": 0,
+      "tax": 122.30000000000001,
+      "discount": 0,
+      "paidAmount": 1345,
+      "dueAmount": 0.2999999999999545,
+      "firstName": "Miraz",
+      "lastName": "Ahmed",
+      "email": "mirazahmed31@gmail.com",
+      "phone": "0123454457292",
+      "address": "West High, Chittagong",
+      "city": "Chittagong",
+      "state": "gth",
+      "postalCode": "4000",
+      "country": "Bangladesh",
+      "adminNotes": null,
+      "items": [
+        {
+          "id": "orderitem_1776149538504_6wgl",
+          "productId": "prod_1776149451057",
+          "product": {
+            "id": "prod_1776149451057",
+            "name": "Black Full Sleve Top",
+            "slug": "black-full-sleve-top",
+            "description": "Cotton silky luxary fabric. ",
+            "longDesc": "Cotton silky luxary fabric. with high quality ",
+            "price": 1223,
+            "comparePrice": 1200,
+            "sku": "BLACK-Silky-005",
+            "stock": 20,
+            "isFeatured": true,
+            "isArchived": false,
+            "isActive": true,
+            "order": 14,
+            "categoryId": "cat_004",
+            "collectionId": "col_004",
+            "category": {
+              "id": "cat_004",
+              "name": "Tops",
+              "slug": "tops",
+              "description": "Blouses, shirts, and sweaters",
+              "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+              "parentId": null,
+              "order": 4,
+              "isActive": true
+            },
+            "collection": {
+              "id": "col_004",
+              "name": "Dark Romance",
+              "slug": "dark",
+              "description": "Mysterious and alluring pieces",
+              "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+              "videoUrl": null,
+              "season": "Winter",
+              "year": 2025,
+              "isFeatured": false,
+              "isActive": true,
+              "order": 4
+            },
+            "images": [
+              {
+                "id": "img_1776149451057_0",
+                "url": "/uploads/1776149246645-85524802-ivan-kazlouskij-1dkUMKQAEm0-unsplash.jpg",
+                "altText": "Black Full Sleve Top",
+                "order": 0,
+                "isPrimary": true,
+                "width": 800,
+                "height": 1000
+              }
+            ],
+            "material": "70% Cotton, 30% Linen",
+            "fit": "Regular",
+            "care": "Machine wash cold",
+            "sizes": [
+              "XS",
+              "S",
+              "M",
+              "L",
+              "XL"
+            ],
+            "colors": [
+              "black"
+            ],
+            "tags": [
+              "black",
+              "luxary"
+            ],
+            "variants": [],
+            "createdAt": "2026-04-14T06:50:51.057Z",
+            "updatedAt": "2026-04-14T06:50:51.057Z"
+          },
+          "quantity": 1,
+          "price": 1223,
+          "size": "XS",
+          "color": "black"
+        }
+      ],
+      "createdAt": "2026-04-14T06:52:18.504Z",
+      "updatedAt": "2026-04-14T06:53:06.222Z"
     }
   ],
   "media": [
@@ -1839,6 +2018,19 @@
       "mimeType": "image/jpeg",
       "folder": null,
       "createdAt": "2026-02-28T02:01:08.098Z"
+    },
+    {
+      "id": "media_1776149246645",
+      "url": "/uploads/1776149246645-85524802-ivan-kazlouskij-1dkUMKQAEm0-unsplash.jpg",
+      "altText": "ivan-kazlouskij-1dkUMKQAEm0-unsplash.jpg",
+      "publicId": null,
+      "type": "IMAGE",
+      "width": null,
+      "height": null,
+      "size": 1151663,
+      "mimeType": "image/jpeg",
+      "folder": null,
+      "createdAt": "2026-04-14T06:47:26.645Z"
     }
   ],
   "seoData": {},
@@ -1946,6 +2138,18 @@
       "adminNotes": null,
       "createdAt": "2026-03-01T08:13:33.668Z",
       "updatedAt": "2026-03-01T19:03:20.702Z"
+    },
+    {
+      "id": "pay_1776149538667",
+      "orderId": "order_1776149538504",
+      "method": "BKASH",
+      "senderNumber": "01234567678",
+      "transactionId": "sjdkhf34weyr43##",
+      "amount": 1345,
+      "status": "PENDING",
+      "adminNotes": null,
+      "createdAt": "2026-04-14T06:52:18.667Z",
+      "updatedAt": "2026-04-14T06:52:18.667Z"
     }
   ],
   "settings": {

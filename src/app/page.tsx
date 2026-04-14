@@ -24,22 +24,22 @@ export default function Home() {
       <main className="bg-cream w-full overflow-hidden">
         
         {/* Massive Brand Text - Absolutely positioned over the first two sections */}
-        <div className="absolute top-[35vh] md:top-[60vh] left-0 w-full z-20 pointer-events-none flex justify-centermix-blend-difference text-cream">
+        <div className="absolute top-[35vh] md:top-[60vh] left-0 w-full z-20 pointer-events-none flex justify-center mix-blend-difference text-cream">
           <h1 className="text-[14vw] font-display tracking-[0.15em] uppercase leading-none text-center w-full shadow-text">
             Roselyra
           </h1>
         </div>
 
-        {/* --- ROW 1 --- */}
+        {/* --- ROW 1 --- Full height hero */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative aspect-[3/4] md:aspect-auto md:h-[90vh] w-full group">
+          <div className="relative h-[70vh] md:h-[90vh] w-full group">
             {hero1Product ? (
               <Link href={`/products/${hero1Product.slug}`} className="block w-full h-full">
                 <Image
                   src={hero1Image}
                   alt={hero1Product.name}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   priority
                 />
                 <div className="absolute bottom-8 left-8 z-10">
@@ -58,14 +58,14 @@ export default function Home() {
               />
             )}
           </div>
-          <div className="relative aspect-[3/4] md:aspect-auto md:h-[90vh] w-full group">
+          <div className="relative h-[70vh] md:h-[90vh] w-full group">
             {hero2Product ? (
               <Link href={`/products/${hero2Product.slug}`} className="block w-full h-full">
                 <Image
                   src={hero2Image}
                   alt={hero2Product.name}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                   priority
                 />
                 <div className="absolute bottom-8 left-8 z-10">
@@ -88,8 +88,7 @@ export default function Home() {
 
         {/* --- ROW 2 --- */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative aspect-square md:aspect-[4/3] w-full group bg-[#881416]">
-            {/* Custom deep red background with a product shot as seen in design */}
+          <div className="relative h-[55vh] md:h-[65vh] w-full group bg-[#881416]">
             <Image
               src={getImg('hero3', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
               alt="Bags"
@@ -102,7 +101,7 @@ export default function Home() {
               </span>
             </Link>
           </div>
-          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group">
              <Image
               src={getImg('hero4', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
               alt="Sparkle"
@@ -119,7 +118,7 @@ export default function Home() {
 
         {/* --- ROW 3 --- */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group">
             <Image
               src={getImg('hero5', "https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?q=80&w=3148&auto=format&fit=crop")}
               alt="Roses"
@@ -132,7 +131,7 @@ export default function Home() {
               </span>
             </Link>
           </div>
-          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group">
              <Image
               src={getImg('hero6', "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=3270&auto=format&fit=crop")}
               alt="Editorial"
@@ -149,7 +148,7 @@ export default function Home() {
         
         {/* --- ROW 4 --- */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative aspect-square md:aspect-[4/3] w-full group bg-noir">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group bg-noir">
             <Image
               src={getImg('hero7', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
               alt="Black White Rose"
@@ -162,7 +161,7 @@ export default function Home() {
               </span>
             </Link>
           </div>
-          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group">
              <Image
               src={getImg('hero8', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
               alt="Minimal"
@@ -179,7 +178,7 @@ export default function Home() {
 
         {/* --- ROW 5 --- */}
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative aspect-square md:aspect-[4/3] w-full group">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group">
             <Image
               src={getImg('hero9', "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2724&auto=format&fit=crop")}
               alt="Crochet"
@@ -192,7 +191,7 @@ export default function Home() {
               </span>
             </Link>
           </div>
-          <div className="relative aspect-square md:aspect-[4/3] w-full group bg-[#111]">
+          <div className="relative h-[55vh] md:h-[65vh] w-full group bg-[#111]">
              <Image
               src={getImg('hero10', "https://images.unsplash.com/photo-1645292155425-1126d1a03d21?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
               alt="White Rose"
@@ -207,75 +206,85 @@ export default function Home() {
           </div>
         </div>
 
-        {/* --- Featured Products --- */}
-        <div className="py-32 px-4 md:px-12 max-w-7xl mx-auto">
-          <h2 className="text-center text-xl font-display uppercase tracking-widest mb-12">Featured Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8 items-end">
-            {featuredProducts.length > 0 ? (
-              featuredProducts.map((product) => (
-                <Link key={product.id} href={`/products/${product.slug}`} className="group flex flex-col items-center">
-                  <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
+        {/* --- Featured Products --- Full editorial sizing */}
+        <div className="py-24 px-4 md:px-12">
+          <h2 className="text-center text-sm font-display uppercase tracking-[0.3em] mb-16">Featured Products</h2>
+          {featuredProducts.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              {featuredProducts.map((product) => (
+                <Link key={product.id} href={`/products/${product.slug}`} className="group block">
+                  <div className="relative w-full aspect-[3/4] overflow-hidden mb-4 bg-[#f5f5f5]">
                     <Image
                       src={product.images?.[0]?.url || "/placeholder.jpg"}
                       alt={product.name}
                       fill
-                      className="object-contain mix-blend-multiply"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
-                    {product.name}
-                  </span>
+                  <div className="text-center">
+                    <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors block">
+                      {product.name}
+                    </span>
+                    <span className="text-[10px] text-noir/60 mt-1 block">${product.price.toFixed(2)}</span>
+                  </div>
                 </Link>
-              ))
-            ) : (
-              <>
-            {/* Product 1 */}
-            <Link href="/products/medium-rose-hobo-bag" className="group flex flex-col items-center">
-              <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
-                <Image
-                  src={getImg('hero11', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
-                  alt="Product 1"
-                  fill
-                  className="object-contain mix-blend-multiply"
-                />
-              </div>
-              <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
-                Medium Rose Hobo Bag
-              </span>
-            </Link>
+              ))}
+            </div>
+          ) : (
+            /* Fallback: 3 hardcoded editorial products */
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              {/* Product 1 */}
+              <Link href="/products/medium-rose-hobo-bag" className="group block">
+                <div className="relative w-full aspect-[3/4] overflow-hidden mb-4 bg-[#f5f5f5]">
+                  <Image
+                    src={getImg('hero11', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
+                    alt="Medium Rose Hobo Bag"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="text-center">
+                  <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors block">
+                    Medium Rose Hobo Bag
+                  </span>
+                </div>
+              </Link>
 
-            {/* Product 2 */}
-            <Link href="/products/long-sleeve-mini-dress" className="group flex flex-col items-center">
-              <div className="relative w-48 h-64 md:w-64 md:h-80 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
-                <Image
-                  src={getImg('hero12', "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2787&auto=format&fit=crop")}
-                  alt="Product 2"
-                  fill
-                  className="object-contain mix-blend-multiply"
-                />
-              </div>
-              <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
-                Long Sleeve Mini Dress
-              </span>
-            </Link>
+              {/* Product 2 */}
+              <Link href="/products/long-sleeve-mini-dress" className="group block">
+                <div className="relative w-full aspect-[3/4] overflow-hidden mb-4 bg-[#f5f5f5]">
+                  <Image
+                    src={getImg('hero12', "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2787&auto=format&fit=crop")}
+                    alt="Long Sleeve Mini Dress"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="text-center">
+                  <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors block">
+                    Long Sleeve Mini Dress
+                  </span>
+                </div>
+              </Link>
 
-            {/* Product 3 */}
-            <Link href="/products/red-rose-heels" className="group flex flex-col items-center">
-              <div className="relative w-48 h-48 md:w-64 md:h-64 mb-6 transition-transform duration-700 group-hover:-translate-y-2">
-                 <Image
-                  src={getImg('hero13', "https://images.unsplash.com/photo-1543163521-1bf2?q=80539c55dd&w=2960&auto=format&fit=crop")}
-                  alt="Product 3"
-                  fill
-                  className="object-contain mix-blend-multiply"
-                />
-              </div>
-              <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors">
-                Red Rose Heels
-              </span>
-            </Link>
-              </>
-            )}
-          </div>
+              {/* Product 3 */}
+              <Link href="/products/red-rose-heels" className="group block">
+                <div className="relative w-full aspect-[3/4] overflow-hidden mb-4 bg-[#f5f5f5]">
+                  <Image
+                    src={getImg('hero13', "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=2960&auto=format&fit=crop")}
+                    alt="Red Rose Heels"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="text-center">
+                  <span className="text-[10px] uppercase tracking-widest text-noir font-medium hover:text-rose transition-colors block">
+                    Red Rose Heels
+                  </span>
+                </div>
+              </Link>
+            </div>
+          )}
         </div>
 
       </main>
