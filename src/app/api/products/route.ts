@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
+import { revalidatePath } from "next/cache";
 
 const productSchema = z.object({
 	name: z.string().min(1),
@@ -68,6 +69,7 @@ export async function POST(req: NextRequest) {
 
 		const data = parsed.data;
 		const product = db.createProduct(data);
+		revalidatePath("/", "layout");
 		return successResponse(product, 201);
 	} catch (err) {
 		console.error("[PRODUCTS POST]", err);

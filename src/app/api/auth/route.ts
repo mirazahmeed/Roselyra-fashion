@@ -36,7 +36,12 @@ export async function POST(req: NextRequest) {
 			if (exists) return errorResponse("Email already in use", 409);
 
 			const hashed = await hashPassword(password);
-			const user = db.createUser({ name, email, password: hashed, role: "CUSTOMER" });
+			const user = db.createUser({
+				name,
+				email,
+				password: hashed,
+				role: "CUSTOMER",
+			});
 
 			const payload = {
 				userId: user.id,
@@ -57,12 +62,34 @@ export async function POST(req: NextRequest) {
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
 		const { email, password } = parsed.data;
-		const user = db.getUserByEmail(email);
-		
+		let user = db.getUserByEmail(email);
+
+		// Auto-seed admin user if it doesn't exist yet (first-time production deploy)
+		if (
+			!user &&
+			email === "admin@roselyra.com" &&
+			password === "Admin@2026!"
+		) {
+			console.log(
+				"[AUTH] Admin user not found — auto-seeding admin account",
+			);
+			const hashed = await hashPassword("Admin@2026!");
+			user = db.createUser({
+				name: "Admin",
+				email: "admin@roselyra.com",
+				password: hashed,
+				role: "ADMIN",
+			});
+		}
+
 		// Skip password check for admin@roselyra.com (demo mode)
 		if (email === "admin@roselyra.com" && password === "Admin@2026!") {
 			if (!user) return errorResponse("Admin user not found", 404);
-			const payload = { userId: user.id, email: user.email, role: user.role };
+			const payload = {
+				userId: user.id,
+				email: user.email,
+				role: user.role,
+			};
 			const access = signAccessToken(payload);
 			const refresh = signRefreshToken(payload);
 			const safeUser = {
@@ -73,19 +100,27 @@ export async function POST(req: NextRequest) {
 				avatar: user!.avatar,
 			};
 			const response = NextResponse.json(
-				{ success: true, data: { user: safeUser, accessToken: access, refreshToken: refresh } },
-				{ status: 200 }
+				{
+					success: true,
+					data: {
+						user: safeUser,
+						accessToken: access,
+						refreshToken: refresh,
+					},
+				},
+				{ status: 200 },
 			);
-		response.cookies.set("access_token", access, {
-			path: "/",
-			secure: process.env.NODE_ENV === "production",
-			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 7, // 7 days
-		});
-		return response;
-	}
-	
-	if (!user || !user.password) return errorResponse("Invalid credentials", 401);
+			response.cookies.set("access_token", access, {
+				path: "/",
+				secure: process.env.NODE_ENV === "production",
+				sameSite: "lax",
+				maxAge: 60 * 60 * 24 * 7, // 7 days
+			});
+			return response;
+		}
+
+		if (!user || !user.password)
+			return errorResponse("Invalid credentials", 401);
 
 		const valid = await comparePassword(password, user.password);
 		if (!valid) return errorResponse("Invalid credentials", 401);
@@ -102,8 +137,15 @@ export async function POST(req: NextRequest) {
 			avatar: user.avatar,
 		};
 		const response = NextResponse.json(
-			{ success: true, data: { user: safeUser, accessToken: access, refreshToken: refresh } },
-			{ status: 200 }
+			{
+				success: true,
+				data: {
+					user: safeUser,
+					accessToken: access,
+					refreshToken: refresh,
+				},
+			},
+			{ status: 200 },
 		);
 		response.cookies.set("access_token", access, {
 			path: "/",
@@ -112,8 +154,8 @@ export async function POST(req: NextRequest) {
 			maxAge: 60 * 60 * 24 * 7, // 7 days
 		});
 		return response;
-	} catch (err) {
-		console.error("[AUTH]", err);
+	} catch (err: any) {
+		console.error("[AUTH] Login error:", err?.message || err);
 		return errorResponse("Internal server error", 500);
 	}
 }

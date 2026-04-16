@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
+import { revalidatePath } from "next/cache";
 
 export async function GET(req: NextRequest) {
 	try {
@@ -23,6 +24,7 @@ export async function PUT(req: NextRequest) {
 		Object.assign(db.homeConfig, body);
 		db.saveDB();
 
+		revalidatePath("/", "layout");
 		return successResponse(db.homeConfig);
 	} catch (err) {
 		console.error("[HOME_CONFIG PUT]", err);

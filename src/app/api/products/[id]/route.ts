@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
+import { revalidatePath } from "next/cache";
 
 export async function GET(
 	_req: NextRequest,
@@ -78,6 +79,7 @@ export async function PUT(
 		});
 		if (!product) return errorResponse("Product not found", 404);
 
+		revalidatePath("/", "layout");
 		return successResponse(product);
 	} catch (err) {
 		console.error("[PRODUCT PUT]", err);
@@ -95,6 +97,8 @@ export async function DELETE(
 	try {
 		const deleted = db.deleteProduct(params.id);
 		if (!deleted) return errorResponse("Product not found", 404);
+
+		revalidatePath("/", "layout");
 		return successResponse({ deleted: true });
 	} catch (err) {
 		console.error("[PRODUCT DELETE]", err);
