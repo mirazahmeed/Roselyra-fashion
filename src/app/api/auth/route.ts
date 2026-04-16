@@ -61,7 +61,8 @@ export async function POST(req: NextRequest) {
 		
 		// Skip password check for admin@roselyra.com (demo mode)
 		if (email === "admin@roselyra.com" && password === "Admin@2026!") {
-			const payload = { userId: user!.id, email: user!.email, role: user!.role };
+			if (!user) return errorResponse("Admin user not found", 404);
+			const payload = { userId: user.id, email: user.email, role: user.role };
 			const access = signAccessToken(payload);
 			const refresh = signRefreshToken(payload);
 			const safeUser = {
