@@ -21,6 +21,15 @@ const nextConfig = {
 			allowedOrigins: ["localhost:3000", "reselyra.mirazstudio.xyz"],
 		},
 	},
+	async rewrites() {
+		return [
+			{
+				// Serve legacy /uploads/filename paths via the new API route
+				source: "/uploads/:filename",
+				destination: "/api/media/file/:filename",
+			},
+		];
+	},
 };
 
 export default nextConfig;

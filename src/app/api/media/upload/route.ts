@@ -24,7 +24,8 @@ export async function POST(req: NextRequest) {
 		const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
 		const filename = `${uniqueSuffix}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
 
-		const uploadDir = join(process.cwd(), "public", "uploads");
+		// Save to uploads/ at project root (NOT public/) so it works in production
+		const uploadDir = join(process.cwd(), "uploads");
 
 		try {
 			await mkdir(uploadDir, { recursive: true });
@@ -35,7 +36,8 @@ export async function POST(req: NextRequest) {
 		const filepath = join(uploadDir, filename);
 		await writeFile(filepath, buffer);
 
-		const url = `/uploads/${filename}`;
+		// Serve via API route instead of static /uploads/ path
+		const url = `/api/media/file/${filename}`;
 
 		const mimeType = file.type || "application/octet-stream";
 		const type: "VIDEO" | "IMAGE" =
