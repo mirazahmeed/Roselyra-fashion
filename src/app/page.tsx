@@ -14,7 +14,7 @@ export default function Home() {
   const getProduct = (key: string) => {
     const productId = config[key];
     if (!productId) return null;
-    return products.find(p => p.id === productId) || null;
+    return products.find(p => p.id === productId && p.isActive && !p.isArchived) || null;
   };
   
   const hero1Product = getProduct('hero1Product');

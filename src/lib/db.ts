@@ -23,8 +23,11 @@ import path from "path";
 
 const DATA_FILE = path.join(process.cwd(), "data.json");
 let state: any = {};
+let lastModifiedTime = 0;
+
 try {
 	if (fs.existsSync(DATA_FILE)) {
+		lastModifiedTime = fs.statSync(DATA_FILE).mtimeMs;
 		state = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
 	} else {
 		state = {
@@ -72,20 +75,20 @@ try {
 	};
 }
 
-export const productImages: Record<string, ProductImage[]> =
+export let productImages: Record<string, ProductImage[]> =
 	state.productImages || {};
-export const categories: Category[] = state.categories || [];
-export const collections: Collection[] = state.collections || [];
-export const products: Product[] = state.products || [];
-export const users: User[] = state.users || [];
-export const orders: Order[] = state.orders || [];
-export const media: Media[] = state.media || [];
-export const seoData: any = state.seoData || {};
-export const homeConfig: any = state.homeConfig || {};
-export const emailVerifications: EmailVerification[] =
+export let categories: Category[] = state.categories || [];
+export let collections: Collection[] = state.collections || [];
+export let products: Product[] = state.products || [];
+export let users: User[] = state.users || [];
+export let orders: Order[] = state.orders || [];
+export let media: Media[] = state.media || [];
+export let seoData: any = state.seoData || {};
+export let homeConfig: any = state.homeConfig || {};
+export let emailVerifications: EmailVerification[] =
 	state.emailVerifications || [];
-export const payments: Payment[] = state.payments || [];
-export const settings: SiteSettings = state.settings || {
+export let payments: Payment[] = state.payments || [];
+export let settings: SiteSettings = state.settings || {
 	bkashNumber: "",
 	bkashMerchantNumber: "",
 	deliveryCharge: 100,
@@ -98,6 +101,33 @@ export const settings: SiteSettings = state.settings || {
 	storeAddress: "",
 	footerText: "© 2026 Roselyra. All rights reserved.",
 };
+
+export function syncDB() {
+	if (!fs.existsSync(DATA_FILE)) return;
+	const mtimeMs = fs.statSync(DATA_FILE).mtimeMs;
+	if (mtimeMs > lastModifiedTime) {
+		try {
+			state = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+			productImages = state.productImages || {};
+			categories = state.categories || [];
+			collections = state.collections || [];
+			products = state.products || [];
+			users = state.users || [];
+			orders = state.orders || [];
+			media = state.media || [];
+			seoData = state.seoData || {};
+			homeConfig = state.homeConfig || {};
+			emailVerifications = state.emailVerifications || [];
+			payments = state.payments || [];
+			if (state.settings) {
+				settings = state.settings;
+			}
+			lastModifiedTime = mtimeMs;
+		} catch (err) {
+			console.error("Failed to sync DB", err);
+		}
+	}
+}
 
 export function saveDB() {
 	state.products = products;
@@ -114,24 +144,44 @@ export function saveDB() {
 	state.settings = settings;
 	try {
 		fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2));
+		lastModifiedTime = fs.statSync(DATA_FILE).mtimeMs;
 	} catch (err) {
 		console.error("Failed to save DB", err);
 	}
 }
 
-export const db = {
-	homeConfig,
+const _rawDb = {
+	get homeConfig() {
+		return homeConfig;
+	},
 	saveDB,
-	products,
-	categories,
-	collections,
-	users,
-	orders,
-	media,
-	seoData,
-	settings,
-
-	productImages,
+	get products() {
+		return products;
+	},
+	get categories() {
+		return categories;
+	},
+	get collections() {
+		return collections;
+	},
+	get users() {
+		return users;
+	},
+	get orders() {
+		return orders;
+	},
+	get media() {
+		return media;
+	},
+	get seoData() {
+		return seoData;
+	},
+	get settings() {
+		return settings;
+	},
+	get productImages() {
+		return productImages;
+	},
 
 	getProducts(
 		options: {
@@ -748,3 +798,17 @@ export const db = {
 		return true;
 	},
 };
+
+export const db = new Proxy(_rawDb, {
+	get(target, prop) {
+		syncDB();
+		const value = target[prop as keyof typeof _rawDb];
+		if (typeof value === "function" && prop !== "saveDB") {
+			return function (...args: any[]) {
+				syncDB();
+				return (value as Function).apply(target, args);
+			};
+		}
+		return value;
+	},
+});
