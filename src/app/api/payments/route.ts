@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor, requireAuth } from "@/lib/apiMiddleware";
 
@@ -15,21 +15,19 @@ export async function POST(req: NextRequest) {
       return errorResponse("Order ID, method, and amount are required", 400);
     }
 
-    const order = db.orders.find(o => o.id === orderId);
+    const order = await db.getOrderById(orderId);
     if (!order) {
       return errorResponse("Order not found", 404);
     }
 
-    // Validate minimum advance amount
-    const settings = db.getSettings();
+    const settings = await db.getSettings();
     if (method === "BKASH") {
       if (amount < settings.minAdvanceAmount) {
         return errorResponse(`Minimum advance amount is ${settings.minAdvanceAmount}`, 400);
       }
     }
 
-    // Create payment record
-    const payment = db.createPayment({
+    const payment = await db.createPayment({
       orderId,
       method,
       senderNumber,
@@ -37,55 +35,9 @@ export async function POST(req: NextRequest) {
       amount,
     });
 
-    // Send email notification
-    try {
-      const { sendPaymentReceivedEmail } = await import("@/lib/email");
-      await sendPaymentReceivedEmail(order, settings);
-    } catch (emailError) {
-      console.error("Failed to send payment email:", emailError);
-    }
-
     return successResponse({ payment, order: { ...order, status: order.status } });
   } catch (err) {
     console.error("[CREATE_PAYMENT]", err);
-    return errorResponse("Internal server error", 500);
-  }
-}
-
-export async function PUT(req: NextRequest) {
-  const authError = requireEditor(req);
-  if (authError) return authError;
-
-  try {
-    const body = await req.json();
-    const { paymentId, status, adminNotes } = body;
-
-    if (!paymentId || !status) {
-      return errorResponse("Payment ID and status are required", 400);
-    }
-
-    const payment = db.updatePaymentStatus(paymentId, status, adminNotes);
-    if (!payment) {
-      return errorResponse("Payment not found", 404);
-    }
-
-    // Send confirmation email if approved
-    if (status === "APPROVED") {
-      const order = db.orders.find(o => o.id === payment.orderId);
-      if (order) {
-        const settings = db.getSettings();
-        try {
-          const { sendOrderConfirmationEmail } = await import("@/lib/email");
-          await sendOrderConfirmationEmail(order, settings);
-        } catch (emailError) {
-          console.error("Failed to send confirmation email:", emailError);
-        }
-      }
-    }
-
-    return successResponse({ payment });
-  } catch (err) {
-    console.error("[UPDATE_PAYMENT]", err);
     return errorResponse("Internal server error", 500);
   }
 }
@@ -96,29 +48,44 @@ export async function GET(req: NextRequest) {
     const orderId = searchParams.get("orderId");
     const orderNumber = searchParams.get("orderNumber");
 
-    if (orderNumber) {
-      const order = db.orders.find(o => o.orderNumber === orderNumber);
-      if (!order) {
-        return errorResponse("Order not found", 404);
-      }
-      const payment = db.getPaymentByOrderId(order.id);
-      if (!payment) {
-        return successResponse(null);
-      }
-      return successResponse(payment);
-    }
-
+    const ordersResult = await db.getOrders({ perPage: 100 });
+    let order = null;
+    
     if (orderId) {
-      const payment = db.getPaymentByOrderId(orderId);
-      if (!payment) {
-        return errorResponse("Payment not found", 404);
-      }
-      return successResponse(payment);
+      order = ordersResult.items.find(o => o.id === orderId);
+    } else if (orderNumber) {
+      order = ordersResult.items.find(o => o.orderNumber === orderNumber);
     }
 
-    return errorResponse("Order ID or Order Number is required", 400);
+    if (!order) {
+      return errorResponse("Order not found", 404);
+    }
+
+    const payment = await db.getPaymentByOrderId(order.id);
+    return successResponse({ order, payment });
   } catch (err) {
     console.error("[GET_PAYMENT]", err);
+    return errorResponse("Internal server error", 500);
+  }
+}
+
+export async function PATCH(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const { paymentId, status, adminNotes } = body;
+
+    if (!paymentId || !status) {
+      return errorResponse("Payment ID and status are required", 400);
+    }
+
+    const payment = await db.updatePaymentStatus(paymentId, status, adminNotes);
+    if (!payment) {
+      return errorResponse("Payment not found", 404);
+    }
+
+    return successResponse(payment);
+  } catch (err) {
+    console.error("[UPDATE_PAYMENT]", err);
     return errorResponse("Internal server error", 500);
   }
 }

@@ -1,11 +1,11 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 
 export async function GET(req: NextRequest) {
   try {
-    const settings = db.getSettings();
+    const settings = await db.getSettings();
     return successResponse(settings);
   } catch (err) {
     console.error("[SETTINGS_GET]", err);
@@ -19,7 +19,7 @@ export async function PUT(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const settings = db.updateSettings(body);
+    const settings = await db.updateSettings(body);
     return successResponse(settings);
   } catch (err) {
     console.error("[SETTINGS_PUT]", err);

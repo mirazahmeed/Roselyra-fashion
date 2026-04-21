@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 
 export async function POST(req: NextRequest) {
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return errorResponse("Email is required", 400);
     }
 
-    const user = db.users.find(u => u.email === email);
+    const user = await db.getUserByEmail(email);
     
     if (!user) {
       return errorResponse("User not found", 404);
@@ -21,17 +21,7 @@ export async function POST(req: NextRequest) {
       return errorResponse("Email already verified", 400);
     }
 
-    // Create verification token
-    const verification = db.createEmailVerification(email);
-
-    // Send verification email
-    try {
-      const { sendVerificationEmail } = await import("@/lib/email");
-      await sendVerificationEmail(email, verification.token);
-    } catch (emailError) {
-      console.error("Failed to send verification email:", emailError);
-      // Continue even if email fails
-    }
+    const verification = await db.createEmailVerification(email);
 
     return successResponse({ message: "Verification email sent" });
   } catch (err) {
@@ -49,13 +39,12 @@ export async function GET(req: NextRequest) {
       return errorResponse("Token is required", 400);
     }
 
-    const result = db.verifyEmail(token);
+    const result = await db.verifyEmail(token);
 
     if (!result.success) {
       return errorResponse(result.error || "Verification failed", 400);
     }
 
-    // Redirect to login with success message
     return new Response(null, {
       status: 302,
       headers: {

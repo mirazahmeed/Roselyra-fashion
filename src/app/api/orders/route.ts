@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { authenticate, requireAuth } from "@/lib/apiMiddleware";
 
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
 		const data = parsed.data;
-		const order = db.createOrder({ ...data, userId: user?.userId });
+		const order = await db.createOrder({ ...data, userId: user?.userId });
 
 		return successResponse(order, 201);
 	} catch (err) {
@@ -56,7 +56,8 @@ export async function GET(req: NextRequest) {
 		const myOrders = searchParams.get("myOrders");
 
 		if (orderNumber) {
-			const order = db.orders.find(o => o.orderNumber === orderNumber);
+			const allOrders = await db.getOrders({ perPage: 1000 });
+			const order = allOrders.items.find(o => o.orderNumber === orderNumber);
 			if (!order) return errorResponse("Order not found", 404);
 			return successResponse(order);
 		}
@@ -66,20 +67,20 @@ export async function GET(req: NextRequest) {
 			if (authError) return authError;
 
 			const user = authenticate(req);
-			const result = db.getOrders({ userId: user?.userId, page, perPage });
+			const result = await db.getOrders({ userId: user?.userId, page, perPage });
 			
-			const ordersWithPayment = result.items.map((order: any) => {
-				const payment = db.getPaymentByOrderId(order.id);
+			const ordersWithPayment = await Promise.all(result.items.map(async (order: any) => {
+				const payment = await db.getPaymentByOrderId(order.id);
 				return {
 					...order,
 					paymentStatus: payment ? payment.status : "UNPAID",
 				};
-			});
+			}));
 			
 			return successResponse({ ...result, items: ordersWithPayment });
 		}
 
-		const result = db.getOrders({ page, perPage });
+		const result = await db.getOrders({ page, perPage });
 		return successResponse(result);
 	} catch (err) {
 		console.error("[ORDERS GET]", err);

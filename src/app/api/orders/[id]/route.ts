@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { authenticate } from "@/lib/apiMiddleware";
 
@@ -30,7 +30,7 @@ export async function PATCH(
 		const parsed = updateSchema.safeParse(body);
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
-		const order = db.updateOrderStatus(params.id, parsed.data.status);
+		const order = await db.updateOrderStatus(params.id, parsed.data.status);
 		if (!order) return errorResponse("Order not found", 404);
 
 		return successResponse(order);
@@ -45,8 +45,9 @@ export async function GET(
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		const order = db.getOrderById(params.id);
+		const order = await db.getOrderById(params.id);
 		if (!order) return errorResponse("Order not found", 404);
+
 		return successResponse(order);
 	} catch (err) {
 		console.error("[ORDER GET]", err);
@@ -64,10 +65,10 @@ export async function DELETE(
 			return errorResponse("Unauthorized", 401);
 		}
 
-		const success = db.deleteOrder(params.id);
-		if (!success) return errorResponse("Order not found", 404);
+		const deleted = await db.deleteOrder(params.id);
+		if (!deleted) return errorResponse("Order not found", 404);
 
-		return successResponse({ success: true });
+		return successResponse({ deleted: true });
 	} catch (err) {
 		console.error("[ORDER DELETE]", err);
 		return errorResponse("Internal server error", 500);
