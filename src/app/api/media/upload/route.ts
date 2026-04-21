@@ -1,10 +1,9 @@
 import { NextRequest } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
-import type { Media } from "@/types";
 
 export async function POST(req: NextRequest) {
 	const authError = requireEditor(req);
@@ -24,41 +23,26 @@ export async function POST(req: NextRequest) {
 		const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
 		const filename = `${uniqueSuffix}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`;
 
-		// Save to uploads/ at project root (NOT public/) so it works in production
 		const uploadDir = join(process.cwd(), "uploads");
 
 		try {
 			await mkdir(uploadDir, { recursive: true });
-		} catch {
-			// Directory might already exist
-		}
+		} catch {}
 
 		const filepath = join(uploadDir, filename);
 		await writeFile(filepath, buffer);
 
-		// Serve via API route instead of static /uploads/ path
 		const url = `/api/media/file/${filename}`;
-
 		const mimeType = file.type || "application/octet-stream";
-		const type: "VIDEO" | "IMAGE" =
-			mimeType.startsWith("video") ? "VIDEO" : "IMAGE";
+		const type: "VIDEO" | "IMAGE" = mimeType.startsWith("video") ? "VIDEO" : "IMAGE";
 
-		const media: Media = {
-			id: `media_${Date.now()}`,
+		const media = await db.createMedia({
 			url,
 			altText: file.name,
-			publicId: null,
 			type,
-			width: null,
-			height: null,
 			size: file.size,
 			mimeType,
-			folder: null,
-			createdAt: new Date(),
-		};
-
-		db.media.push(media);
-		db.saveDB();
+		});
 		return successResponse(media, 201);
 	} catch (err) {
 		console.error("[MEDIA UPLOAD]", err);

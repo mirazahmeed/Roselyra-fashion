@@ -1,126 +1,137 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { signAccessToken, signRefreshToken } from "@/lib/auth";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
+import { User } from "@/types";
+
+function toUser(u: User | null): User | null {
+	if (!u) return null;
+	return {
+		_id: u._id,
+		id: u.id,
+		email: u.email,
+		name: u.name,
+		role: u.role,
+		avatar: u.avatar,
+		emailVerified: u.emailVerified,
+		createdAt: u.createdAt,
+	};
+}
 
 export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const { action } = body;
+	try {
+		const body = await req.json();
+		const { action } = body;
 
-    if (action === "google") {
-      const { uid, email, name, avatar } = body;
+		if (action === "google") {
+			const { uid, email, name, avatar } = body;
 
-      if (!email) {
-        return errorResponse("Email is required", 400);
-      }
+			if (!email) {
+				return errorResponse("Email is required", 400);
+			}
 
-      let user = db.getUserByEmail(email);
+			let existingUser = await db.getUserByEmail(email);
+			let user = toUser(existingUser);
 
-      if (!user) {
-        user = db.createUser({
-          name: name || email.split("@")[0],
-          email,
-          password: "", 
-          role: "CUSTOMER",
-          avatar: avatar || null,
-        });
-      }
+			if (!user) {
+				const newUser = await db.createUser({
+					name: name || email.split("@")[0],
+					email,
+					password: "",
+					role: "CUSTOMER",
+					avatar: avatar || null,
+				});
+				user = toUser(newUser);
+			}
 
-      const payload = { userId: user.id, email: user.email, role: user.role };
-      const access = signAccessToken(payload);
-      const refresh = signRefreshToken(payload);
+			const payload = { userId: user!.id, email: user!.email, role: user!.role };
+			const access = signAccessToken(payload);
+			const refresh = signRefreshToken(payload);
 
-      const safeUser = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        avatar: user.avatar,
-      };
+			return successResponse({
+				user: {
+					id: user!.id,
+					email: user!.email,
+					name: user!.name,
+					role: user!.role,
+					avatar: user!.avatar,
+				},
+				accessToken: access,
+				refreshToken: refresh,
+			});
+		}
 
-      return successResponse({
-        user: safeUser,
-        accessToken: access,
-        refreshToken: refresh,
-      });
-    }
+		if (action === "signup") {
+			const { firstName, lastName, email } = body;
 
-    if (action === "signup") {
-      const { uid, firstName, lastName, email, phone } = body;
+			if (!email || !firstName || !lastName) {
+				return errorResponse("First name, last name, and email are required", 400);
+			}
 
-      if (!email || !firstName || !lastName) {
-        return errorResponse("First name, last name, and email are required", 400);
-      }
+			const existingUser = await db.getUserByEmail(email);
 
-      let user = db.getUserByEmail(email);
+			if (existingUser) {
+				return errorResponse("Email already registered", 409);
+			}
 
-      if (user) {
-        return errorResponse("Email already registered", 409);
-      }
+			const user = await db.createUser({
+				name: `${firstName} ${lastName}`,
+				email,
+				password: "",
+				role: "CUSTOMER",
+			});
 
-      user = db.createUser({
-        name: `${firstName} ${lastName}`,
-        email,
-        password: "",
-        role: "CUSTOMER",
-        avatar: undefined,
-      });
+			const payload = { userId: user.id, email: user.email, role: user.role };
+			const access = signAccessToken(payload);
+			const refresh = signRefreshToken(payload);
 
-      const payload = { userId: user.id, email: user.email, role: user.role };
-      const access = signAccessToken(payload);
-      const refresh = signRefreshToken(payload);
+			return successResponse({
+				user: {
+					id: user.id,
+					email: user.email,
+					name: user.name,
+					role: user.role,
+					avatar: user.avatar,
+				},
+				accessToken: access,
+				refreshToken: refresh,
+			}, 201);
+		}
 
-      const safeUser = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        avatar: user.avatar,
-      };
+		if (action === "login") {
+			const { email } = body;
 
-      return successResponse({
-        user: safeUser,
-        accessToken: access,
-        refreshToken: refresh,
-      }, 201);
-    }
+			if (!email) {
+				return errorResponse("Email is required", 400);
+			}
 
-    if (action === "login") {
-      const { email } = body;
+			const existingUser = await db.getUserByEmail(email);
+			const user = toUser(existingUser);
 
-      if (!email) {
-        return errorResponse("Email is required", 400);
-      }
+			if (!user) {
+				return errorResponse("No account found with this email", 401);
+			}
 
-      let user = db.getUserByEmail(email);
+			const payload = { userId: user.id, email: user.email, role: user.role };
+			const access = signAccessToken(payload);
+			const refresh = signRefreshToken(payload);
 
-      if (!user) {
-        return errorResponse("No account found with this email", 401);
-      }
+			return successResponse({
+				user: {
+					id: user.id,
+					email: user.email,
+					name: user.name,
+					role: user.role,
+					avatar: user.avatar,
+				},
+				accessToken: access,
+				refreshToken: refresh,
+			});
+		}
 
-      const payload = { userId: user.id, email: user.email, role: user.role };
-      const access = signAccessToken(payload);
-      const refresh = signRefreshToken(payload);
-
-      const safeUser = {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        avatar: user.avatar,
-      };
-
-      return successResponse({
-        user: safeUser,
-        accessToken: access,
-        refreshToken: refresh,
-      });
-    }
-
-    return errorResponse("Invalid action", 400);
-  } catch (err) {
-    console.error("[FIREBASE_AUTH]", err);
-    return errorResponse("Internal server error", 500);
-  }
+		return errorResponse("Invalid action", 400);
+	} catch (err) {
+		console.error("[FIREBASE_AUTH]", err);
+		return errorResponse("Internal server error", 500);
+	}
 }

@@ -1,11 +1,17 @@
-import { db } from "@/lib/db";
+import { mongo } from "@/lib/db";
 import Link from "next/link";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
 export default async function CollectionsPage() {
-  const collections = db.getCollections({ featured: false, includeInactive: false });
+  const collections = await mongo.getCollections({ featured: false, includeInactive: false });
+  const collectionsWithProducts = await Promise.all(
+    collections.map(async (collection) => ({
+      collection,
+      products: (await mongo.getProducts({ collection: collection.slug, perPage: 12 })).items,
+    }))
+  );
 
   return (
     <PageTransition>
@@ -17,13 +23,11 @@ export default async function CollectionsPage() {
             </h1>
           </ScrollReveal>
 
-          <div className="space-y-40">
-            {collections.map((collection, idx) => {
-              const products = db.getProducts({ collection: collection.slug, perPage: 12 }).items;
-              
+<div className="space-y-40">
+            {collectionsWithProducts.map(({ collection, products }, idx) => {
               return (
                 <section key={collection.id}>
-                  <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4">
+                  <div className="flex flex-col md:flex-row md:flex-end justify-between mb-8 pb-4">
                     <ScrollReveal direction="right" delay={0.1}>
                       <h2 className="text-2xl md:text-3xl font-display uppercase tracking-widest hover:text-rose transition-colors">
                         <Link href={`/collections/${collection.slug}`}>

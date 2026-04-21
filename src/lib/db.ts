@@ -1,107 +1,40 @@
+import { Db, Collection, ObjectId } from "mongodb";
+import { getDb } from "./mongodb";
 import type {
 	Product,
 	Category,
-	Collection,
+	Collection as CollectionType,
 	Order,
 	User,
 	Media,
-	ProductImage,
-	ProductVariant,
 	Payment,
 	SiteSettings,
 	EmailVerification,
-} from "@/types";
-import type {
 	Role,
 	OrderStatus,
 	PaymentType,
 	PaymentMethod,
 	PaymentStatus,
 } from "@/types";
-import fs from "fs";
-import path from "path";
 
-const isVercel =
-	process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
-const DATA_FILE =
-	isVercel ?
-		path.join("/tmp", "data.json")
-	:	path.join(process.cwd(), "data.json");
+let mongoDb: Db | null = null;
 
-let state: any = {};
-let lastModifiedTime = 0;
-
-try {
-	if (isVercel && !fs.existsSync(DATA_FILE)) {
-		const originalFile = path.join(process.cwd(), "data.json");
-		if (fs.existsSync(originalFile)) {
-			fs.copyFileSync(originalFile, DATA_FILE);
-		}
-	}
-
-	if (fs.existsSync(DATA_FILE)) {
-		lastModifiedTime = fs.statSync(DATA_FILE).mtimeMs;
-		state = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-	} else {
-		state = {
-			productImages: {},
-			categories: [],
-			collections: [],
-			products: [],
-			users: [],
-			orders: [],
-			media: [],
-			seoData: {},
-			homeConfig: {},
-			emailVerifications: [],
-			payments: [],
-			settings: {
-				bkashNumber: "",
-				bkashMerchantNumber: "",
-				deliveryCharge: 100,
-				minAdvanceAmount: 100,
-				codEnabled: true,
-				storeName: "Roselyra",
-				storeLogo: null,
-				storeEmail: "contact@roselyra.com",
-				storePhone: "+8801XXXXXXXXX",
-				storeAddress: "",
-				footerText: "© 2026 Roselyra. All rights reserved.",
-			},
-		};
-	}
-} catch (e) {
-	console.error("Error loading DB", e);
-	state = {
-		productImages: {},
-		categories: [],
-		collections: [],
-		products: [],
-		users: [],
-		orders: [],
-		media: [],
-		seoData: {},
-		homeConfig: {},
-		emailVerifications: [],
-		payments: [],
-		settings: {},
+async function getCollections() {
+	if (!mongoDb) mongoDb = await getDb();
+	return {
+		products: mongoDb.collection<Product>("products"),
+		categories: mongoDb.collection<Category>("categories"),
+		collections: mongoDb.collection<CollectionType>("collections"),
+		orders: mongoDb.collection<Order>("orders"),
+		users: mongoDb.collection<User>("users"),
+		media: mongoDb.collection<Media>("media"),
+		payments: mongoDb.collection<Payment>("payments"),
+		settings: mongoDb.collection<SiteSettings>("settings"),
+		emailVerifications: mongoDb.collection<EmailVerification>("emailVerifications"),
 	};
 }
 
-export let productImages: Record<string, ProductImage[]> =
-	state.productImages || {};
-export let categories: Category[] = state.categories || [];
-export let collections: Collection[] = state.collections || [];
-export let products: Product[] = state.products || [];
-export let users: User[] = state.users || [];
-export let orders: Order[] = state.orders || [];
-export let media: Media[] = state.media || [];
-export let seoData: any = state.seoData || {};
-export let homeConfig: any = state.homeConfig || {};
-export let emailVerifications: EmailVerification[] =
-	state.emailVerifications || [];
-export let payments: Payment[] = state.payments || [];
-export let settings: SiteSettings = state.settings || {
+const defaultSettings: SiteSettings = {
 	bkashNumber: "",
 	bkashMerchantNumber: "",
 	deliveryCharge: 100,
@@ -115,218 +48,183 @@ export let settings: SiteSettings = state.settings || {
 	footerText: "© 2026 Roselyra. All rights reserved.",
 };
 
-export function syncDB() {
-	if (!fs.existsSync(DATA_FILE)) return;
-	const mtimeMs = fs.statSync(DATA_FILE).mtimeMs;
-	if (mtimeMs > lastModifiedTime) {
-		try {
-			state = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-			productImages = state.productImages || {};
-			categories = state.categories || [];
-			collections = state.collections || [];
-			products = state.products || [];
-			users = state.users || [];
-			orders = state.orders || [];
-			media = state.media || [];
-			seoData = state.seoData || {};
-			homeConfig = state.homeConfig || {};
-			emailVerifications = state.emailVerifications || [];
-			payments = state.payments || [];
-			if (state.settings) {
-				settings = state.settings;
-			}
-			lastModifiedTime = mtimeMs;
-		} catch (err) {
-			console.error("Failed to sync DB", err);
-		}
-	}
-}
-
-export function saveDB() {
-	state.products = products;
-	state.categories = categories;
-	state.collections = collections;
-	state.users = users;
-	state.orders = orders;
-	state.media = media;
-	state.seoData = seoData;
-	state.productImages = productImages;
-	state.homeConfig = homeConfig;
-	state.emailVerifications = emailVerifications;
-	state.payments = payments;
-	state.settings = settings;
+function toObjectId(id: string): ObjectId {
 	try {
-		fs.writeFileSync(DATA_FILE, JSON.stringify(state, null, 2));
-		lastModifiedTime = fs.statSync(DATA_FILE).mtimeMs;
-	} catch (err) {
-		console.error("Failed to save DB", err);
+		return new ObjectId(id);
+	} catch {
+		return new ObjectId();
 	}
 }
 
-const _rawDb = {
-	get homeConfig() {
-		return homeConfig;
-	},
-	saveDB,
-	get products() {
-		return products;
-	},
-	get categories() {
-		return categories;
-	},
-	get collections() {
-		return collections;
-	},
-	get users() {
-		return users;
-	},
-	get orders() {
-		return orders;
-	},
-	get media() {
-		return media;
-	},
-	get seoData() {
-		return seoData;
-	},
-	get settings() {
-		return settings;
-	},
-	get productImages() {
-		return productImages;
+export const mongoMethods = {
+	async getSettings() {
+		const { settings } = await getCollections();
+		const result = await settings.findOne({ _id: new ObjectId("000000000000000000000001") });
+		return result || defaultSettings;
 	},
 
-	getProducts(
-		options: {
-			page?: number;
-			perPage?: number;
-			category?: string;
-			collection?: string;
-			featured?: boolean;
-			search?: string;
-			sort?: string;
-			minPrice?: number;
-			maxPrice?: number;
-		} = {},
-	) {
-		let filtered = products.filter((p) => p.isActive && !p.isArchived);
+	async getHomeConfig() {
+		return this.getSettings().then(s => ({} as any));
+	},
+
+	async getMediaAll(options: { type?: "IMAGE" | "VIDEO"; page?: number; perPage?: number } = {}) {
+		return this.getMedia(options);
+	},
+
+	async getAllOrders(options: { userId?: string; page?: number; perPage?: number } = {}) {
+		return this.getOrders(options);
+	},
+
+	async getAllUsers() {
+		return Promise.resolve([] as User[]);
+	},
+
+	async getMediaList() {
+		const result = await this.getMedia({ perPage: 1000 });
+		return result.items;
+	},
+
+	async getOrdersList() {
+		const result = await this.getOrders({ perPage: 1000 });
+		return result.items;
+	},
+
+	async updateSettings(data: Partial<SiteSettings>) {
+		const { settings } = await getCollections();
+		await settings.updateOne(
+			{ _id: new ObjectId("000000000000000000000000001") },
+			{ $set: { ...data } },
+			{ upsert: true }
+		);
+		return this.getSettings();
+	},
+
+	async getProducts(options: {
+		page?: number;
+		perPage?: number;
+		category?: string;
+		collection?: string;
+		featured?: boolean;
+		search?: string;
+		sort?: string;
+		minPrice?: number;
+		maxPrice?: number;
+	} = {}) {
+		const { products, categories, collections } = await getCollections();
+		const filter: Record<string, unknown> = { isActive: true, isArchived: { $ne: true } };
 
 		if (options.category) {
-			filtered = filtered.filter(
-				(p) => p.category?.slug === options.category,
-			);
+			const cat = await categories.findOne({ slug: options.category });
+			if (cat) filter.categoryId = cat._id?.toString();
 		}
 		if (options.collection) {
-			filtered = filtered.filter(
-				(p) => p.collection?.slug === options.collection,
-			);
+			const col = await collections.findOne({ slug: options.collection });
+			if (col) filter.collectionId = col._id?.toString();
 		}
-		if (options.featured) {
-			filtered = filtered.filter((p) => p.isFeatured);
-		}
+		if (options.featured) filter.isFeatured = true;
 		if (options.search) {
-			const search = options.search.toLowerCase();
-			filtered = filtered.filter(
-				(p) =>
-					p.name.toLowerCase().includes(search) ||
-					p.description?.toLowerCase().includes(search) ||
-					p.tags.some((t) => t.toLowerCase().includes(search)),
-			);
+			filter.$or = [
+				{ name: { $regex: options.search, $options: "i" } },
+				{ description: { $regex: options.search, $options: "i" } },
+				{ tags: { $regex: options.search, $options: "i" } },
+			];
 		}
-		if (options.minPrice !== undefined) {
-			filtered = filtered.filter((p) => p.price >= options.minPrice!);
-		}
-		if (options.maxPrice !== undefined) {
-			filtered = filtered.filter((p) => p.price <= options.maxPrice!);
-		}
+		if (options.minPrice) filter.price = { $gte: options.minPrice };
+		if (options.maxPrice) { filter.price = { ...filter.price as Record<string, number>, $lte: options.maxPrice }; }
 
-		const sort = options.sort || "order";
-		if (sort === "price_asc") {
-			filtered.sort((a, b) => a.price - b.price);
-		} else if (sort === "price_desc") {
-			filtered.sort((a, b) => b.price - a.price);
-		} else if (sort === "newest") {
-			filtered.sort(
-				(a, b) =>
-					new Date(b.createdAt).getTime() -
-					new Date(a.createdAt).getTime(),
-			);
-		} else {
-			filtered.sort((a, b) => a.order - b.order);
+		const sort: Record<string, 1 | -1> = {};
+		switch (options.sort) {
+			case "price_asc": sort.price = 1; break;
+			case "price_desc": sort.price = -1; break;
+			case "newest": sort.createdAt = -1; break;
+			default: sort.order = 1;
 		}
 
 		const page = options.page || 1;
 		const perPage = options.perPage || 24;
 		const skip = (page - 1) * perPage;
-		const items = filtered.slice(skip, skip + perPage);
 
-		return {
-			items,
-			total: filtered.length,
-			page,
-			perPage,
-			totalPages: Math.ceil(filtered.length / perPage),
-		};
-	},
+		const [items, total] = await Promise.all([
+			products.find(filter).sort(sort).skip(skip).limit(perPage).toArray(),
+			products.countDocuments(filter),
+		]);
 
-	getProductBySlug(slug: string) {
-		return products.find((p) => p.slug === slug && p.isActive) || null;
-	},
-
-	getProductById(id: string) {
-		return products.find((p) => p.id === id) || null;
-	},
-
-	getCategories(options: { includeInactive?: boolean } = {}) {
-		let filtered = categories;
-		if (!options.includeInactive) {
-			filtered = filtered.filter((c) => c.isActive);
-		}
-		return filtered.sort((a, b) => a.order - b.order);
-	},
-
-	getCategoryBySlug(slug: string) {
-		return categories.find((c) => c.slug === slug) || null;
-	},
-
-	getCollections(
-		options: { featured?: boolean; includeInactive?: boolean } = {},
-	) {
-		let filtered = collections;
-		if (!options.includeInactive) {
-			filtered = filtered.filter((c) => c.isActive);
-		}
-		if (options.featured) {
-			filtered = filtered.filter((c) => c.isFeatured);
-		}
-		return filtered.sort((a, b) => a.order - b.order);
-	},
-
-	getCollectionBySlug(slug: string) {
-		return collections.find((c) => c.slug === slug) || null;
-	},
-
-	getUserByEmail(email: string) {
-		return users.find((u) => u.email === email) || null;
-	},
-
-	getUserById(id: string) {
-		return users.find((u) => u.id === id) || null;
-	},
-
-	createUser(data: {
-		name: string;
-		email: string;
-		password: string;
-		role?: Role;
-		avatar?: string;
-	}) {
-		const existing = users.find((u) => u.email === data.email);
-		if (existing) {
-			throw new Error("Email already exists");
+		for (const item of items) {
+			if (item.categoryId) {
+				item.category = await categories.findOne({ _id: new ObjectId(item.categoryId) }) || undefined;
+			}
+			if (item.collectionId) {
+				item.collection = await collections.findOne({ _id: new ObjectId(item.collectionId) }) || undefined;
+			}
 		}
 
-		const user: User = {
+		return { items, total, page, perPage, totalPages: Math.ceil(total / perPage) };
+	},
+
+	async getProductBySlug(slug: string) {
+		const { products, categories, collections } = await getCollections();
+		const product = await products.findOne({ slug, isActive: true });
+		if (product && product.categoryId) {
+			product.category = await categories.findOne({ _id: new ObjectId(product.categoryId) }) || undefined;
+		}
+		if (product && product.collectionId) {
+			product.collection = await collections.findOne({ _id: new ObjectId(product.collectionId) }) || undefined;
+		}
+		return product;
+	},
+
+	async getProductById(id: string) {
+		const { products, categories, collections } = await getCollections();
+		const product = await products.findOne({ _id: new ObjectId(id) });
+		if (product && product.categoryId) {
+			product.category = await categories.findOne({ _id: new ObjectId(product.categoryId) }) || undefined;
+		}
+		if (product && product.collectionId) {
+			product.collection = await collections.findOne({ _id: new ObjectId(product.collectionId) }) || undefined;
+		}
+		return product;
+	},
+
+	async getCategories(options: { includeInactive?: boolean } = {}) {
+		const { categories } = await getCollections();
+		const filter = options.includeInactive ? {} : { isActive: true };
+		return categories.find(filter).sort({ order: 1 }).toArray();
+	},
+
+	async getCategoryBySlug(slug: string) {
+		const { categories } = await getCollections();
+		return categories.findOne({ slug });
+	},
+
+	async getCollections(options: { featured?: boolean; includeInactive?: boolean } = {}) {
+		const { collections } = await getCollections();
+		const filter: Record<string, unknown> = options.includeInactive ? {} : { isActive: true };
+		if (options.featured) filter.isFeatured = true;
+		return collections.find(filter).sort({ order: 1 }).toArray();
+	},
+
+	async getCollectionBySlug(slug: string) {
+		const { collections } = await getCollections();
+		return collections.findOne({ slug });
+	},
+
+	async getUserByEmail(email: string) {
+		const { users } = await getCollections();
+		return users.findOne({ email });
+	},
+
+	async getUserById(id: string) {
+		const { users } = await getCollections();
+		return users.findOne({ _id: new ObjectId(id) });
+	},
+
+	async createUser(data: { name: string; email: string; password: string; role?: Role; avatar?: string }) {
+		const { users } = await getCollections();
+		const existing = await users.findOne({ email: data.email });
+		if (existing) throw new Error("Email already exists");
+
+		const user = {
+			_id: new ObjectId(),
 			id: `user_${Date.now()}`,
 			email: data.email,
 			name: data.name,
@@ -337,19 +235,13 @@ const _rawDb = {
 			createdAt: new Date(),
 		};
 
-		users.push(user);
-		saveDB();
-		return user;
+		await users.insertOne(user as User & { _id: ObjectId });
+		const { _id, ...result } = user;
+		return result as User;
 	},
 
-	createOrder(data: {
-		items: Array<{
-			productId: string;
-			quantity: number;
-			price: number;
-			size?: string | null;
-			color?: string | null;
-		}>;
+	async createOrder(data: {
+		items: Array<{ productId: string; quantity: number; price: number; size?: string | null; color?: string | null }>;
 		firstName: string;
 		lastName: string;
 		email: string;
@@ -367,10 +259,8 @@ const _rawDb = {
 		userId?: string | null;
 		guestEmail?: string | null;
 	}) {
-		const subtotal = data.items.reduce(
-			(sum, item) => sum + item.price * item.quantity,
-			0,
-		);
+		const { orders, products } = await getCollections();
+		const subtotal = data.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 		const tax = subtotal * 0.1;
 		const shippingCost = data.shippingCost || 0;
 		const discount = data.discount || 0;
@@ -379,7 +269,23 @@ const _rawDb = {
 
 		const orderNumber = `RL-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
+		const orderItems = await Promise.all(
+			data.items.map(async (item) => {
+				const product = await products.findOne({ _id: new ObjectId(item.productId) });
+				return {
+					id: `orderitem_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+					productId: item.productId,
+					product: product || undefined,
+					quantity: item.quantity,
+					price: item.price,
+					size: item.size || null,
+					color: item.color || null,
+				};
+			})
+		);
+
 		const order: Order = {
+			_id: new ObjectId(),
 			id: `order_${Date.now()}`,
 			orderNumber,
 			userId: data.userId || null,
@@ -402,66 +308,44 @@ const _rawDb = {
 			state: data.state ?? null,
 			postalCode: data.postalCode,
 			country: data.country,
+			items: orderItems,
 			adminNotes: null,
-			items: data.items.map((item) => {
-				const product = products.find((p) => p.id === item.productId)!;
-				return {
-					id: `orderitem_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-					productId: item.productId,
-					product,
-					quantity: item.quantity,
-					price: item.price,
-					size: item.size || null,
-					color: item.color || null,
-				};
-			}),
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		};
 
-		orders.push(order);
-		saveDB();
+		await orders.insertOne(order as Order & { _id: ObjectId });
 		return order;
 	},
 
-	getOrders(
-		options: { userId?: string; page?: number; perPage?: number } = {},
-	) {
-		let filtered = [...orders];
-
-		if (options.userId) {
-			filtered = filtered.filter((o) => o.userId === options.userId);
-		}
-
-		filtered.sort(
-			(a, b) =>
-				new Date(b.createdAt).getTime() -
-				new Date(a.createdAt).getTime(),
-		);
+	async getOrders(options: { userId?: string; page?: number; perPage?: number } = {}) {
+		const { orders } = await getCollections();
+		const filter = options.userId ? { userId: options.userId } : {};
 
 		const page = options.page || 1;
 		const perPage = options.perPage || 20;
 		const skip = (page - 1) * perPage;
-		const items = filtered.slice(skip, skip + perPage);
 
-		return {
-			items,
-			total: filtered.length,
-			page,
-			perPage,
-			totalPages: Math.ceil(filtered.length / perPage),
-		};
+		const [items, total] = await Promise.all([
+			orders.find(filter).sort({ createdAt: -1 }).skip(skip).limit(perPage).toArray(),
+			orders.countDocuments(filter),
+		]);
+
+		return { items, total, page, perPage, totalPages: Math.ceil(total / perPage) };
 	},
 
-	getOrderById(id: string) {
-		return orders.find((o) => o.id === id) || null;
+	async getOrderById(id: string) {
+		const { orders } = await getCollections();
+		const filter = /^[0-9a-f]{24}$/i.test(id) ? { _id: new ObjectId(id) } : { id };
+		return orders.findOne(filter as { _id: ObjectId } | { id: string });
 	},
 
-	getOrderByNumber(orderNumber: string) {
-		return orders.find((o) => o.orderNumber === orderNumber) || null;
+	async getOrderByNumber(orderNumber: string) {
+		const { orders } = await getCollections();
+		return orders.findOne({ orderNumber });
 	},
 
-	createProduct(data: {
+	async createProduct(data: {
 		name: string;
 		slug?: string;
 		description?: string;
@@ -480,42 +364,29 @@ const _rawDb = {
 		colors?: string[];
 		tags?: string[];
 		images?: string[];
-		variants?: ProductVariant[];
 	}) {
-		const slug =
-			data.slug ||
-			data.name
-				.toLowerCase()
-				.replace(/[^a-z0-9\s-]/g, "")
-				.replace(/\s+/g, "-");
+		const { products, categories, collections } = await getCollections();
+		const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
 
-		const existing = products.find((p) => p.slug === slug);
-		if (existing) {
-			throw new Error("Slug already exists");
-		}
+		const existing = await products.findOne({ slug });
+		if (existing) throw new Error("Slug already exists");
 
-		const category =
-			data.categoryId ?
-				categories.find((c) => c.id === data.categoryId) || null
-			:	null;
-		const collection =
-			data.collectionId ?
-				collections.find((c) => c.id === data.collectionId) || null
-			:	null;
+		const category = data.categoryId ? await categories.findOne({ _id: new ObjectId(data.categoryId) }) : null;
+		const collection = data.collectionId ? await collections.findOne({ _id: new ObjectId(data.collectionId) }) : null;
 
-		const newImages: ProductImage[] = (data.images || []).map(
-			(url, idx) => ({
-				id: `img_${Date.now()}_${idx}`,
-				url,
-				altText: data.name,
-				order: idx,
-				isPrimary: idx === 0,
-				width: 800,
-				height: 1000,
-			}),
-		);
+		const count = await products.countDocuments();
+		const newImages = (data.images || []).map((url, idx) => ({
+			id: `img_${Date.now()}_${idx}`,
+			url,
+			altText: data.name,
+			order: idx,
+			isPrimary: idx === 0,
+			width: 800,
+			height: 1000,
+		}));
 
 		const product: Product = {
+			_id: new ObjectId(),
 			id: `prod_${Date.now()}`,
 			name: data.name,
 			slug,
@@ -528,11 +399,11 @@ const _rawDb = {
 			isFeatured: data.isFeatured || false,
 			isArchived: false,
 			isActive: true,
-			order: products.length + 1,
+			order: count + 1,
 			categoryId: data.categoryId || null,
 			collectionId: data.collectionId || null,
-			category,
-			collection,
+			category: category || null,
+			collection: collection || null,
 			images: newImages,
 			material: data.material || null,
 			fit: data.fit || null,
@@ -540,101 +411,64 @@ const _rawDb = {
 			sizes: data.sizes || [],
 			colors: data.colors || [],
 			tags: data.tags || [],
-			variants: data.variants || [],
+			variants: [],
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		};
 
-		products.push(product);
-		saveDB();
+		await products.insertOne(product as Product & { _id: ObjectId });
 		return product;
 	},
 
-	updateProduct(id: string, data: Partial<Product>) {
-		const index = products.findIndex((p) => p.id === id);
-		if (index === -1) return null;
-
-		products[index] = {
-			...products[index],
-			...data,
-			updatedAt: new Date(),
-		};
-		saveDB();
-		return products[index];
+	async updateProduct(id: string, data: Partial<Product>) {
+		const { products } = await getCollections();
+		await products.updateOne({ _id: new ObjectId(id) }, { $set: { ...data, updatedAt: new Date() } });
+		return this.getProductById(id);
 	},
 
-	deleteProduct(id: string) {
-		const index = products.findIndex((p) => p.id === id);
-		if (index === -1) return false;
-
-		products[index].isArchived = true;
-		products[index].isActive = false;
-		saveDB();
-		return true;
+	async deleteProduct(id: string) {
+		const { products } = await getCollections();
+		const result = await products.updateOne(
+			{ _id: new ObjectId(id) },
+			{ $set: { isArchived: true, isActive: false, updatedAt: new Date() } }
+		);
+		return result.modifiedCount > 0;
 	},
 
-	createCategory(data: {
-		name: string;
-		slug?: string;
-		description?: string;
-		imageUrl?: string;
-		parentId?: string | null;
-		order?: number;
-		isActive?: boolean;
-	}) {
-		const slug =
-			data.slug ||
-			data.name
-				.toLowerCase()
-				.replace(/[^a-z0-9\s-]/g, "")
-				.replace(/\s+/g, "-");
+	async createCategory(data: { name: string; slug?: string; description?: string; imageUrl?: string; parentId?: string | null; order?: number; isActive?: boolean }) {
+		const { categories } = await getCollections();
+		const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
 
-		const existing = categories.find((c) => c.slug === slug);
-		if (existing) {
-			throw new Error("Slug already exists");
-		}
+		const existing = await categories.findOne({ slug });
+		if (existing) throw new Error("Slug already exists");
 
+		const count = await categories.countDocuments();
 		const category: Category = {
+			_id: new ObjectId(),
 			id: `cat_${Date.now()}`,
 			name: data.name,
 			slug,
 			description: data.description || null,
 			imageUrl: data.imageUrl || null,
 			parentId: data.parentId || null,
-			order: data.order ?? categories.length + 1,
+			order: data.order ?? count + 1,
 			isActive: data.isActive ?? true,
 		};
 
-		categories.push(category);
-		saveDB();
+		await categories.insertOne(category as Category & { _id: ObjectId });
 		return category;
 	},
 
-	createCollection(data: {
-		name: string;
-		slug?: string;
-		description?: string;
-		imageUrl?: string;
-		videoUrl?: string;
-		season?: string;
-		year?: number;
-		isFeatured?: boolean;
-		isActive?: boolean;
-		order?: number;
-	}) {
-		const slug =
-			data.slug ||
-			data.name
-				.toLowerCase()
-				.replace(/[^a-z0-9\s-]/g, "")
-				.replace(/\s+/g, "-");
+	async createCollection(data: { name: string; slug?: string; description?: string; imageUrl?: string; videoUrl?: string; season?: string; year?: number; isFeatured?: boolean; isActive?: boolean; order?: number }) {
+		const { collections } = await getCollections();
+		const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
 
-		const existing = collections.find((c) => c.slug === slug);
-		if (existing) {
-			throw new Error("Slug already exists");
-		}
+		const existing = await collections.findOne({ slug });
+		if (existing) throw new Error("Slug already exists");
 
-		const collection: Collection = {
+		const count = await collections.countDocuments();
+		const collection: CollectionType = {
+			_id: new ObjectId(),
 			id: `col_${Date.now()}`,
 			name: data.name,
 			slug,
@@ -645,67 +479,51 @@ const _rawDb = {
 			year: data.year ?? null,
 			isFeatured: data.isFeatured ?? false,
 			isActive: data.isActive ?? true,
-			order: data.order ?? collections.length + 1,
+			order: data.order ?? count + 1,
 		};
 
-		collections.push(collection);
-		saveDB();
+		await collections.insertOne(collection as CollectionType & { _id: ObjectId });
 		return collection;
 	},
 
-	// ─── Email Verification ─────────────────────────────
-	createEmailVerification(email: string) {
-		const token =
-			Math.random().toString(36).substring(2, 15) +
-			Math.random().toString(36).substring(2, 15);
+	async createEmailVerification(email: string) {
+		const { emailVerifications } = await getCollections();
+		const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 		const verification: EmailVerification = {
+			_id: new ObjectId(),
 			id: `ev_${Date.now()}`,
 			email,
 			token,
 			expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
 			createdAt: new Date(),
 		};
-		emailVerifications.push(verification);
-		saveDB();
+
+		await emailVerifications.insertOne(verification as EmailVerification & { _id: ObjectId });
 		return verification;
 	},
 
-	verifyEmail(token: string) {
-		const verification = emailVerifications.find((v) => v.token === token);
-		if (!verification) {
-			return { success: false, error: "Invalid token" };
-		}
-		if (verification.expiresAt < new Date()) {
-			return { success: false, error: "Token expired" };
-		}
+	async verifyEmail(token: string) {
+		const { emailVerifications, users } = await getCollections();
+		const verification = await emailVerifications.findOne({ token });
+		if (!verification) return { success: false, error: "Invalid token" };
+		if (verification.expiresAt < new Date()) return { success: false, error: "Token expired" };
 
-		// Mark user as verified
-		const user = users.find((u) => u.email === verification.email);
-		if (user) {
-			user.emailVerified = true;
-		}
-
-		// Remove verification record
-		const index = emailVerifications.indexOf(verification);
-		emailVerifications.splice(index, 1);
-		saveDB();
+		await users.updateOne({ email: verification.email }, { $set: { emailVerified: true } });
+		await emailVerifications.deleteOne({ _id: verification._id });
 
 		return { success: true, email: verification.email };
 	},
 
-	getEmailVerification(email: string) {
-		return emailVerifications.find((v) => v.email === email) || null;
+	async getEmailVerification(email: string) {
+		const { emailVerifications } = await getCollections();
+		return emailVerifications.findOne({ email });
 	},
 
-	// ─── Payment Management ─────────────────────────────
-	createPayment(data: {
-		orderId: string;
-		method: PaymentMethod;
-		senderNumber?: string;
-		transactionId?: string;
-		amount: number;
-	}) {
+	async createPayment(data: { orderId: string; method: PaymentMethod; senderNumber?: string; transactionId?: string; amount: number }) {
+		const { payments, orders } = await getCollections();
+
 		const payment: Payment = {
+			_id: new ObjectId(),
 			id: `pay_${Date.now()}`,
 			orderId: data.orderId,
 			method: data.method,
@@ -717,111 +535,103 @@ const _rawDb = {
 			createdAt: new Date(),
 			updatedAt: new Date(),
 		};
-		payments.push(payment);
 
-		// Update order status
-		const order = orders.find((o) => o.id === data.orderId);
+		await payments.insertOne(payment as Payment & { _id: ObjectId });
+
+		const order = await orders.findOne({ _id: new ObjectId(data.orderId) });
 		if (order) {
-			order.status = "PAYMENT_SUBMITTED" as OrderStatus;
-			order.paidAmount = data.amount;
-			order.dueAmount =
-				order.subtotal +
-				order.shippingCost +
-				order.tax -
-				order.discount -
-				data.amount;
-			order.updatedAt = new Date();
+			const newDue = order.subtotal + order.shippingCost + order.tax - order.discount - data.amount;
+			await orders.updateOne(
+				{ _id: new ObjectId(data.orderId) },
+				{ $set: { status: "PAYMENT_SUBMITTED" as OrderStatus, paidAmount: data.amount, dueAmount: newDue, updatedAt: new Date() } }
+			);
 		}
 
-		saveDB();
 		return payment;
 	},
 
-	updatePaymentStatus(
-		paymentId: string,
-		status: PaymentStatus,
-		adminNotes?: string,
-	) {
-		const payment = payments.find((p) => p.id === paymentId);
-		if (!payment) return null;
+	async updatePaymentStatus(paymentId: string, status: PaymentStatus, adminNotes?: string) {
+		const { payments, orders } = await getCollections();
+		await payments.updateOne({ _id: new ObjectId(paymentId) }, { $set: { status, adminNotes: adminNotes || null, updatedAt: new Date() } });
 
-		payment.status = status;
-		if (adminNotes) payment.adminNotes = adminNotes;
-		payment.updatedAt = new Date();
-
-		// Update order status based on payment status
-		const order = orders.find((o) => o.id === payment.orderId);
-		if (order) {
+		const payment = await payments.findOne({ _id: new ObjectId(paymentId) });
+		if (payment) {
 			if (status === "APPROVED") {
-				order.status = "CONFIRMED" as OrderStatus;
-				order.paymentMethod = payment.method;
+				await orders.updateOne({ _id: new ObjectId(payment.orderId) }, { $set: { status: "CONFIRMED" as OrderStatus, updatedAt: new Date() } });
 			} else if (status === "REJECTED") {
-				order.status = "PENDING" as OrderStatus;
-				order.paidAmount = 0;
-				order.dueAmount =
-					order.subtotal +
-					order.shippingCost +
-					order.tax -
-					order.discount;
+				const order = await orders.findOne({ _id: new ObjectId(payment.orderId) });
+				await orders.updateOne(
+					{ _id: new ObjectId(payment.orderId) },
+					{ $set: { status: "PENDING" as OrderStatus, paidAmount: 0, dueAmount: order ? order.subtotal + order.shippingCost + order.tax - order.discount : 0, updatedAt: new Date() } }
+				);
 			}
-			order.updatedAt = new Date();
 		}
 
-		saveDB();
 		return payment;
 	},
 
-	getPaymentByOrderId(orderId: string) {
-		return payments.find((p) => p.orderId === orderId) || null;
+	async getPaymentByOrderId(orderId: string) {
+		const { payments } = await getCollections();
+		return payments.findOne({ orderId });
 	},
 
-	// ─── Settings Management ─────────────────────────────
-	getSettings() {
-		return settings;
+	async updateOrderStatus(orderId: string, status: OrderStatus, adminNotes?: string) {
+		const { orders } = await getCollections();
+		await orders.updateOne(
+			{ _id: new ObjectId(orderId) },
+			{ $set: { status, adminNotes: adminNotes || null, updatedAt: new Date() } }
+		);
+		return this.getOrderById(orderId);
 	},
 
-	updateSettings(data: Partial<SiteSettings>) {
-		Object.assign(settings, data);
-		saveDB();
-		return settings;
+	async deleteOrder(id: string) {
+		const { orders } = await getCollections();
+		const result = await orders.deleteOne({ _id: new ObjectId(id) });
+		return result.deletedCount > 0;
 	},
 
-	// ─── Update Order ────────────────────────────────
-	updateOrderStatus(
-		orderId: string,
-		status: OrderStatus,
-		adminNotes?: string,
-	) {
-		const order = orders.find((o) => o.id === orderId);
-		if (!order) return null;
+	async getMedia(options: { type?: "IMAGE" | "VIDEO"; page?: number; perPage?: number } = {}) {
+		const { media } = await getCollections();
+		const filter = options.type ? { type: options.type as "IMAGE" | "VIDEO" } : {};
+		const page = options.page || 1;
+		const perPage = options.perPage || 50;
+		const skip = (page - 1) * perPage;
 
-		order.status = status;
-		if (adminNotes) order.adminNotes = adminNotes;
-		order.updatedAt = new Date();
-		saveDB();
-		return order;
+		const [items, total] = await Promise.all([
+			media.find(filter).sort({ createdAt: -1 }).skip(skip).limit(perPage).toArray(),
+			media.countDocuments(filter),
+		]);
+
+		return { items, total, page, perPage, totalPages: Math.ceil(total / perPage) };
 	},
 
-	deleteOrder(id: string) {
-		const index = orders.findIndex((o) => o.id === id);
-		if (index === -1) return false;
+	async createMedia(data: { url: string; publicId?: string; altText?: string; type?: "IMAGE" | "VIDEO"; width?: number; height?: number; size?: number; mimeType?: string; folder?: string }) {
+		const { media } = await getCollections();
+		const item: Media = {
+			_id: new ObjectId(),
+			id: `media_${Date.now()}`,
+			url: data.url,
+			publicId: data.publicId || null,
+			altText: data.altText || null,
+			type: data.type || "IMAGE",
+			width: data.width || null,
+			height: data.height || null,
+			size: data.size || null,
+			mimeType: data.mimeType || null,
+			folder: data.folder || null,
+			createdAt: new Date(),
+		};
 
-		orders.splice(index, 1);
-		saveDB();
-		return true;
+		await media.insertOne(item as Media & { _id: ObjectId });
+		return item;
+	},
+
+	async deleteMedia(id: string) {
+		const { media } = await getCollections();
+		const result = await media.deleteOne({ _id: new ObjectId(id) });
+		return result.deletedCount > 0;
 	},
 };
 
-export const db = new Proxy(_rawDb, {
-	get(target, prop) {
-		syncDB();
-		const value = target[prop as keyof typeof _rawDb];
-		if (typeof value === "function" && prop !== "saveDB") {
-			return function (...args: any[]) {
-				syncDB();
-				return (value as Function).apply(target, args);
-			};
-		}
-		return value;
-	},
-});
+export const mongo = mongoMethods;
+export const db = mongoMethods;

@@ -1,6 +1,11 @@
 // Shared TypeScript types for ROSELYRA platform
 
+import { ObjectId } from "mongodb";
+
 export type Role = "CUSTOMER" | "EDITOR" | "ADMIN";
+
+export type WithId<T> = T & { _id: ObjectId };
+export type WithoutId<T> = Omit<T, "_id">;
 
 export type OrderStatus =
 	| "PENDING"
@@ -17,6 +22,7 @@ export type PaymentMethod = "BKASH" | "COD" | "CARD";
 export type PaymentStatus = "PENDING" | "APPROVED" | "REJECTED";
 
 export interface EmailVerification {
+	_id?: ObjectId;
 	id: string;
 	email: string;
 	token: string;
@@ -26,6 +32,7 @@ export interface EmailVerification {
 
 // ─── User ─────────────────────────────────────────
 export interface User {
+	_id?: ObjectId;
 	id: string;
 	email: string;
 	name: string | null;
@@ -47,6 +54,7 @@ export interface AuthUser {
 
 // ─── Category ─────────────────────────────────────
 export interface Category {
+	_id?: ObjectId;
 	id: string;
 	name: string;
 	slug: string;
@@ -60,6 +68,7 @@ export interface Category {
 
 // ─── Collection ───────────────────────────────────
 export interface Collection {
+	_id?: ObjectId;
 	id: string;
 	name: string;
 	slug: string;
@@ -95,6 +104,7 @@ export interface ProductImage {
 }
 
 export interface Product {
+	_id?: ObjectId;
 	id: string;
 	name: string;
 	slug: string;
@@ -146,7 +156,7 @@ export interface LocalCartItem {
 export interface OrderItem {
 	id: string;
 	productId: string;
-	product: Product;
+	product?: Product;
 	quantity: number;
 	price: number;
 	size: string | null;
@@ -154,6 +164,7 @@ export interface OrderItem {
 }
 
 export interface Order {
+	_id?: ObjectId;
 	id: string;
 	orderNumber: string;
 	userId: string | null;
@@ -184,6 +195,7 @@ export interface Order {
 
 // ─── Payment ────────────────────────────────────────
 export interface Payment {
+	_id?: ObjectId;
 	id: string;
 	orderId: string;
 	method: PaymentMethod;
@@ -213,6 +225,7 @@ export interface SiteSettings {
 
 // ─── Media ────────────────────────────────────────
 export interface Media {
+	_id?: ObjectId;
 	id: string;
 	url: string;
 	publicId: string | null;

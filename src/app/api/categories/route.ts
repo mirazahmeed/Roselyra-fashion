@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
 	const includeInactive = searchParams.get("includeInactive") === "true";
 	
 	try {
-		const categories = db.getCategories({ includeInactive });
+		const categories = await db.getCategories({ includeInactive });
 		
 		const skip = (page - 1) * perPage;
 		const items = categories.slice(skip, skip + perPage);
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
 		const parsed = schema.safeParse(body);
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
-		const category = db.createCategory(parsed.data);
+		const category = await db.createCategory(parsed.data);
 		return successResponse(category, 201);
 	} catch (err) {
 		console.error("[CATEGORIES POST]", err);

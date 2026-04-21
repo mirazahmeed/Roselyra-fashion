@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { mongo } from "@/lib/db";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -10,7 +10,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const collection = db.getCollectionBySlug(params.slug);
+  const collection = await mongo.getCollectionBySlug(params.slug);
 
   if (!collection) return {};
 
@@ -25,13 +25,13 @@ export default async function CollectionDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const collection = db.getCollectionBySlug(params.slug);
+  const collection = await mongo.getCollectionBySlug(params.slug);
 
   if (!collection) {
     notFound();
   }
 
-  const products = db.getProducts({ collection: params.slug, perPage: 50 }).items;
+  const products = (await mongo.getProducts({ collection: params.slug, perPage: 50 })).items;
 
   return (
     <PageTransition>

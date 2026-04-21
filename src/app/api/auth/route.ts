@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import {
 	hashPassword,
 	comparePassword,
@@ -8,7 +8,21 @@ import {
 	signRefreshToken,
 } from "@/lib/auth";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
-import type { Role } from "@/types";
+import type { Role, User } from "@/types";
+
+function toUser(u: User | null): User | null {
+	if (!u) return null;
+	return {
+		_id: u._id,
+		id: u.id,
+		email: u.email,
+		name: u.name,
+		role: u.role,
+		avatar: u.avatar,
+		emailVerified: u.emailVerified,
+		createdAt: u.createdAt,
+	};
+}
 
 const loginSchema = z.object({
 	email: z.string().email(),
@@ -32,11 +46,11 @@ export async function POST(req: NextRequest) {
 			if (!parsed.success) return errorResponse(parsed.error.message);
 
 			const { name, email, password } = parsed.data;
-			const exists = db.getUserByEmail(email);
+			const exists = await db.getUserByEmail(email);
 			if (exists) return errorResponse("Email already in use", 409);
 
 			const hashed = await hashPassword(password);
-			const user = db.createUser({
+			const user = await db.createUser({
 				name,
 				email,
 				password: hashed,
@@ -56,33 +70,34 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-		// Default: login
 		const body = await req.json();
 		const parsed = loginSchema.safeParse(body);
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
 		const { email, password } = parsed.data;
-		let user = db.getUserByEmail(email);
+		const existingUser = await db.getUserByEmail(email);
+		const user = toUser(existingUser);
 
-		// Auto-seed admin user if it doesn't exist yet (first-time production deploy)
 		if (
 			!user &&
 			email === "admin@roselyra.com" &&
 			password === "Admin@2026!"
 		) {
-			console.log(
-				"[AUTH] Admin user not found — auto-seeding admin account",
-			);
+			console.log("[AUTH] Admin user not found — auto-seeding admin account");
 			const hashed = await hashPassword("Admin@2026!");
-			user = db.createUser({
+			const newUser = await db.createUser({
 				name: "Admin",
 				email: "admin@roselyra.com",
 				password: hashed,
 				role: "ADMIN",
 			});
+			Object.assign(user!, {
+				id: newUser.id,
+				email: newUser.email,
+				role: newUser.role,
+			});
 		}
 
-		// Skip password check for admin@roselyra.com (demo mode)
 		if (email === "admin@roselyra.com" && password === "Admin@2026!") {
 			if (!user) return errorResponse("Admin user not found", 404);
 			const payload = {
@@ -93,11 +108,11 @@ export async function POST(req: NextRequest) {
 			const access = signAccessToken(payload);
 			const refresh = signRefreshToken(payload);
 			const safeUser = {
-				id: user!.id,
-				email: user!.email,
-				name: user!.name,
-				role: user!.role,
-				avatar: user!.avatar,
+				id: user.id,
+				email: user.email,
+				name: user.name,
+				role: user.role,
+				avatar: user.avatar,
 			};
 			const response = NextResponse.json(
 				{
@@ -114,13 +129,13 @@ export async function POST(req: NextRequest) {
 				path: "/",
 				secure: process.env.NODE_ENV === "production",
 				sameSite: "lax",
-				maxAge: 60 * 60 * 24 * 7, // 7 days
+				maxAge: 60 * 60 * 24 * 7,
 			});
 			return response;
 		}
 
-		if (!user || !user.password)
-			return errorResponse("Invalid credentials", 401);
+		if (!user) return errorResponse("Invalid credentials", 401);
+		if (!user.password) return errorResponse("Invalid credentials", 401);
 
 		const valid = await comparePassword(password, user.password);
 		if (!valid) return errorResponse("Invalid credentials", 401);
@@ -151,7 +166,7 @@ export async function POST(req: NextRequest) {
 			path: "/",
 			secure: process.env.NODE_ENV === "production",
 			sameSite: "lax",
-			maxAge: 60 * 60 * 24 * 7, // 7 days
+			maxAge: 60 * 60 * 24 * 7,
 		});
 		return response;
 	} catch (err: any) {
@@ -169,7 +184,7 @@ export async function GET(req: NextRequest) {
 			return errorResponse("Not authenticated", 401);
 		}
 
-		const dbUser = db.users.find((u) => u.id === user.userId);
+		const dbUser = await db.getUserById(user.userId);
 		if (!dbUser) {
 			return errorResponse("User not found", 404);
 		}

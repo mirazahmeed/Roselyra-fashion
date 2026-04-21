@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { mongo } from "@/lib/db";
 import ProductDetailClient from "./ProductDetailClient";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
@@ -8,7 +8,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const product = db.getProductBySlug(params.slug);
+  const product = await mongo.getProductBySlug(params.slug);
 
   if (!product) return {};
 
@@ -23,12 +23,12 @@ export async function generateMetadata({
   };
 }
 
-export default function ProductPage({
+export default async function ProductPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const product = db.getProductBySlug(params.slug);
+  const product = await mongo.getProductBySlug(params.slug);
 
   if (!product || !product.isActive) {
     notFound();

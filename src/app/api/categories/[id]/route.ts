@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 
@@ -19,9 +19,9 @@ export async function GET(
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		let category = db.getCategoryBySlug(params.id);
+		let category = await db.getCategoryBySlug(params.id);
 		if (!category) {
-			const allCategories = db.getCategories({ includeInactive: true });
+			const allCategories = await db.getCategories({ includeInactive: true });
 			category = allCategories.find(c => c.id === params.id) || null;
 		}
 		if (!category) return errorResponse("Category not found", 404);
@@ -40,7 +40,7 @@ export async function PUT(
 	if (authError) return authError;
 
 	try {
-		const allCategories = db.getCategories({ includeInactive: true });
+		const allCategories = await db.getCategories({ includeInactive: true });
 		const index = allCategories.findIndex(c => c.id === params.id);
 		if (index === -1) return errorResponse("Category not found", 404);
 

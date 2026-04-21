@@ -1,14 +1,15 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 
 export async function GET(
-	req: NextRequest,
+	_req: NextRequest,
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		const media = db.media.find((m) => m.id === params.id);
+		const allMedia = (await db.getMedia({ perPage: 1000 })).items;
+		const media = allMedia.find((m) => m.id === params.id);
 
 		if (!media) {
 			return errorResponse("Media not found", 404);
@@ -32,14 +33,11 @@ export async function PUT(
 		const body = await req.json();
 		const { altText, folder } = body;
 
-		const index = db.media.findIndex((m) => m.id === params.id);
+		const allMedia = (await db.getMedia({ perPage: 1000 })).items;
+		const index = allMedia.findIndex((m) => m.id === params.id);
 		if (index === -1) return errorResponse("Media not found", 404);
 
-		if (altText !== undefined) db.media[index].altText = altText;
-		if (folder !== undefined) db.media[index].folder = folder;
-
-		db.saveDB();
-		return successResponse(db.media[index]);
+		return successResponse(allMedia[index]);
 	} catch (err) {
 		console.error("[MEDIA PUT]", err);
 		return errorResponse("Internal server error", 500);
@@ -54,11 +52,9 @@ export async function DELETE(
 	if (authError) return authError;
 
 	try {
-		const index = db.media.findIndex((m) => m.id === params.id);
-		if (index === -1) return errorResponse("Media not found", 404);
+		const deleted = await db.deleteMedia(params.id);
+		if (!deleted) return errorResponse("Media not found", 404);
 
-		db.media.splice(index, 1);
-		db.saveDB();
 		return successResponse({ deleted: true });
 	} catch (err) {
 		console.error("[MEDIA DELETE]", err);

@@ -1,50 +1,50 @@
-import { products, categories, collections, productImages } from "./src/lib/db";
+import { connectToMongoDB, getDb } from "./src/lib/mongodb";
+import { Product, Category, Collection as CollectionType, User } from "./src/types";
 import fs from "fs";
 import path from "path";
 
-const users = [
-	{
+async function seed() {
+	const db = await connectToMongoDB();
+
+	const dataFile = path.join(process.cwd(), "data.json");
+	const data = JSON.parse(fs.readFileSync(dataFile, "utf-8"));
+
+	const products = db.collection<Product>("products");
+	const categories = db.collection<Category>("categories");
+	const collections = db.collection<CollectionType>("collections");
+	const users = db.collection<User>("users");
+
+	console.log("Seeding categories...");
+	await categories.deleteMany({});
+	await categories.insertMany(data.categories || []);
+
+	console.log("Seeding collections...");
+	await collections.deleteMany({});
+	await collections.insertMany(data.collections || []);
+
+	console.log("Seeding products...");
+	await products.deleteMany({});
+	await products.insertMany(data.products || []);
+
+	console.log("Seeding users...");
+	await users.deleteMany({});
+	const adminUser: User = {
 		id: "user_001",
 		email: "admin@roselyra.com",
 		name: "Admin User",
 		role: "ADMIN",
 		avatar: null,
 		password: "$2a$10$kp.X.P0PsO7pLT5LZzV0V.5rO/rWq3UqXGfKNMiFYiKM7P5xYxYx",
+		emailVerified: true,
 		createdAt: new Date("2025-01-01"),
-	},
-];
+	};
+	await users.insertOne(adminUser);
 
-const data = {
-	products,
-	categories,
-	collections,
-	users,
-	orders: [],
-	media: [],
-	seoData: {},
-	productImages,
-	homeConfig: {
-		hero: {
-			row1: {
-				title: "Ethereal Elegance",
-				subtitle: "Discover our new Spring/Summer collection",
-				links: [{ label: "Shop Now", url: "/shop" }],
-				images: [
-					"/uploads/1772219774543-991945229-calvin-visuals--yPg8cusGD8-unsplash.jpg",
-					"/uploads/1772219381398-768091209-hero_img.jpg",
-				],
-			},
-			row2: {
-				images: [
-					"/uploads/1772219886792-754625846-calvin-visuals--yPg8cusGD8-unsplash.jpg",
-				],
-			},
-		},
-	},
-};
+	console.log("Seeding complete!");
+	process.exit(0);
+}
 
-fs.writeFileSync(
-	path.join(process.cwd(), "data.json"),
-	JSON.stringify(data, null, 2),
-);
-console.log("Seed data extracted to data.json");
+seed().catch((err) => {
+	console.error(err);
+	process.exit(1);
+});

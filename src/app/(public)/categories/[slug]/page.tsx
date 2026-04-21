@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { mongo } from "@/lib/db";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -10,7 +10,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const category = db.getCategoryBySlug(params.slug);
+  const category = await mongo.getCategoryBySlug(params.slug);
 
   if (!category) return {};
 
@@ -25,13 +25,13 @@ export default async function CategoryDetailPage({
 }: {
   params: { slug: string };
 }) {
-  const category = db.getCategoryBySlug(params.slug);
+  const category = await mongo.getCategoryBySlug(params.slug);
 
   if (!category) {
     notFound();
   }
 
-  const products = db.getProducts({ category: params.slug, perPage: 50 }).items;
+  const products = (await mongo.getProducts({ category: params.slug, perPage: 50 })).items;
 
   return (
     <PageTransition>

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 
@@ -22,14 +22,14 @@ export async function GET(
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		let collection = db.getCollectionBySlug(params.id);
+		let collection = await db.getCollectionBySlug(params.id);
 		if (!collection) {
-			const allCollections = db.getCollections({ includeInactive: true });
+			const allCollections = await db.getCollections({ includeInactive: true });
 			collection = allCollections.find(c => c.id === params.id) || null;
 		}
 		if (!collection) return errorResponse("Collection not found", 404);
 
-		const products = db.getProducts({ collection: collection.slug, perPage: 50 }).items;
+		const products = (await db.getProducts({ collection: collection.slug, perPage: 50 })).items;
 		
 		return successResponse({ ...collection, products });
 	} catch (err) {
@@ -46,11 +46,11 @@ export async function PUT(
 	if (authError) return authError;
 
 	try {
-		const allCollections = db.getCollections({ includeInactive: true });
-		const collection = allCollections.find(c => c.id === params.id);
-		if (!collection) return errorResponse("Collection not found", 404);
+		const allCollections = await db.getCollections({ includeInactive: true });
+		const index = allCollections.findIndex(c => c.id === params.id);
+		if (index === -1) return errorResponse("Collection not found", 404);
 
-		return successResponse(collection);
+		return successResponse(allCollections[index]);
 	} catch (err) {
 		console.error("[COLLECTION PUT]", err);
 		return errorResponse("Internal server error", 500);

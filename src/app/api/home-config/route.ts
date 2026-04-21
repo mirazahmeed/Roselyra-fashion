@@ -1,12 +1,13 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 import { revalidatePath } from "next/cache";
 
 export async function GET(req: NextRequest) {
 	try {
-		return successResponse(db.homeConfig);
+		const settings = await db.getSettings();
+		return successResponse(settings);
 	} catch (err) {
 		console.error("[HOME_CONFIG GET]", err);
 		return errorResponse("Internal server error", 500);
@@ -19,13 +20,9 @@ export async function PUT(req: NextRequest) {
 
 	try {
 		const body = await req.json();
-
-		// Update the homeConfig in memory and persist
-		Object.assign(db.homeConfig, body);
-		db.saveDB();
-
+		const settings = await db.updateSettings(body);
 		revalidatePath("/", "layout");
-		return successResponse(db.homeConfig);
+		return successResponse(settings);
 	} catch (err) {
 		console.error("[HOME_CONFIG PUT]", err);
 		return errorResponse("Internal server error", 500);

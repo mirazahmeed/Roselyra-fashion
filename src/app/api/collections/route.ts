@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 
@@ -23,18 +23,18 @@ export async function GET(req: NextRequest) {
 	const includeInactive = searchParams.get("includeInactive") === "true";
 	
 	try {
-		const collections = db.getCollections({
+		const collections = await db.getCollections({
 			featured: featured === "true",
 			includeInactive,
 		});
 		
-		const collectionsWithProducts = collections.map(col => ({
+		const collectionsWithProducts = await Promise.all(collections.map(async col => ({
 			...col,
-			products: db.getProducts({ collection: col.slug, perPage: 6 }).items.slice(0, 6).map(p => ({
+			products: (await db.getProducts({ collection: col.slug, perPage: 6 })).items.slice(0, 6).map(p => ({
 				...p,
 				images: p.images.slice(0, 1),
 			})),
-		}));
+		})));
 		
 		return successResponse({
 			items: collectionsWithProducts,
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 		const parsed = schema.safeParse(body);
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
-		const collection = db.createCollection(parsed.data);
+		const collection = await db.createCollection(parsed.data);
 		return successResponse(collection, 201);
 	} catch (err) {
 		console.error("[COLLECTIONS POST]", err);

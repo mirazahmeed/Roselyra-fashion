@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 import { revalidatePath } from "next/cache";
@@ -39,7 +39,7 @@ export async function GET(req: NextRequest) {
 		const minPrice = searchParams.get("minPrice");
 		const maxPrice = searchParams.get("maxPrice");
 
-		const result = db.getProducts({
+		const result = await db.getProducts({
 			page,
 			perPage,
 			category: category || undefined,
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
 		const data = parsed.data;
-		const product = db.createProduct(data);
+		const product = await db.createProduct(data);
 		revalidatePath("/", "layout");
 		return successResponse(product, 201);
 	} catch (err) {
