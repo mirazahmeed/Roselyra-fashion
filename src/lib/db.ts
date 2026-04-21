@@ -30,7 +30,8 @@ async function getCollections() {
 		media: mongoDb.collection<Media>("media"),
 		payments: mongoDb.collection<Payment>("payments"),
 		settings: mongoDb.collection<SiteSettings>("settings"),
-		emailVerifications: mongoDb.collection<EmailVerification>("emailVerifications"),
+		emailVerifications:
+			mongoDb.collection<EmailVerification>("emailVerifications"),
 	};
 }
 
@@ -48,30 +49,36 @@ const defaultSettings: SiteSettings = {
 	footerText: "© 2026 Roselyra. All rights reserved.",
 };
 
-function toObjectId(id: string): ObjectId {
-	try {
-		return new ObjectId(id);
-	} catch {
-		return new ObjectId();
-	}
+function getIdFilter(id: string) {
+	return /^[0-9a-f]{24}$/i.test(id) ? { _id: new ObjectId(id) } : { id };
 }
 
 export const mongoMethods = {
 	async getSettings() {
 		const { settings } = await getCollections();
-		const result = await settings.findOne({ _id: new ObjectId("000000000000000000000001") });
+		const result = await settings.findOne({
+			_id: new ObjectId("000000000000000000000001"),
+		});
 		return result || defaultSettings;
 	},
 
 	async getHomeConfig() {
-		return this.getSettings().then(s => ({} as any));
+		return this.getSettings().then((s) => ({}) as any);
 	},
 
-	async getMediaAll(options: { type?: "IMAGE" | "VIDEO"; page?: number; perPage?: number } = {}) {
+	async getMediaAll(
+		options: {
+			type?: "IMAGE" | "VIDEO";
+			page?: number;
+			perPage?: number;
+		} = {},
+	) {
 		return this.getMedia(options);
 	},
 
-	async getAllOrders(options: { userId?: string; page?: number; perPage?: number } = {}) {
+	async getAllOrders(
+		options: { userId?: string; page?: number; perPage?: number } = {},
+	) {
 		return this.getOrders(options);
 	},
 
@@ -94,24 +101,29 @@ export const mongoMethods = {
 		await settings.updateOne(
 			{ _id: new ObjectId("000000000000000000000000001") },
 			{ $set: { ...data } },
-			{ upsert: true }
+			{ upsert: true },
 		);
 		return this.getSettings();
 	},
 
-	async getProducts(options: {
-		page?: number;
-		perPage?: number;
-		category?: string;
-		collection?: string;
-		featured?: boolean;
-		search?: string;
-		sort?: string;
-		minPrice?: number;
-		maxPrice?: number;
-	} = {}) {
+	async getProducts(
+		options: {
+			page?: number;
+			perPage?: number;
+			category?: string;
+			collection?: string;
+			featured?: boolean;
+			search?: string;
+			sort?: string;
+			minPrice?: number;
+			maxPrice?: number;
+		} = {},
+	) {
 		const { products, categories, collections } = await getCollections();
-		const filter: Record<string, unknown> = { isActive: true, isArchived: { $ne: true } };
+		const filter: Record<string, unknown> = {
+			isActive: true,
+			isArchived: { $ne: true },
+		};
 
 		if (options.category) {
 			const cat = await categories.findOne({ slug: options.category });
@@ -130,14 +142,26 @@ export const mongoMethods = {
 			];
 		}
 		if (options.minPrice) filter.price = { $gte: options.minPrice };
-		if (options.maxPrice) { filter.price = { ...filter.price as Record<string, number>, $lte: options.maxPrice }; }
+		if (options.maxPrice) {
+			filter.price = {
+				...(filter.price as Record<string, number>),
+				$lte: options.maxPrice,
+			};
+		}
 
 		const sort: Record<string, 1 | -1> = {};
 		switch (options.sort) {
-			case "price_asc": sort.price = 1; break;
-			case "price_desc": sort.price = -1; break;
-			case "newest": sort.createdAt = -1; break;
-			default: sort.order = 1;
+			case "price_asc":
+				sort.price = 1;
+				break;
+			case "price_desc":
+				sort.price = -1;
+				break;
+			case "newest":
+				sort.createdAt = -1;
+				break;
+			default:
+				sort.order = 1;
 		}
 
 		const page = options.page || 1;
@@ -145,42 +169,71 @@ export const mongoMethods = {
 		const skip = (page - 1) * perPage;
 
 		const [items, total] = await Promise.all([
-			products.find(filter).sort(sort).skip(skip).limit(perPage).toArray(),
+			products
+				.find(filter)
+				.sort(sort)
+				.skip(skip)
+				.limit(perPage)
+				.toArray(),
 			products.countDocuments(filter),
 		]);
 
 		for (const item of items) {
 			if (item.categoryId) {
-				item.category = await categories.findOne({ _id: new ObjectId(item.categoryId) }) || undefined;
+				item.category =
+					(await categories.findOne({
+						_id: new ObjectId(item.categoryId),
+					})) || undefined;
 			}
 			if (item.collectionId) {
-				item.collection = await collections.findOne({ _id: new ObjectId(item.collectionId) }) || undefined;
+				item.collection =
+					(await collections.findOne({
+						_id: new ObjectId(item.collectionId),
+					})) || undefined;
 			}
 		}
 
-		return { items, total, page, perPage, totalPages: Math.ceil(total / perPage) };
+		return {
+			items,
+			total,
+			page,
+			perPage,
+			totalPages: Math.ceil(total / perPage),
+		};
 	},
 
 	async getProductBySlug(slug: string) {
 		const { products, categories, collections } = await getCollections();
 		const product = await products.findOne({ slug, isActive: true });
 		if (product && product.categoryId) {
-			product.category = await categories.findOne({ _id: new ObjectId(product.categoryId) }) || undefined;
+			product.category =
+				(await categories.findOne({
+					_id: new ObjectId(product.categoryId),
+				})) || undefined;
 		}
 		if (product && product.collectionId) {
-			product.collection = await collections.findOne({ _id: new ObjectId(product.collectionId) }) || undefined;
+			product.collection =
+				(await collections.findOne({
+					_id: new ObjectId(product.collectionId),
+				})) || undefined;
 		}
 		return product;
 	},
 
 	async getProductById(id: string) {
 		const { products, categories, collections } = await getCollections();
-		const product = await products.findOne({ _id: new ObjectId(id) });
+		const product = await products.findOne(getIdFilter(id) as any);
 		if (product && product.categoryId) {
-			product.category = await categories.findOne({ _id: new ObjectId(product.categoryId) }) || undefined;
+			product.category =
+				(await categories.findOne({
+					_id: new ObjectId(product.categoryId),
+				})) || undefined;
 		}
 		if (product && product.collectionId) {
-			product.collection = await collections.findOne({ _id: new ObjectId(product.collectionId) }) || undefined;
+			product.collection =
+				(await collections.findOne({
+					_id: new ObjectId(product.collectionId),
+				})) || undefined;
 		}
 		return product;
 	},
@@ -196,9 +249,12 @@ export const mongoMethods = {
 		return categories.findOne({ slug });
 	},
 
-	async getCollections(options: { featured?: boolean; includeInactive?: boolean } = {}) {
+	async getCollections(
+		options: { featured?: boolean; includeInactive?: boolean } = {},
+	) {
 		const { collections } = await getCollections();
-		const filter: Record<string, unknown> = options.includeInactive ? {} : { isActive: true };
+		const filter: Record<string, unknown> =
+			options.includeInactive ? {} : { isActive: true };
 		if (options.featured) filter.isFeatured = true;
 		return collections.find(filter).sort({ order: 1 }).toArray();
 	},
@@ -215,10 +271,16 @@ export const mongoMethods = {
 
 	async getUserById(id: string) {
 		const { users } = await getCollections();
-		return users.findOne({ _id: new ObjectId(id) });
+		return users.findOne(getIdFilter(id) as any);
 	},
 
-	async createUser(data: { name: string; email: string; password: string; role?: Role; avatar?: string }) {
+	async createUser(data: {
+		name: string;
+		email: string;
+		password: string;
+		role?: Role;
+		avatar?: string;
+	}) {
 		const { users } = await getCollections();
 		const existing = await users.findOne({ email: data.email });
 		if (existing) throw new Error("Email already exists");
@@ -241,7 +303,13 @@ export const mongoMethods = {
 	},
 
 	async createOrder(data: {
-		items: Array<{ productId: string; quantity: number; price: number; size?: string | null; color?: string | null }>;
+		items: Array<{
+			productId: string;
+			quantity: number;
+			price: number;
+			size?: string | null;
+			color?: string | null;
+		}>;
 		firstName: string;
 		lastName: string;
 		email: string;
@@ -260,7 +328,10 @@ export const mongoMethods = {
 		guestEmail?: string | null;
 	}) {
 		const { orders, products } = await getCollections();
-		const subtotal = data.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+		const subtotal = data.items.reduce(
+			(sum, item) => sum + item.price * item.quantity,
+			0,
+		);
 		const tax = subtotal * 0.1;
 		const shippingCost = data.shippingCost || 0;
 		const discount = data.discount || 0;
@@ -271,7 +342,9 @@ export const mongoMethods = {
 
 		const orderItems = await Promise.all(
 			data.items.map(async (item) => {
-				const product = await products.findOne({ _id: new ObjectId(item.productId) });
+				const product = await products.findOne(
+					getIdFilter(item.productId) as any,
+				);
 				return {
 					id: `orderitem_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
 					productId: item.productId,
@@ -281,7 +354,7 @@ export const mongoMethods = {
 					size: item.size || null,
 					color: item.color || null,
 				};
-			})
+			}),
 		);
 
 		const order: Order = {
@@ -318,7 +391,9 @@ export const mongoMethods = {
 		return order;
 	},
 
-	async getOrders(options: { userId?: string; page?: number; perPage?: number } = {}) {
+	async getOrders(
+		options: { userId?: string; page?: number; perPage?: number } = {},
+	) {
 		const { orders } = await getCollections();
 		const filter = options.userId ? { userId: options.userId } : {};
 
@@ -327,16 +402,28 @@ export const mongoMethods = {
 		const skip = (page - 1) * perPage;
 
 		const [items, total] = await Promise.all([
-			orders.find(filter).sort({ createdAt: -1 }).skip(skip).limit(perPage).toArray(),
+			orders
+				.find(filter)
+				.sort({ createdAt: -1 })
+				.skip(skip)
+				.limit(perPage)
+				.toArray(),
 			orders.countDocuments(filter),
 		]);
 
-		return { items, total, page, perPage, totalPages: Math.ceil(total / perPage) };
+		return {
+			items,
+			total,
+			page,
+			perPage,
+			totalPages: Math.ceil(total / perPage),
+		};
 	},
 
 	async getOrderById(id: string) {
 		const { orders } = await getCollections();
-		const filter = /^[0-9a-f]{24}$/i.test(id) ? { _id: new ObjectId(id) } : { id };
+		const filter =
+			/^[0-9a-f]{24}$/i.test(id) ? { _id: new ObjectId(id) } : { id };
 		return orders.findOne(filter as { _id: ObjectId } | { id: string });
 	},
 
@@ -366,13 +453,26 @@ export const mongoMethods = {
 		images?: string[];
 	}) {
 		const { products, categories, collections } = await getCollections();
-		const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
+		const slug =
+			data.slug ||
+			data.name
+				.toLowerCase()
+				.replace(/[^a-z0-9\s-]/g, "")
+				.replace(/\s+/g, "-");
 
 		const existing = await products.findOne({ slug });
 		if (existing) throw new Error("Slug already exists");
 
-		const category = data.categoryId ? await categories.findOne({ _id: new ObjectId(data.categoryId) }) : null;
-		const collection = data.collectionId ? await collections.findOne({ _id: new ObjectId(data.collectionId) }) : null;
+		const category =
+			data.categoryId ?
+				await categories.findOne({ _id: new ObjectId(data.categoryId) })
+			:	null;
+		const collection =
+			data.collectionId ?
+				await collections.findOne({
+					_id: new ObjectId(data.collectionId),
+				})
+			:	null;
 
 		const count = await products.countDocuments();
 		const newImages = (data.images || []).map((url, idx) => ({
@@ -422,22 +522,36 @@ export const mongoMethods = {
 
 	async updateProduct(id: string, data: Partial<Product>) {
 		const { products } = await getCollections();
-		await products.updateOne({ _id: new ObjectId(id) }, { $set: { ...data, updatedAt: new Date() } });
+		await products.updateOne(getIdFilter(id) as any, {
+			$set: { ...data, updatedAt: new Date() },
+		});
 		return this.getProductById(id);
 	},
 
 	async deleteProduct(id: string) {
 		const { products } = await getCollections();
-		const result = await products.updateOne(
-			{ _id: new ObjectId(id) },
-			{ $set: { isArchived: true, isActive: false, updatedAt: new Date() } }
-		);
+		const result = await products.updateOne(getIdFilter(id) as any, {
+			$set: { isArchived: true, isActive: false, updatedAt: new Date() },
+		});
 		return result.modifiedCount > 0;
 	},
 
-	async createCategory(data: { name: string; slug?: string; description?: string; imageUrl?: string; parentId?: string | null; order?: number; isActive?: boolean }) {
+	async createCategory(data: {
+		name: string;
+		slug?: string;
+		description?: string;
+		imageUrl?: string;
+		parentId?: string | null;
+		order?: number;
+		isActive?: boolean;
+	}) {
 		const { categories } = await getCollections();
-		const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
+		const slug =
+			data.slug ||
+			data.name
+				.toLowerCase()
+				.replace(/[^a-z0-9\s-]/g, "")
+				.replace(/\s+/g, "-");
 
 		const existing = await categories.findOne({ slug });
 		if (existing) throw new Error("Slug already exists");
@@ -459,9 +573,25 @@ export const mongoMethods = {
 		return category;
 	},
 
-	async createCollection(data: { name: string; slug?: string; description?: string; imageUrl?: string; videoUrl?: string; season?: string; year?: number; isFeatured?: boolean; isActive?: boolean; order?: number }) {
+	async createCollection(data: {
+		name: string;
+		slug?: string;
+		description?: string;
+		imageUrl?: string;
+		videoUrl?: string;
+		season?: string;
+		year?: number;
+		isFeatured?: boolean;
+		isActive?: boolean;
+		order?: number;
+	}) {
 		const { collections } = await getCollections();
-		const slug = data.slug || data.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-");
+		const slug =
+			data.slug ||
+			data.name
+				.toLowerCase()
+				.replace(/[^a-z0-9\s-]/g, "")
+				.replace(/\s+/g, "-");
 
 		const existing = await collections.findOne({ slug });
 		if (existing) throw new Error("Slug already exists");
@@ -482,13 +612,17 @@ export const mongoMethods = {
 			order: data.order ?? count + 1,
 		};
 
-		await collections.insertOne(collection as CollectionType & { _id: ObjectId });
+		await collections.insertOne(
+			collection as CollectionType & { _id: ObjectId },
+		);
 		return collection;
 	},
 
 	async createEmailVerification(email: string) {
 		const { emailVerifications } = await getCollections();
-		const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+		const token =
+			Math.random().toString(36).substring(2, 15) +
+			Math.random().toString(36).substring(2, 15);
 		const verification: EmailVerification = {
 			_id: new ObjectId(),
 			id: `ev_${Date.now()}`,
@@ -498,7 +632,9 @@ export const mongoMethods = {
 			createdAt: new Date(),
 		};
 
-		await emailVerifications.insertOne(verification as EmailVerification & { _id: ObjectId });
+		await emailVerifications.insertOne(
+			verification as EmailVerification & { _id: ObjectId },
+		);
 		return verification;
 	},
 
@@ -506,9 +642,13 @@ export const mongoMethods = {
 		const { emailVerifications, users } = await getCollections();
 		const verification = await emailVerifications.findOne({ token });
 		if (!verification) return { success: false, error: "Invalid token" };
-		if (verification.expiresAt < new Date()) return { success: false, error: "Token expired" };
+		if (verification.expiresAt < new Date())
+			return { success: false, error: "Token expired" };
 
-		await users.updateOne({ email: verification.email }, { $set: { emailVerified: true } });
+		await users.updateOne(
+			{ email: verification.email },
+			{ $set: { emailVerified: true } },
+		);
 		await emailVerifications.deleteOne({ _id: verification._id });
 
 		return { success: true, email: verification.email };
@@ -519,7 +659,13 @@ export const mongoMethods = {
 		return emailVerifications.findOne({ email });
 	},
 
-	async createPayment(data: { orderId: string; method: PaymentMethod; senderNumber?: string; transactionId?: string; amount: number }) {
+	async createPayment(data: {
+		orderId: string;
+		method: PaymentMethod;
+		senderNumber?: string;
+		transactionId?: string;
+		amount: number;
+	}) {
 		const { payments, orders } = await getCollections();
 
 		const payment: Payment = {
@@ -538,32 +684,68 @@ export const mongoMethods = {
 
 		await payments.insertOne(payment as Payment & { _id: ObjectId });
 
-		const order = await orders.findOne({ _id: new ObjectId(data.orderId) });
+		const order = await orders.findOne(getIdFilter(data.orderId) as any);
 		if (order) {
-			const newDue = order.subtotal + order.shippingCost + order.tax - order.discount - data.amount;
-			await orders.updateOne(
-				{ _id: new ObjectId(data.orderId) },
-				{ $set: { status: "PAYMENT_SUBMITTED" as OrderStatus, paidAmount: data.amount, dueAmount: newDue, updatedAt: new Date() } }
-			);
+			const newDue =
+				order.subtotal +
+				order.shippingCost +
+				order.tax -
+				order.discount -
+				data.amount;
+			await orders.updateOne(getIdFilter(data.orderId) as any, {
+				$set: {
+					status: "PAYMENT_SUBMITTED" as OrderStatus,
+					paidAmount: data.amount,
+					dueAmount: newDue,
+					updatedAt: new Date(),
+				},
+			});
 		}
 
 		return payment;
 	},
 
-	async updatePaymentStatus(paymentId: string, status: PaymentStatus, adminNotes?: string) {
+	async updatePaymentStatus(
+		paymentId: string,
+		status: PaymentStatus,
+		adminNotes?: string,
+	) {
 		const { payments, orders } = await getCollections();
-		await payments.updateOne({ _id: new ObjectId(paymentId) }, { $set: { status, adminNotes: adminNotes || null, updatedAt: new Date() } });
+		await payments.updateOne(getIdFilter(paymentId) as any, {
+			$set: {
+				status,
+				adminNotes: adminNotes || null,
+				updatedAt: new Date(),
+			},
+		});
 
-		const payment = await payments.findOne({ _id: new ObjectId(paymentId) });
+		const payment = await payments.findOne(getIdFilter(paymentId) as any);
 		if (payment) {
 			if (status === "APPROVED") {
-				await orders.updateOne({ _id: new ObjectId(payment.orderId) }, { $set: { status: "CONFIRMED" as OrderStatus, updatedAt: new Date() } });
+				await orders.updateOne(getIdFilter(payment.orderId) as any, {
+					$set: {
+						status: "CONFIRMED" as OrderStatus,
+						updatedAt: new Date(),
+					},
+				});
 			} else if (status === "REJECTED") {
-				const order = await orders.findOne({ _id: new ObjectId(payment.orderId) });
-				await orders.updateOne(
-					{ _id: new ObjectId(payment.orderId) },
-					{ $set: { status: "PENDING" as OrderStatus, paidAmount: 0, dueAmount: order ? order.subtotal + order.shippingCost + order.tax - order.discount : 0, updatedAt: new Date() } }
+				const order = await orders.findOne(
+					getIdFilter(payment.orderId) as any,
 				);
+				await orders.updateOne(getIdFilter(payment.orderId) as any, {
+					$set: {
+						status: "PENDING" as OrderStatus,
+						paidAmount: 0,
+						dueAmount:
+							order ?
+								order.subtotal +
+								order.shippingCost +
+								order.tax -
+								order.discount
+							:	0,
+						updatedAt: new Date(),
+					},
+				});
 			}
 		}
 
@@ -575,37 +757,72 @@ export const mongoMethods = {
 		return payments.findOne({ orderId });
 	},
 
-	async updateOrderStatus(orderId: string, status: OrderStatus, adminNotes?: string) {
+	async updateOrderStatus(
+		orderId: string,
+		status: OrderStatus,
+		adminNotes?: string,
+	) {
 		const { orders } = await getCollections();
-		await orders.updateOne(
-			{ _id: new ObjectId(orderId) },
-			{ $set: { status, adminNotes: adminNotes || null, updatedAt: new Date() } }
-		);
+		await orders.updateOne(getIdFilter(orderId) as any, {
+			$set: {
+				status,
+				adminNotes: adminNotes || null,
+				updatedAt: new Date(),
+			},
+		});
 		return this.getOrderById(orderId);
 	},
 
 	async deleteOrder(id: string) {
 		const { orders } = await getCollections();
-		const result = await orders.deleteOne({ _id: new ObjectId(id) });
+		const result = await orders.deleteOne(getIdFilter(id) as any);
 		return result.deletedCount > 0;
 	},
 
-	async getMedia(options: { type?: "IMAGE" | "VIDEO"; page?: number; perPage?: number } = {}) {
+	async getMedia(
+		options: {
+			type?: "IMAGE" | "VIDEO";
+			page?: number;
+			perPage?: number;
+		} = {},
+	) {
 		const { media } = await getCollections();
-		const filter = options.type ? { type: options.type as "IMAGE" | "VIDEO" } : {};
+		const filter =
+			options.type ? { type: options.type as "IMAGE" | "VIDEO" } : {};
 		const page = options.page || 1;
 		const perPage = options.perPage || 50;
 		const skip = (page - 1) * perPage;
 
 		const [items, total] = await Promise.all([
-			media.find(filter).sort({ createdAt: -1 }).skip(skip).limit(perPage).toArray(),
+			media
+				.find(filter)
+				.sort({ createdAt: -1 })
+				.skip(skip)
+				.limit(perPage)
+				.toArray(),
 			media.countDocuments(filter),
 		]);
 
-		return { items, total, page, perPage, totalPages: Math.ceil(total / perPage) };
+		return {
+			items,
+			total,
+			page,
+			perPage,
+			totalPages: Math.ceil(total / perPage),
+		};
 	},
 
-	async createMedia(data: { url: string; publicId?: string; altText?: string; type?: "IMAGE" | "VIDEO"; width?: number; height?: number; size?: number; mimeType?: string; folder?: string }) {
+	async createMedia(data: {
+		url: string;
+		publicId?: string;
+		altText?: string;
+		type?: "IMAGE" | "VIDEO";
+		width?: number;
+		height?: number;
+		size?: number;
+		mimeType?: string;
+		folder?: string;
+	}) {
 		const { media } = await getCollections();
 		const item: Media = {
 			_id: new ObjectId(),
@@ -628,7 +845,7 @@ export const mongoMethods = {
 
 	async deleteMedia(id: string) {
 		const { media } = await getCollections();
-		const result = await media.deleteOne({ _id: new ObjectId(id) });
+		const result = await media.deleteOne(getIdFilter(id) as any);
 		return result.deletedCount > 0;
 	},
 };
