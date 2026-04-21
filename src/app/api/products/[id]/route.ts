@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { requireEditor } from "@/lib/apiMiddleware";
 import { revalidatePath } from "next/cache";
@@ -10,9 +10,9 @@ export async function GET(
 	{ params }: { params: { id: string } },
 ) {
 	try {
-		let product = db.getProductById(params.id);
+		let product = await db.getProductById(params.id);
 		if (!product) {
-			product = db.getProductBySlug(params.id);
+			product = await db.getProductBySlug(params.id);
 		}
 		if (!product) return errorResponse("Product not found", 404);
 		return successResponse(product);
@@ -59,7 +59,6 @@ export async function PUT(
 
 		const { images: imageUrls, ...rest } = parsed.data;
 
-		// Convert URL strings → ProductImage objects if images were provided
 		const productImages =
 			imageUrls ?
 				imageUrls.map((url, idx) => ({
@@ -73,7 +72,7 @@ export async function PUT(
 				}))
 			:	undefined;
 
-		const product = db.updateProduct(params.id, {
+		const product = await db.updateProduct(params.id, {
 			...rest,
 			...(productImages !== undefined ? { images: productImages } : {}),
 		});
@@ -95,7 +94,7 @@ export async function DELETE(
 	if (authError) return authError;
 
 	try {
-		const deleted = db.deleteProduct(params.id);
+		const deleted = await db.deleteProduct(params.id);
 		if (!deleted) return errorResponse("Product not found", 404);
 
 		revalidatePath("/", "layout");
