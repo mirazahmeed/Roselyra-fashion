@@ -21,11 +21,24 @@ import type {
 import fs from "fs";
 import path from "path";
 
-const DATA_FILE = path.join(process.cwd(), "data.json");
+const isVercel =
+	process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
+const DATA_FILE =
+	isVercel ?
+		path.join("/tmp", "data.json")
+	:	path.join(process.cwd(), "data.json");
+
 let state: any = {};
 let lastModifiedTime = 0;
 
 try {
+	if (isVercel && !fs.existsSync(DATA_FILE)) {
+		const originalFile = path.join(process.cwd(), "data.json");
+		if (fs.existsSync(originalFile)) {
+			fs.copyFileSync(originalFile, DATA_FILE);
+		}
+	}
+
 	if (fs.existsSync(DATA_FILE)) {
 		lastModifiedTime = fs.statSync(DATA_FILE).mtimeMs;
 		state = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
