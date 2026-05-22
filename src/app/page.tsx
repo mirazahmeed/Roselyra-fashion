@@ -17,22 +17,44 @@ export const revalidate = 60; // ISR: revalidate every 60 seconds
 export default async function Home() {
   const [config, productsResult] = await Promise.all([
     db.getSettings() as Promise<any>,
-    db.getProducts({ featured: true, perPage: 20 }),
+    db.getProducts({ perPage: 100 }),
   ]);
   const products = productsResult.items;
   const featuredProducts = products.filter(p => p.isFeatured && p.isActive && !p.isArchived);
   
   const getImg = (key: string, fallback: string) => config[key] || fallback;
-  const getProduct = (key: string) => {
-    const productId = config[key];
-    if (!productId) return null;
-    return products.find(p => p.id === productId && p.isActive && !p.isArchived) || null;
-  };
   
-  const hero1Product = getProduct('hero1Product');
-  const hero2Product = getProduct('hero2Product');
-  const hero1Image = config['hero1'] || hero1Product?.images?.[0]?.url || "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800";
-  const hero2Image = config['hero2'] || hero2Product?.images?.[0]?.url || "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop";
+  const getSlotConfig = (
+    num: number,
+    defaultImg: string,
+    defaultLink: string,
+    defaultLabel: string
+  ) => {
+    const imgKey = `hero${num}`;
+    const prodKey = `hero${num}Product`;
+    const linkKey = `hero${num}Link`;
+    const labelKey = `hero${num}Label`;
+
+    const productId = config[prodKey];
+    const product = productId ? products.find(p => p.id === productId && p.isActive && !p.isArchived) : null;
+
+    const image = config[imgKey] || product?.images?.[0]?.url || defaultImg;
+    const link = product ? `/products/${product.slug}` : (config[linkKey] || defaultLink);
+    const label = config[labelKey] || product?.name || defaultLabel;
+
+    return { image, link, label, product };
+  };
+
+  const hero1 = getSlotConfig(1, "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800", "", "Shop Now");
+  const hero2 = getSlotConfig(2, "https://images.unsplash.com/photo-1542295669297-4d352b042bca?q=80&w=2787&auto=format&fit=crop", "", "Shop Now");
+  const hero3 = getSlotConfig(3, "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop", "/collections/bags", "Shop bags");
+  const hero4 = getSlotConfig(4, "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "/collections/new", "Course in luxury");
+  const hero5 = getSlotConfig(5, "https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?q=80&w=3148&auto=format&fit=crop", "/collections/rose", "Romance");
+  const hero6 = getSlotConfig(6, "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=3270&auto=format&fit=crop", "/collections/editorial", "Cruise In Focus");
+  const hero7 = getSlotConfig(7, "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "/collections/dark", "Summer Of Romance");
+  const hero8 = getSlotConfig(8, "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "/collections/minimal", "Course Luxury");
+  const hero9 = getSlotConfig(9, "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2724&auto=format&fit=crop", "/collections/crochet", "Crochet Artifacts");
+  const hero10 = getSlotConfig(10, "https://images.unsplash.com/photo-1645292155425-1126d1a03d21?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "/collections/artifacts", "Art Pieces");
 
   // Shared sizes attribute for 2-column grid images
   const heroSizes = "(max-width: 768px) 100vw, 50vw";
@@ -47,11 +69,11 @@ export default async function Home() {
         {/* --- ROW 1 --- Full height hero */}
         <div className="grid grid-cols-1 md:grid-cols-2">
           <AnimatedGridCell index={0} className="relative h-[70vh] md:h-[90vh] w-full group">
-            {hero1Product ? (
-              <Link href={`/products/${hero1Product.slug}`} className="block w-full h-full">
+            {hero1.product ? (
+              <Link href={`/products/${hero1.product.slug}`} className="block w-full h-full">
                 <Image
-                  src={hero1Image}
-                  alt={hero1Product.name}
+                  src={hero1.image}
+                  alt={hero1.product.name}
                   fill
                   sizes={heroSizes}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -59,15 +81,31 @@ export default async function Home() {
                 />
                 <div className="absolute bottom-8 left-8 z-10">
                   <AnimatedLabel delay={0.5} className="text-cream text-xs uppercase tracking-widest font-bold mb-2">
-                    Shop Now
+                    {hero1.label}
                   </AnimatedLabel>
-                  <h3 className="text-cream text-2xl font-display">{hero1Product.name}</h3>
-                  <p className="text-cream/80">${hero1Product.price}</p>
+                  <h3 className="text-cream text-2xl font-display">{hero1.product.name}</h3>
+                  <p className="text-cream/80">${hero1.product.price}</p>
+                </div>
+              </Link>
+            ) : hero1.link ? (
+              <Link href={hero1.link} className="block w-full h-full">
+                <Image
+                  src={hero1.image}
+                  alt={hero1.label}
+                  fill
+                  sizes={heroSizes}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute bottom-8 left-8 z-10">
+                  <AnimatedLabel delay={0.5} className="text-cream text-xs uppercase tracking-widest font-bold mb-2">
+                    {hero1.label}
+                  </AnimatedLabel>
                 </div>
               </Link>
             ) : (
               <Image
-                src={hero1Image}
+                src={hero1.image}
                 alt="Campaign Image 1"
                 fill
                 sizes={heroSizes}
@@ -77,11 +115,11 @@ export default async function Home() {
             )}
           </AnimatedGridCell>
           <AnimatedGridCell index={1} className="relative h-[70vh] md:h-[90vh] w-full group">
-            {hero2Product ? (
-              <Link href={`/products/${hero2Product.slug}`} className="block w-full h-full">
+            {hero2.product ? (
+              <Link href={`/products/${hero2.product.slug}`} className="block w-full h-full">
                 <Image
-                  src={hero2Image}
-                  alt={hero2Product.name}
+                  src={hero2.image}
+                  alt={hero2.product.name}
                   fill
                   sizes={heroSizes}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -89,15 +127,31 @@ export default async function Home() {
                 />
                 <div className="absolute bottom-8 left-8 z-10">
                   <AnimatedLabel delay={0.7} className="text-cream text-xs uppercase tracking-widest font-bold mb-2">
-                    Shop Now
+                    {hero2.label}
                   </AnimatedLabel>
-                  <h3 className="text-cream text-2xl font-display">{hero2Product.name}</h3>
-                  <p className="text-cream/80">${hero2Product.price}</p>
+                  <h3 className="text-cream text-2xl font-display">{hero2.product.name}</h3>
+                  <p className="text-cream/80">${hero2.product.price}</p>
+                </div>
+              </Link>
+            ) : hero2.link ? (
+              <Link href={hero2.link} className="block w-full h-full">
+                <Image
+                  src={hero2.image}
+                  alt={hero2.label}
+                  fill
+                  sizes={heroSizes}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute bottom-8 left-8 z-10">
+                  <AnimatedLabel delay={0.7} className="text-cream text-xs uppercase tracking-widest font-bold mb-2">
+                    {hero2.label}
+                  </AnimatedLabel>
                 </div>
               </Link>
             ) : (
               <Image
-                src={hero2Image}
+                src={hero2.image}
                 alt="Campaign Image 2"
                 fill
                 sizes={heroSizes}
@@ -115,33 +169,37 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <AnimatedGridCell index={0} className="relative h-[55vh] md:h-[65vh] w-full group bg-[#881416]">
             <Image
-              src={getImg('hero3', "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?q=80&w=3149&auto=format&fit=crop")}
-              alt="Bags"
+              src={hero3.image}
+              alt={hero3.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover mix-blend-overlay opacity-60"
             />
-            <Link href="/collections/bags" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.2} className="absolute bottom-1/4 right-8 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
-                Shop bags
-              </AnimatedLabel>
-            </Link>
+            {hero3.link && (
+              <Link href={hero3.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.2} className="absolute bottom-1/4 right-8 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                  {hero3.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
           <AnimatedGridCell index={1} className="relative h-[55vh] md:h-[65vh] w-full group">
              <Image
-              src={getImg('hero4', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
-              alt="Sparkle"
+              src={hero4.image}
+              alt={hero4.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover"
             />
-            <Link href="/collections/new" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
-                Course in luxury
-              </AnimatedLabel>
-            </Link>
+            {hero4.link && (
+              <Link href={hero4.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                  {hero4.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
         </div>
 
@@ -149,33 +207,37 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <AnimatedGridCell index={0} className="relative h-[55vh] md:h-[65vh] w-full group">
             <Image
-              src={getImg('hero5', "https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?q=80&w=3148&auto=format&fit=crop")}
-              alt="Roses"
+              src={hero5.image}
+              alt={hero5.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover"
             />
-            <Link href="/collections/rose" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.2} className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold">
-                Romance
-              </AnimatedLabel>
-            </Link>
+            {hero5.link && (
+              <Link href={hero5.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.2} className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold">
+                  {hero5.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
           <AnimatedGridCell index={1} className="relative h-[55vh] md:h-[65vh] w-full group">
              <Image
-              src={getImg('hero6', "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=3270&auto=format&fit=crop")}
-              alt="Editorial"
+              src={hero6.image}
+              alt={hero6.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover"
             />
-            <Link href="/collections/editorial" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold">
-                Cruise In Focus
-              </AnimatedLabel>
-            </Link>
+            {hero6.link && (
+              <Link href={hero6.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold">
+                  {hero6.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
         </div>
         
@@ -183,33 +245,37 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <AnimatedGridCell index={0} className="relative h-[55vh] md:h-[65vh] w-full group bg-noir">
             <Image
-              src={getImg('hero7', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
-              alt="Black White Rose"
+              src={hero7.image}
+              alt={hero7.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover mix-blend-luminosity opacity-80"
             />
-            <Link href="/collections/dark" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.2} className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
-                Summer Of Romance
-              </AnimatedLabel>
-            </Link>
+            {hero7.link && (
+              <Link href={hero7.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.2} className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                  {hero7.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
           <AnimatedGridCell index={1} className="relative h-[55vh] md:h-[65vh] w-full group">
              <Image
-              src={getImg('hero8', "https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
-              alt="Minimal"
+              src={hero8.image}
+              alt={hero8.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover"
             />
-             <Link href="/collections/minimal" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
-                Course Luxury
-              </AnimatedLabel>
-            </Link>
+             {hero8.link && (
+              <Link href={hero8.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                  {hero8.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
         </div>
 
@@ -217,33 +283,37 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <AnimatedGridCell index={0} className="relative h-[55vh] md:h-[65vh] w-full group">
             <Image
-              src={getImg('hero9', "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2724&auto=format&fit=crop")}
-              alt="Crochet"
+              src={hero9.image}
+              alt={hero9.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover"
             />
-            <Link href="/collections/crochet" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.2} className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold text-right">
-                Crochet Artifacts
-              </AnimatedLabel>
-            </Link>
+            {hero9.link && (
+              <Link href={hero9.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.2} className="absolute top-1/2 right-8 -translate-y-1/2 text-[10px] md:text-xs text-noir uppercase tracking-widest font-bold text-right">
+                  {hero9.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
           <AnimatedGridCell index={1} className="relative h-[55vh] md:h-[65vh] w-full group bg-[#111]">
              <Image
-              src={getImg('hero10', "https://images.unsplash.com/photo-1645292155425-1126d1a03d21?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")}
-              alt="White Rose"
+              src={hero10.image}
+              alt={hero10.label}
               fill
               sizes={heroSizes}
               loading="lazy"
               className="object-cover opacity-80"
             />
-            <Link href="/collections/artifacts" className="absolute inset-0 z-10">
-              <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
-                Art Pieces
-              </AnimatedLabel>
-            </Link>
+            {hero10.link && (
+              <Link href={hero10.link} className="absolute inset-0 z-10">
+                <AnimatedLabel delay={0.3} className="absolute top-1/2 left-8 -translate-y-1/2 text-[10px] md:text-xs text-cream uppercase tracking-widest font-bold">
+                  {hero10.label}
+                </AnimatedLabel>
+              </Link>
+            )}
           </AnimatedGridCell>
         </div>
 

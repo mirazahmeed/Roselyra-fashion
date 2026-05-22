@@ -99,9 +99,10 @@ export const mongoMethods = {
 
 	async updateSettings(data: Partial<SiteSettings>) {
 		const { settings } = await getCollections();
+		const { _id, ...updateData } = data as any;
 		await settings.updateOne(
 			{ _id: new ObjectId("000000000000000000000001") },
-			{ $set: { ...data } },
+			{ $set: { ...updateData } },
 			{ upsert: true },
 		);
 		return this.getSettings();
