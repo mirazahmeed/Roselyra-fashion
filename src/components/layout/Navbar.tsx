@@ -29,7 +29,7 @@ export function Navbar() {
   const [categories, setCategories] = useState<Category[]>([]);
   const cartItemsCount = useCartStore((s) => s.totalItems());
   const { openCart } = useCartStore();
-  const { isNavOpen, toggleNav, closeNav } = useUIStore();
+  const { isNavOpen, toggleNav, closeNav, openSearch } = useUIStore();
   const { user, isAdmin } = useAuthStore();
 
   useEffect(() => {
@@ -115,9 +115,9 @@ export function Navbar() {
 
           {/* Right: Actions */}
           <div className="flex items-center gap-4 md:gap-6 text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium">
-            <button onClick={() => router.push("/search")} className="hover:opacity-60 transition-opacity flex items-center gap-2" aria-label="Search">
-              <Search className="w-4 h-4 hidden lg:block" strokeWidth={1.5} />
-              <span className="hidden lg:block">Search</span>
+            <button onClick={openSearch} className="hover:opacity-60 transition-opacity flex items-center gap-2" aria-label="Search">
+              <Search className="w-4 h-4" strokeWidth={1.5} />
+              <span className="hidden md:inline-block">Search</span>
             </button>
             <Link
               href={user && !isAdmin() ? "/account" : "/login"}
@@ -192,6 +192,16 @@ export function Navbar() {
                 <Link href="/wishlist" onClick={closeNav} className="hover:text-cream transition-colors">
                   Wishlist
                 </Link>
+                <button
+                  onClick={() => {
+                    closeNav();
+                    openSearch();
+                  }}
+                  className="hover:text-cream transition-colors flex items-center gap-1.5"
+                >
+                  <Search className="w-3.5 h-3.5" />
+                  Search
+                </button>
               </motion.div>
             </div>
           </motion.div>
