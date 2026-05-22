@@ -3,6 +3,7 @@ import { z } from "zod";
 import { mongo as db } from "@/lib/db";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
 import { authenticate, requireAuth } from "@/lib/apiMiddleware";
+import { getDb } from "@/lib/mongodb";
 
 const orderSchema = z.object({
 	items: z.array(
@@ -25,6 +26,7 @@ const orderSchema = z.object({
 	country: z.string().min(1),
 	shippingCost: z.number().default(0),
 	discount: z.number().default(0),
+	couponCode: z.string().optional().nullable(),
 });
 
 export async function POST(req: NextRequest) {
@@ -38,7 +40,66 @@ export async function POST(req: NextRequest) {
 		if (!parsed.success) return errorResponse(parsed.error.message);
 
 		const data = parsed.data;
-		const order = await db.createOrder({ ...data, userId: user?.userId });
+		let finalDiscount = data.discount || 0;
+
+		const mongoDb = await getDb();
+
+		// Secure Coupon Validation
+		if (data.couponCode) {
+			const coupons = mongoDb.collection("coupons");
+			const coupon = await coupons.findOne({
+				code: data.couponCode.toUpperCase(),
+				isActive: true,
+			});
+
+			if (!coupon) {
+				return errorResponse("Invalid or inactive coupon code", 400);
+			}
+
+			if (coupon.expiresAt && new Date(coupon.expiresAt) < new Date()) {
+				return errorResponse("This coupon has expired", 400);
+			}
+
+			if (coupon.maxUses && coupon.usedCount >= coupon.maxUses) {
+				return errorResponse("This coupon has already reached its usage limit", 400);
+			}
+
+			if (coupon.firstOrderOnly) {
+				const ordersCol = mongoDb.collection("orders");
+				const previousOrder = await ordersCol.findOne({
+					email: data.email,
+					status: { $nin: ["CANCELLED", "REFUNDED"] },
+				});
+
+				if (previousOrder) {
+					return errorResponse("This welcome coupon is only applicable on your first order.", 400);
+				}
+			}
+
+			// Server-side discount calculation to prevent frontend tampering
+			const subtotal = data.items.reduce(
+				(sum, item) => sum + item.price * item.quantity,
+				0,
+			);
+
+			if (coupon.discountPercent) {
+				finalDiscount = subtotal * (coupon.discountPercent / 100);
+			} else if (coupon.discountAmount) {
+				finalDiscount = coupon.discountAmount;
+			}
+
+			// Increment coupon usage
+			await coupons.updateOne(
+				{ _id: coupon._id },
+				{ $inc: { usedCount: 1 } }
+			);
+		}
+
+		const order = await db.createOrder({
+			...data,
+			discount: finalDiscount,
+			userId: user?.userId,
+		});
 
 		return successResponse(order, 201);
 	} catch (err) {
@@ -46,6 +107,7 @@ export async function POST(req: NextRequest) {
 		return errorResponse("Internal server error", 500);
 	}
 }
+
 
 export async function GET(req: NextRequest) {
 	try {

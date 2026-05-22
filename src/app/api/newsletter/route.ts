@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { z } from "zod";
 import { successResponse, errorResponse } from "@/lib/apiHelpers";
+import { getDb } from "@/lib/mongodb";
 
 const schema = z.object({ email: z.string().email() });
 
@@ -9,7 +10,27 @@ export async function POST(req: NextRequest) {
 		const body = await req.json();
 		const parsed = schema.safeParse(body);
 		if (!parsed.success) return errorResponse("Invalid email");
-		// TODO: integrate with Mailchimp/Klaviyo
+
+		const db = await getDb();
+		const subscribers = db.collection("newsletter_subscribers");
+
+		// Check for existing subscriber
+		const existing = await subscribers.findOne({
+			email: parsed.data.email,
+		});
+
+		if (existing) {
+			// Already subscribed — still count as success
+			return successResponse({ subscribed: true, existing: true });
+		}
+
+		await subscribers.insertOne({
+			email: parsed.data.email,
+			subscribedAt: new Date(),
+			source: "website",
+			isActive: true,
+		});
+
 		console.log("[NEWSLETTER] New subscriber:", parsed.data.email);
 		return successResponse({ subscribed: true });
 	} catch (err) {

@@ -35,6 +35,7 @@ export function ProductCard({
                   src={secondaryImage.url}
                   alt={secondaryImage.altText || product.name}
                   fill
+                  loading="lazy"
                   sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
                   className="object-cover absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"
                 />
@@ -50,7 +51,7 @@ export function ProductCard({
 
       <div className="flex flex-col items-center justify-center text-center">
         <Link href={`/products/${product.slug}`}>
-          <h3 className="text-[10px] md:text-xs uppercase tracking-widest text-noir mb-1 hover:text-rose transition-colors">
+          <h3 className="text-[10px] md:text-xs uppercase tracking-widest text-noir mb-1 hover:text-rose transition-colors line-draw">
             {product.name}
           </h3>
         </Link>

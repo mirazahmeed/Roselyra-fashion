@@ -52,7 +52,9 @@ export async function GET(
 			status: 200,
 			headers: {
 				"Content-Type": contentType,
+				"Content-Length": buffer.byteLength.toString(),
 				"Cache-Control": "public, max-age=31536000, immutable",
+				"ETag": `"${filename}"`,
 			},
 		});
 	} catch (err) {

@@ -8,6 +8,7 @@ import { useUIStore } from "@/store/uiStore";
 import { useAuthStore } from "@/store/authStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { MagneticButton } from "@/components/animations/MagneticButton";
 
 interface Category {
   id: string;
@@ -95,7 +96,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium hover:opacity-60 transition-opacity"
+                  className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium hover:opacity-60 transition-opacity line-draw"
                 >
                   {link.label}
                 </Link>
@@ -105,9 +106,11 @@ export function Navbar() {
 
           {/* Center: Logo — absolutely centered so it never overlaps nav items */}
           <div className="absolute left-1/2 -translate-x-1/2">
-            <Link href="/" className="text-sm md:text-base font-display tracking-[0.3em] uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
-              Roselyra
-            </Link>
+            <MagneticButton strength={0.15}>
+              <Link href="/" className="text-sm md:text-base font-display tracking-[0.3em] uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
+                Roselyra
+              </Link>
+            </MagneticButton>
           </div>
 
           {/* Right: Actions */}

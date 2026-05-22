@@ -68,6 +68,12 @@ export default function CheckoutPage() {
   const [transactionId, setTransactionId] = useState("");
   const [paidAmount, setPaidAmount] = useState(0);
 
+  // Coupon states
+  const [couponInput, setCouponInput] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<any>(null);
+  const [couponError, setCouponError] = useState("");
+  const [isCheckingCoupon, setIsCheckingCoupon] = useState(false);
+
   useEffect(() => {
     setMounted(true);
     fetch("/api/settings")
@@ -80,17 +86,70 @@ export default function CheckoutPage() {
       });
   }, []);
 
+  // Pre-fill Welcome Coupon if stored in localStorage
+  useEffect(() => {
+    if (mounted && user) {
+      const storedCoupon = localStorage.getItem("roselyra-first-order-coupon");
+      if (storedCoupon) {
+        setCouponInput(storedCoupon);
+      }
+    }
+  }, [mounted, user]);
+
   useEffect(() => {
     if (hydrated && !user) {
       router.push("/login?redirect=/checkout");
     }
   }, [hydrated, user, router]);
 
+  const handleApplyCoupon = async () => {
+    if (!couponInput.trim()) return;
+    setIsCheckingCoupon(true);
+    setCouponError("");
+    try {
+      const response = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: couponInput.trim(),
+          email: user?.email,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setAppliedCoupon(result.data);
+        setCouponError("");
+        toast.success(`Coupon applied: ${result.data.discountPercent}% Off!`);
+      } else {
+        setAppliedCoupon(null);
+        setCouponError(result.error || "Invalid coupon code");
+        toast.error(result.error || "Invalid coupon code");
+      }
+    } catch (error) {
+      setCouponError("Failed to check coupon code");
+      toast.error("Failed to check coupon code");
+    } finally {
+      setIsCheckingCoupon(false);
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponInput("");
+    setCouponError("");
+    toast.success("Coupon removed");
+  };
+
   const cartItems = items;
   const subtotalTotal = subtotal();
   const shipping = subtotalTotal >= 500 ? 0 : settings.deliveryCharge;
   const tax = subtotalTotal * 0.1;
-  const total = subtotalTotal + shipping + tax;
+  const discount = appliedCoupon
+    ? appliedCoupon.discountPercent
+      ? subtotalTotal * (appliedCoupon.discountPercent / 100)
+      : appliedCoupon.discountAmount
+    : 0;
+  const total = Math.max(0, subtotalTotal + shipping + tax - discount);
 
   const {
     register,
@@ -118,7 +177,8 @@ export default function CheckoutPage() {
       ...data,
       items: orderItems,
       shippingCost: shipping,
-      discount: 0,
+      discount: discount,
+      couponCode: appliedCoupon?.code || null,
       paymentType: paymentOption,
       userId: user?.id,
     };
@@ -163,6 +223,11 @@ export default function CheckoutPage() {
           });
         }
 
+        // Clean coupon storage if welcome offer was used
+        if (appliedCoupon?.firstOrderOnly) {
+          localStorage.removeItem("roselyra-first-order-coupon");
+        }
+
         clearCart();
         toast.success("Order placed successfully!");
         router.push(`/order/${order.orderNumber}`);
@@ -178,6 +243,7 @@ export default function CheckoutPage() {
   };
 
   const handlePaymentSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
 
     if (!senderNumber || !transactionId) {
@@ -504,11 +570,62 @@ export default function CheckoutPage() {
                   ))}
                 </div>
 
+                {/* Coupon Code Input */}
+                <div className="border-t pt-4 mb-6">
+                  <Label htmlFor="couponInput" className="text-xs uppercase tracking-wider text-muted-foreground mb-2 block">
+                    Promo Code / First Order Coupon
+                  </Label>
+                  {appliedCoupon ? (
+                    <div className="flex items-center justify-between bg-noir/5 border border-noir/10 px-3 py-2.5 rounded-sm">
+                      <span className="text-xs font-semibold tracking-widest text-noir uppercase">
+                        {appliedCoupon.code} ({appliedCoupon.discountPercent ? `${appliedCoupon.discountPercent}% OFF` : `$${appliedCoupon.discountAmount} OFF`})
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleRemoveCoupon}
+                        className="text-[10px] uppercase tracking-widest font-bold text-red-600 hover:text-red-800 transition-colors"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <Input
+                        id="couponInput"
+                        placeholder="Enter coupon code"
+                        value={couponInput}
+                        onChange={(e) => {
+                          setCouponInput(e.target.value);
+                          setCouponError("");
+                        }}
+                        className="flex-1 rounded-none border-noir/20 focus:border-noir h-10 text-xs tracking-wider"
+                      />
+                      <Button
+                        type="button"
+                        onClick={handleApplyCoupon}
+                        disabled={isCheckingCoupon || !couponInput.trim()}
+                        className="bg-noir text-cream rounded-none h-10 px-6 hover:bg-noir-soft text-xs uppercase tracking-widest disabled:opacity-50 transition-colors"
+                      >
+                        {isCheckingCoupon ? <Loader2 className="w-4 h-4 animate-spin" /> : "Apply"}
+                      </Button>
+                    </div>
+                  )}
+                  {couponError && (
+                    <p className="text-xs text-destructive mt-1.5 tracking-wide">{couponError}</p>
+                  )}
+                </div>
+
                 <div className="space-y-2 border-t pt-4">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Subtotal</span>
                     <span>${subtotalTotal.toFixed(2)}</span>
                   </div>
+                  {discount > 0 && (
+                    <div className="flex justify-between text-sm text-green-600 font-medium">
+                      <span>Discount ({appliedCoupon?.code})</span>
+                      <span>-${discount.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Shipping</span>
                     <span>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span>
@@ -540,6 +657,7 @@ export default function CheckoutPage() {
                     </>
                   )}
                 </div>
+
 
                 <Button
                   type="submit"

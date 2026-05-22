@@ -17,10 +17,11 @@ import type {
 	PaymentStatus,
 } from "@/types";
 
-let mongoDb: Db | null = null;
+const globalForDb = globalThis as unknown as { _dbCollections: Db | null };
 
 async function getCollections() {
-	if (!mongoDb) mongoDb = await getDb();
+	if (!globalForDb._dbCollections) globalForDb._dbCollections = await getDb();
+	const mongoDb = globalForDb._dbCollections;
 	return {
 		products: mongoDb.collection<Product>("products"),
 		categories: mongoDb.collection<Category>("categories"),
@@ -178,18 +179,28 @@ export const mongoMethods = {
 			products.countDocuments(filter),
 		]);
 
+		// Batch-load categories and collections to avoid N+1 queries
+		const categoryIds = Array.from(new Set(items.map(i => i.categoryId).filter(Boolean))) as string[];
+		const collectionIds = Array.from(new Set(items.map(i => i.collectionId).filter(Boolean))) as string[];
+
+		const [catDocs, colDocs] = await Promise.all([
+			categoryIds.length > 0
+				? categories.find({ _id: { $in: categoryIds.map(id => new ObjectId(id)) } }).toArray()
+				: Promise.resolve([]),
+			collectionIds.length > 0
+				? collections.find({ _id: { $in: collectionIds.map(id => new ObjectId(id)) } }).toArray()
+				: Promise.resolve([]),
+		]);
+
+		const catMap = new Map(catDocs.map(c => [c._id!.toString(), c]));
+		const colMap = new Map(colDocs.map(c => [c._id!.toString(), c]));
+
 		for (const item of items) {
 			if (item.categoryId) {
-				item.category =
-					(await categories.findOne({
-						_id: new ObjectId(item.categoryId),
-					})) || undefined;
+				item.category = catMap.get(item.categoryId) || undefined;
 			}
 			if (item.collectionId) {
-				item.collection =
-					(await collections.findOne({
-						_id: new ObjectId(item.collectionId),
-					})) || undefined;
+				item.collection = colMap.get(item.collectionId) || undefined;
 			}
 		}
 

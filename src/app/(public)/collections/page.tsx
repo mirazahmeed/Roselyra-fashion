@@ -4,6 +4,8 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { PageTransition } from "@/components/animations/PageTransition";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 
+export const revalidate = 60;
+
 export default async function CollectionsPage() {
   const collections = await mongo.getCollections({ featured: false, includeInactive: false });
   const collectionsWithProducts = await Promise.all(

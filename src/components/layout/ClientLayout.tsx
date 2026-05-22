@@ -7,6 +7,7 @@ import { CartDrawer } from "@/components/ui/CartDrawer";
 import { LenisProvider } from "@/components/animations/LenisProvider";
 import { Toaster } from "react-hot-toast";
 import { SearchModal } from "@/components/ui/SearchModal";
+import { WelcomeOfferPopup } from "@/components/ui/WelcomeOfferPopup";
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -19,6 +20,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       {!isAdminRoute && <Footer />}
       <CartDrawer />
       <SearchModal />
+      {!isAdminRoute && <WelcomeOfferPopup discountPercent={10} />}
       <Toaster
         position="top-right"
         toastOptions={{
@@ -35,3 +37,4 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
     </LenisProvider>
   );
 }
+

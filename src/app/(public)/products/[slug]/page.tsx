@@ -3,12 +3,19 @@ import ProductDetailClient from "./ProductDetailClient";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
+export const revalidate = 60;
+
+// Cache the product fetch so generateMetadata and the page share it
+async function getProduct(slug: string) {
+  return mongo.getProductBySlug(slug);
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const product = await mongo.getProductBySlug(params.slug);
+  const product = await getProduct(params.slug);
 
   if (!product) return {};
 
@@ -28,7 +35,7 @@ export default async function ProductPage({
 }: {
   params: { slug: string };
 }) {
-  const product = await mongo.getProductBySlug(params.slug);
+  const product = await getProduct(params.slug);
 
   if (!product || !product.isActive) {
     notFound();

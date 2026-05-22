@@ -87,6 +87,10 @@ module.exports = {
 					"scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
 				"scale-out":
 					"scaleOut 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+				marquee: "marquee linear infinite",
+				"marquee-reverse": "marquee-reverse linear infinite",
+				float: "float 6s ease-in-out infinite",
+				"glow-pulse": "glowPulse 3s ease-in-out infinite",
 			},
 			keyframes: {
 				fadeIn: {
@@ -112,6 +116,22 @@ module.exports = {
 				scaleOut: {
 					"0%": { opacity: "0", transform: "scale(1.05)" },
 					"100%": { opacity: "1", transform: "scale(1)" },
+				},
+				marquee: {
+					"0%": { transform: "translateX(0)" },
+					"100%": { transform: "translateX(-50%)" },
+				},
+				"marquee-reverse": {
+					"0%": { transform: "translateX(-50%)" },
+					"100%": { transform: "translateX(0)" },
+				},
+				float: {
+					"0%, 100%": { transform: "translateY(0)" },
+					"50%": { transform: "translateY(-10px)" },
+				},
+				glowPulse: {
+					"0%, 100%": { opacity: "0.4" },
+					"50%": { opacity: "0.8" },
 				},
 			},
 			transitionTimingFunction: {

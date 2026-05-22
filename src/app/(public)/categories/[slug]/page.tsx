@@ -5,6 +5,8 @@ import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {
