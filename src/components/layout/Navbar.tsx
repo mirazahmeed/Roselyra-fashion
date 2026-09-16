@@ -81,58 +81,73 @@ export function Navbar() {
           scrolled ? "bg-cream/90 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"
         } ${isLight && !scrolled ? "text-cream" : "text-noir"}`}
       >
-        <div className="container mx-auto px-4 md:px-8 flex items-center justify-between relative">
+        <div className="container mx-auto px-4 md:px-8 grid grid-cols-[1fr_auto_1fr] items-center">
           {/* Left: Mobile Menu Toggle / Desktop Links */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-start min-w-0 pr-4">
             <button
               onClick={toggleNav}
-              className="lg:hidden flex items-center gap-2 text-sm uppercase tracking-widest"
+              className="xl:hidden flex items-center gap-2 text-sm uppercase tracking-widest hover:opacity-60 transition-opacity flex-shrink-0"
               aria-label="Toggle Menu"
             >
               <Menu className="w-5 h-5" strokeWidth={1.5} />
             </button>
-            <nav className="hidden lg:flex items-center gap-6">
+            <nav className="hidden xl:flex items-center gap-4 2xl:gap-6 min-w-0">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium hover:opacity-60 transition-opacity line-draw"
+                  className="text-[10px] 2xl:text-xs uppercase tracking-[0.15em] 2xl:tracking-[0.2em] font-medium hover:opacity-60 transition-opacity line-draw whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
+            {/* Intermediate screen (lg: 1024px-1279px): show primary links alongside menu button */}
+            <nav className="hidden lg:flex xl:hidden items-center gap-4 ml-4 min-w-0">
+              <Link
+                href="/collections"
+                className="text-[10px] uppercase tracking-[0.15em] font-medium hover:opacity-60 transition-opacity line-draw whitespace-nowrap"
+              >
+                Collections
+              </Link>
+              <Link
+                href="/shop"
+                className="text-[10px] uppercase tracking-[0.15em] font-medium hover:opacity-60 transition-opacity line-draw whitespace-nowrap"
+              >
+                Shop
+              </Link>
+            </nav>
           </div>
 
-          {/* Center: Logo — absolutely centered so it never overlaps nav items */}
-          <div className="absolute left-1/2 -translate-x-1/2">
+          {/* Center: Logo — in its own grid column, guaranteed never to overlap */}
+          <div className="flex items-center justify-center px-2 sm:px-4">
             <MagneticButton strength={0.15}>
-              <Link href="/" className="text-sm md:text-base font-display tracking-[0.3em] uppercase hover:opacity-60 transition-opacity whitespace-nowrap">
+              <Link href="/" className="text-sm md:text-base font-display tracking-[0.3em] uppercase hover:opacity-60 transition-opacity whitespace-nowrap text-center block">
                 Roselyra
               </Link>
             </MagneticButton>
           </div>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-4 md:gap-6 text-[10px] md:text-xs uppercase tracking-[0.2em] font-medium">
-            <button onClick={openSearch} className="hover:opacity-60 transition-opacity flex items-center gap-2" aria-label="Search">
+          <div className="flex items-center justify-end gap-3 sm:gap-4 md:gap-6 text-[10px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] font-medium min-w-0 pl-4">
+            <button onClick={openSearch} className="hover:opacity-60 transition-opacity flex items-center gap-1.5 md:gap-2 flex-shrink-0" aria-label="Search">
               <Search className="w-4 h-4" strokeWidth={1.5} />
               <span className="hidden md:inline-block">Search</span>
             </button>
             <Link
               href={user && !isAdmin() ? "/account" : "/login"}
-              className="hover:opacity-60 transition-opacity whitespace-nowrap"
+              className="hover:opacity-60 transition-opacity whitespace-nowrap flex-shrink-0"
               aria-label="Account"
             >
               {user && !isAdmin() ? "Account" : "Sign In"}
             </Link>
             <button
               onClick={openCart}
-              className="relative hover:opacity-60 transition-opacity flex items-center gap-2"
+              className="relative hover:opacity-60 transition-opacity flex items-center gap-1.5 md:gap-2 flex-shrink-0"
               aria-label="Cart"
             >
               <ShoppingBag className="w-4 h-4 hidden lg:block" strokeWidth={1.5} />
-              <span>Bag {mounted && cartItemsCount > 0 ? `(${cartItemsCount})` : ""}</span>
+              <span className="whitespace-nowrap">Bag {mounted && cartItemsCount > 0 ? `(${cartItemsCount})` : ""}</span>
             </button>
           </div>
         </div>

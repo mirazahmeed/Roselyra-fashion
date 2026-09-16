@@ -51,7 +51,25 @@ const defaultSettings: SiteSettings = {
 };
 
 function getIdFilter(id: string) {
-	return /^[0-9a-f]{24}$/i.test(id) ? { _id: new ObjectId(id) } : { id };
+	return /^[0-9a-f]{24}$/i.test(id)
+		? { $or: [{ _id: new ObjectId(id) }, { id }] }
+		: { id };
+}
+
+function getIdsFilter(ids: string[]) {
+	const objectIds: ObjectId[] = [];
+	const stringIds: string[] = [];
+	for (const id of ids) {
+		if (/^[0-9a-f]{24}$/i.test(id)) {
+			objectIds.push(new ObjectId(id));
+		}
+		stringIds.push(id);
+	}
+	const clauses: any[] = [];
+	if (stringIds.length > 0) clauses.push({ id: { $in: stringIds } });
+	if (objectIds.length > 0) clauses.push({ _id: { $in: objectIds } });
+	if (clauses.length === 0) return { id: "__none__" };
+	return clauses.length === 1 ? clauses[0] : { $or: clauses };
 }
 
 export const mongoMethods = {
@@ -129,11 +147,17 @@ export const mongoMethods = {
 
 		if (options.category) {
 			const cat = await categories.findOne({ slug: options.category });
-			if (cat) filter.categoryId = cat._id?.toString();
+			if (cat) {
+				const ids = [cat.id, cat._id?.toString()].filter(Boolean);
+				filter.categoryId = ids.length === 1 ? ids[0] : { $in: ids };
+			}
 		}
 		if (options.collection) {
 			const col = await collections.findOne({ slug: options.collection });
-			if (col) filter.collectionId = col._id?.toString();
+			if (col) {
+				const ids = [col.id, col._id?.toString()].filter(Boolean);
+				filter.collectionId = ids.length === 1 ? ids[0] : { $in: ids };
+			}
 		}
 		if (options.featured) filter.isFeatured = true;
 		if (options.search) {
@@ -186,15 +210,24 @@ export const mongoMethods = {
 
 		const [catDocs, colDocs] = await Promise.all([
 			categoryIds.length > 0
-				? categories.find({ _id: { $in: categoryIds.map(id => new ObjectId(id)) } }).toArray()
+				? categories.find(getIdsFilter(categoryIds) as any).toArray()
 				: Promise.resolve([]),
 			collectionIds.length > 0
-				? collections.find({ _id: { $in: collectionIds.map(id => new ObjectId(id)) } }).toArray()
+				? collections.find(getIdsFilter(collectionIds) as any).toArray()
 				: Promise.resolve([]),
 		]);
 
-		const catMap = new Map(catDocs.map(c => [c._id!.toString(), c]));
-		const colMap = new Map(colDocs.map(c => [c._id!.toString(), c]));
+		const catMap = new Map<string, Category>();
+		for (const c of catDocs) {
+			if (c.id) catMap.set(c.id, c);
+			if (c._id) catMap.set(c._id.toString(), c);
+		}
+
+		const colMap = new Map<string, CollectionType>();
+		for (const c of colDocs) {
+			if (c.id) colMap.set(c.id, c);
+			if (c._id) colMap.set(c._id.toString(), c);
+		}
 
 		for (const item of items) {
 			if (item.categoryId) {
@@ -219,15 +252,11 @@ export const mongoMethods = {
 		const product = await products.findOne({ slug, isActive: true });
 		if (product && product.categoryId) {
 			product.category =
-				(await categories.findOne({
-					_id: new ObjectId(product.categoryId),
-				})) || undefined;
+				(await categories.findOne(getIdFilter(product.categoryId) as any)) || undefined;
 		}
 		if (product && product.collectionId) {
 			product.collection =
-				(await collections.findOne({
-					_id: new ObjectId(product.collectionId),
-				})) || undefined;
+				(await collections.findOne(getIdFilter(product.collectionId) as any)) || undefined;
 		}
 		return product;
 	},
@@ -237,15 +266,11 @@ export const mongoMethods = {
 		const product = await products.findOne(getIdFilter(id) as any);
 		if (product && product.categoryId) {
 			product.category =
-				(await categories.findOne({
-					_id: new ObjectId(product.categoryId),
-				})) || undefined;
+				(await categories.findOne(getIdFilter(product.categoryId) as any)) || undefined;
 		}
 		if (product && product.collectionId) {
 			product.collection =
-				(await collections.findOne({
-					_id: new ObjectId(product.collectionId),
-				})) || undefined;
+				(await collections.findOne(getIdFilter(product.collectionId) as any)) || undefined;
 		}
 		return product;
 	},
@@ -477,13 +502,11 @@ export const mongoMethods = {
 
 		const category =
 			data.categoryId ?
-				await categories.findOne({ _id: new ObjectId(data.categoryId) })
+				await categories.findOne(getIdFilter(data.categoryId) as any)
 			:	null;
 		const collection =
 			data.collectionId ?
-				await collections.findOne({
-					_id: new ObjectId(data.collectionId),
-				})
+				await collections.findOne(getIdFilter(data.collectionId) as any)
 			:	null;
 
 		const count = await products.countDocuments();

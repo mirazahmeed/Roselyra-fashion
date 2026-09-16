@@ -2,153 +2,93 @@
   "products": [
     {
       "id": "prod_001",
-      "name": "Medium Rose Hobo Bag",
-      "slug": "medium-rose-hobo-bag",
-      "description": "A stunning hobo bag crafted from premium Italian leather with rose gold hardware. Features a spacious interior with multiple pockets.",
-      "longDesc": "This Medium Rose Hobo Bag is the epitome of understated luxury. Crafted from supple Italian leather, it features a unique rose silhouette that sets it apart. The bag includes a detachable shoulder strap, interior zip pocket, and magnetic closure. Perfect for day-to-night transitions.",
-      "price": 485,
-      "comparePrice": 650,
-      "sku": "BAG-ROSE-001",
-      "stock": 15,
+      "name": "Oversized Shearling Suede Coat",
+      "slug": "oversized-shearling-suede-coat",
+      "description": "An iconic winter investment piece crafted from heavy lambskin suede with plush, cloud-soft shearling lining and wide lapels.",
+      "longDesc": "Designed for timeless elegance and thermal protection, the Oversized Shearling Suede Coat showcases exquisite artisan craftsmanship. Built with double-faced Spanish shearling, antiqued brass hardware, and welt pockets, this coat offers effortless drama draped over evening wear or paired with minimalist tailoring.",
+      "price": 890,
+      "comparePrice": 1200,
+      "sku": "OUT-SHEAR-001",
+      "stock": 18,
       "isFeatured": true,
-      "isArchived": true,
-      "isActive": false,
+      "isArchived": false,
+      "isActive": true,
       "order": 1,
-      "categoryId": "cat_002",
-      "collectionId": "col_002",
+      "categoryId": "cat_005",
+      "collectionId": "col_003",
       "category": {
-        "id": "cat_002",
-        "name": "Bags",
-        "slug": "bags",
-        "description": "Luxury handbags and accessories",
-        "imageUrl": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
         "parentId": null,
-        "order": 2,
+        "order": 5,
         "isActive": true
       },
       "collection": {
-        "id": "col_002",
-        "name": "Rose Collection",
-        "slug": "rose",
-        "description": "Inspired by the beauty of roses",
-        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "id": "col_003",
+        "name": "Editorial",
+        "slug": "editorial",
+        "description": "Bold statements for the fearless",
+        "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
         "videoUrl": null,
-        "season": "Spring",
-        "year": 2026,
+        "season": "Fall",
+        "year": 2025,
         "isFeatured": true,
         "isActive": true,
-        "order": 2
+        "order": 3
       },
       "images": [
         {
           "id": "img_001_1",
-          "url": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
-          "altText": "Rose Hobo Bag Front",
+          "url": "/uploads/products/oversized-shearling-suede-coat/coat-front.jpg",
+          "altText": "Oversized Shearling Suede Coat Front View",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 2718,
+          "height": 3397
         },
         {
           "id": "img_001_2",
-          "url": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800",
-          "altText": "Rose Hobo Bag Side",
+          "url": "/uploads/products/oversized-shearling-suede-coat/coat-side.jpg",
+          "altText": "Oversized Shearling Suede Coat Side Profile",
           "order": 1,
           "isPrimary": false,
-          "width": 800,
-          "height": 1000
+          "width": 2653,
+          "height": 3317
         },
         {
           "id": "img_001_3",
-          "url": "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800",
-          "altText": "Rose Hobo Bag Detail",
+          "url": "/uploads/products/oversized-shearling-suede-coat/coat-lifestyle.jpg",
+          "altText": "Oversized Shearling Suede Coat Lifestyle Editorial",
           "order": 2,
           "isPrimary": false,
-          "width": 800,
-          "height": 1000
-        }
-      ],
-      "material": "100% Italian Leather",
-      "fit": "Regular",
-      "care": "Store in dust bag. Clean by professional.",
-      "sizes": [
-        "One Size"
-      ],
-      "colors": [
-        "Rose",
-        "Black",
-        "Tan"
-      ],
-      "tags": [
-        "bags",
-        "featured",
-        "new"
-      ],
-      "createdAt": "2026-01-15T00:00:00.000Z",
-      "updatedAt": "2026-01-15T00:00:00.000Z"
-    },
-    {
-      "id": "prod_002",
-      "name": "Long Sleeve Mini Dress",
-      "slug": "long-sleeve-mini-dress",
-      "description": "An elegant mini dress with long sleeves and a flattering silhouette. Perfect for both day and evening wear.",
-      "longDesc": "This Long Sleeve Mini Dress features a sophisticated mock neckline and bodycon fit. The stretch fabric ensures comfort while maintaining structure. Available in classic black and romantic blush pink.",
-      "price": 295,
-      "comparePrice": null,
-      "sku": "DRS-MINI-002",
-      "stock": 23,
-      "isFeatured": true,
-      "isArchived": false,
-      "isActive": true,
-      "order": 2,
-      "categoryId": "cat_001",
-      "collectionId": "col_001",
-      "category": {
-        "id": "cat_001",
-        "name": "Dresses",
-        "slug": "dresses",
-        "description": "Elegant dresses for every occasion",
-        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
-        "parentId": null,
-        "order": 1,
-        "isActive": true
-      },
-      "collection": {
-        "id": "col_001",
-        "name": "New Arrivals",
-        "slug": "new",
-        "description": "The latest additions to our collection",
-        "imageUrl": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200",
-        "videoUrl": null,
-        "season": "Spring",
-        "year": 2026,
-        "isFeatured": true,
-        "isActive": true,
-        "order": 1
-      },
-      "images": [
-        {
-          "id": "img_002_1",
-          "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800",
-          "altText": "Long Sleeve Mini Dress",
-          "order": 0,
-          "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 2445,
+          "height": 3056
         },
         {
-          "id": "img_002_2",
-          "url": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
-          "altText": "Long Sleeve Mini Dress Back",
-          "order": 1,
+          "id": "img_001_4",
+          "url": "/uploads/products/oversized-shearling-suede-coat/coat-collar-detail.jpg",
+          "altText": "Oversized Shearling Suede Coat Collar & Texture Detail",
+          "order": 3,
           "isPrimary": false,
-          "width": 800,
-          "height": 1000
+          "width": 3002,
+          "height": 3752
+        },
+        {
+          "id": "img_001_5",
+          "url": "/uploads/products/oversized-shearling-suede-coat/coat-editorial.jpg",
+          "altText": "Oversized Shearling Suede Coat Full Lookbook",
+          "order": 4,
+          "isPrimary": false,
+          "width": 2776,
+          "height": 3470
         }
       ],
-      "material": "95% Polyester, 5% Elastane",
-      "fit": "Slim",
-      "care": "Dry clean only",
+      "material": "100% Genuine Lambskin Suede with Plush Shearling Lining",
+      "fit": "Relaxed oversized silhouette, drop shoulders, boxy drape",
+      "care": "Specialist leather and suede dry clean only",
       "sizes": [
         "XS",
         "S",
@@ -157,41 +97,275 @@
         "XL"
       ],
       "colors": [
-        "Black",
-        "Blush Pink"
+        "Espresso Noir",
+        "Warm Camel"
       ],
       "tags": [
-        "dresses",
-        "new",
-        "featured"
+        "outerwear",
+        "shearling",
+        "suede",
+        "winter",
+        "luxury",
+        "editorial"
       ],
-      "createdAt": "2026-01-10T00:00:00.000Z",
-      "updatedAt": "2026-01-10T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_001_1",
+          "color": "Espresso Noir",
+          "size": "XS",
+          "sku": "OUT-SHEAR-001-ESP-XS",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_2",
+          "color": "Espresso Noir",
+          "size": "S",
+          "sku": "OUT-SHEAR-001-ESP-S",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_3",
+          "color": "Espresso Noir",
+          "size": "M",
+          "sku": "OUT-SHEAR-001-ESP-M",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_4",
+          "color": "Espresso Noir",
+          "size": "L",
+          "sku": "OUT-SHEAR-001-ESP-L",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_5",
+          "color": "Espresso Noir",
+          "size": "XL",
+          "sku": "OUT-SHEAR-001-ESP-XL",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_6",
+          "color": "Warm Camel",
+          "size": "XS",
+          "sku": "OUT-SHEAR-001-WAR-XS",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_7",
+          "color": "Warm Camel",
+          "size": "S",
+          "sku": "OUT-SHEAR-001-WAR-S",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_8",
+          "color": "Warm Camel",
+          "size": "M",
+          "sku": "OUT-SHEAR-001-WAR-M",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_9",
+          "color": "Warm Camel",
+          "size": "L",
+          "sku": "OUT-SHEAR-001-WAR-L",
+          "stock": 3,
+          "price": 890
+        },
+        {
+          "id": "var_001_10",
+          "color": "Warm Camel",
+          "size": "XL",
+          "sku": "OUT-SHEAR-001-WAR-XL",
+          "stock": 3,
+          "price": 890
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_002",
+      "name": "Artisanal Patchwork Denim Puffer",
+      "slug": "artisanal-patchwork-denim-puffer",
+      "description": "A limited-run statement jacket fusing reconstructed selvedge denim panels with insulated loft down and a plush fleece collar.",
+      "longDesc": "Each Patchwork Denim Puffer is individually handcrafted from tonal indigo denim swatches, ensuring each piece is one-of-a-kind. Filled with lightweight high-fill-power recycled down and accented with a cozy faux-shearling collar and horn buttons.",
+      "price": 560,
+      "comparePrice": 720,
+      "sku": "OUT-DENIM-002",
+      "stock": 12,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 2,
+      "categoryId": "cat_005",
+      "collectionId": "col_007",
+      "category": {
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+        "parentId": null,
+        "order": 5,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_007",
+        "name": "Art Pieces",
+        "slug": "artifacts",
+        "description": "Wearable art",
+        "imageUrl": "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 7
+      },
+      "images": [
+        {
+          "id": "img_002_1",
+          "url": "/uploads/products/artisanal-patchwork-denim-puffer/puffer-lookbook.jpg",
+          "altText": "Patchwork Denim Puffer Full Outfit Editorial",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4160,
+          "height": 6240
+        },
+        {
+          "id": "img_002_2",
+          "url": "/uploads/products/artisanal-patchwork-denim-puffer/puffer-detail.jpg",
+          "altText": "Patchwork Denim Puffer Fabric & Shearling Close-up",
+          "order": 1,
+          "isPrimary": false,
+          "width": 4160,
+          "height": 6240
+        }
+      ],
+      "material": "100% Upcycled Selvedge Denim, Recycled Goose Down Fill, Faux Shearling Trim",
+      "fit": "Contemporary cropped cocoon fit with adjustable bungee hem",
+      "care": "Dry clean only",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Indigo Patchwork",
+        "Washed Slate"
+      ],
+      "tags": [
+        "outerwear",
+        "denim",
+        "patchwork",
+        "puffer",
+        "art-pieces",
+        "limited-edition"
+      ],
+      "variants": [
+        {
+          "id": "var_002_1",
+          "color": "Indigo Patchwork",
+          "size": "S",
+          "sku": "OUT-DENIM-002-IND-S",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_2",
+          "color": "Indigo Patchwork",
+          "size": "M",
+          "sku": "OUT-DENIM-002-IND-M",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_3",
+          "color": "Indigo Patchwork",
+          "size": "L",
+          "sku": "OUT-DENIM-002-IND-L",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_4",
+          "color": "Indigo Patchwork",
+          "size": "XL",
+          "sku": "OUT-DENIM-002-IND-XL",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_5",
+          "color": "Washed Slate",
+          "size": "S",
+          "sku": "OUT-DENIM-002-WAS-S",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_6",
+          "color": "Washed Slate",
+          "size": "M",
+          "sku": "OUT-DENIM-002-WAS-M",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_7",
+          "color": "Washed Slate",
+          "size": "L",
+          "sku": "OUT-DENIM-002-WAS-L",
+          "stock": 3,
+          "price": 560
+        },
+        {
+          "id": "var_002_8",
+          "color": "Washed Slate",
+          "size": "XL",
+          "sku": "OUT-DENIM-002-WAS-XL",
+          "stock": 3,
+          "price": 560
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
       "id": "prod_003",
-      "name": "Red Rose Heels",
-      "slug": "red-rose-heels",
-      "description": "Stunning red heels with rose petal details. These statement shoes are perfect for special occasions.",
-      "longDesc": "These Red Rose Heels feature手工玫瑰装饰 at the toe, crafted from premium satin. The 4-inch stiletto heel provides height while maintaining comfort with cushioned insole.",
-      "price": 425,
-      "comparePrice": 550,
-      "sku": "SHO-HEEL-003",
-      "stock": 8,
-      "isFeatured": false,
+      "name": "Bloom Hand-Embroidered Tunic",
+      "slug": "bloom-hand-embroidered-tunic",
+      "description": "Meticulously hand-embroidered floral motifs bloom along the cuffs and yoke of this airy, tailored organic cotton tunic.",
+      "longDesc": "Celebrating heritage embroidery arts, the Bloom Tunic requires over 24 hours of meticulous hand needlework per garment. Crafted from crisp handwoven organic cotton poplin, it features billowing sleeves, mother-of-pearl buttons, and intricate botanical filigree.",
+      "price": 340,
+      "comparePrice": 450,
+      "sku": "TOP-BLOOM-003",
+      "stock": 24,
+      "isFeatured": true,
       "isArchived": false,
       "isActive": true,
       "order": 3,
-      "categoryId": "cat_003",
+      "categoryId": "cat_004",
       "collectionId": "col_002",
       "category": {
-        "id": "cat_003",
-        "name": "Shoes",
-        "slug": "shoes",
-        "description": "Designer heels, boots, and more",
-        "imageUrl": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800",
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
         "parentId": null,
-        "order": 3,
+        "order": 4,
         "isActive": true
       },
       "collection": {
@@ -209,53 +383,266 @@
       },
       "images": [
         {
-          "id": "img_1772269073145_0",
-          "url": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800",
-          "altText": null,
+          "id": "img_003_1",
+          "url": "/uploads/products/bloom-hand-embroidered-tunic/tunic-front.jpg",
+          "altText": "Bloom Hand-Embroidered Tunic Front View",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 3090,
+          "height": 4120
+        },
+        {
+          "id": "img_003_2",
+          "url": "/uploads/products/bloom-hand-embroidered-tunic/tunic-sleeve-detail.jpg",
+          "altText": "Bloom Hand-Embroidered Tunic Sleeve Embroidery Close-up",
+          "order": 1,
+          "isPrimary": false,
+          "width": 3451,
+          "height": 4602
         }
       ],
-      "material": "Satin Upper, Leather Sole",
-      "fit": "True to Size",
-      "care": "Store in box. Use shoe trees.",
+      "material": "100% Organic Handwoven Cotton with Silk Thread Embroidery",
+      "fit": "Straight tunic cut with gathered cuff statement sleeves",
+      "care": "Gentle cold hand wash or eco dry clean",
       "sizes": [
-        "36",
-        "37",
-        "38",
-        "39",
-        "40",
-        "41"
+        "XS",
+        "S",
+        "M",
+        "L"
       ],
       "colors": [
-        "Red",
-        "Nude",
-        "Black"
+        "Crimson Noir",
+        "Ivory Rose"
       ],
       "tags": [
-        "shoes",
-        "heels",
-        "featured"
+        "tops",
+        "embroidered",
+        "artisan",
+        "cotton",
+        "rose-collection"
       ],
-      "createdAt": "2026-01-08T00:00:00.000Z",
-      "updatedAt": "2026-02-28T08:57:53.145Z"
+      "variants": [
+        {
+          "id": "var_003_1",
+          "color": "Crimson Noir",
+          "size": "XS",
+          "sku": "TOP-BLOOM-003-CRI-XS",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_2",
+          "color": "Crimson Noir",
+          "size": "S",
+          "sku": "TOP-BLOOM-003-CRI-S",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_3",
+          "color": "Crimson Noir",
+          "size": "M",
+          "sku": "TOP-BLOOM-003-CRI-M",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_4",
+          "color": "Crimson Noir",
+          "size": "L",
+          "sku": "TOP-BLOOM-003-CRI-L",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_5",
+          "color": "Ivory Rose",
+          "size": "XS",
+          "sku": "TOP-BLOOM-003-IVO-XS",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_6",
+          "color": "Ivory Rose",
+          "size": "S",
+          "sku": "TOP-BLOOM-003-IVO-S",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_7",
+          "color": "Ivory Rose",
+          "size": "M",
+          "sku": "TOP-BLOOM-003-IVO-M",
+          "stock": 5,
+          "price": 340
+        },
+        {
+          "id": "var_003_8",
+          "color": "Ivory Rose",
+          "size": "L",
+          "sku": "TOP-BLOOM-003-IVO-L",
+          "stock": 5,
+          "price": 340
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
       "id": "prod_004",
-      "name": "Silk Blouse",
-      "slug": "silk-blouse",
-      "description": "Luxurious silk blouse with a relaxed fit. Perfect for layering or wearing alone.",
-      "longDesc": "This Silk Blouse is made from 100% mulberry silk with a beautiful drape. Features mother-of-pearl buttons and French seams for a polished finish.",
-      "price": 345,
-      "comparePrice": null,
-      "sku": "TOP-SILK-004",
-      "stock": 18,
+      "name": "Ethereal Botanical Wide-Leg Trouser",
+      "slug": "ethereal-botanical-wide-leg-trouser",
+      "description": "Flowing wide-leg trousers featuring an expressive botanical print inspired by archival flora illustrations.",
+      "longDesc": "Tailored to move with grace, these wide-leg trousers feature a fluid drape and comfortable high-rise silhouette. Pair with the matching Bloom Tunic for a cohesive high-fashion statement.",
+      "price": 290,
+      "comparePrice": 380,
+      "sku": "BTM-ROSE-004",
+      "stock": 20,
       "isFeatured": false,
       "isArchived": false,
       "isActive": true,
       "order": 4,
+      "categoryId": "cat_004",
+      "collectionId": "col_002",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_002",
+        "name": "Rose Collection",
+        "slug": "rose",
+        "description": "Inspired by the beauty of roses",
+        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 2
+      },
+      "images": [
+        {
+          "id": "img_004_1",
+          "url": "/uploads/products/ethereal-botanical-wide-leg-trouser/trouser-lookbook.jpg",
+          "altText": "Ethereal Botanical Wide-Leg Trouser Editorial Look",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3000,
+          "height": 4000
+        }
+      ],
+      "material": "100% Pure Viscose Crepe with Archival Flora Print",
+      "fit": "High-rise waist, flowing wide-leg silhouette with front pleats",
+      "care": "Dry clean or delicate cycle inside out",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Rosewood Botanical",
+        "Midnight Navy"
+      ],
+      "tags": [
+        "bottoms",
+        "botanical",
+        "trouser",
+        "wide-leg",
+        "rose-collection"
+      ],
+      "variants": [
+        {
+          "id": "var_004_1",
+          "color": "Rosewood Botanical",
+          "size": "XS",
+          "sku": "BTM-ROSE-004-ROS-XS",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_2",
+          "color": "Rosewood Botanical",
+          "size": "S",
+          "sku": "BTM-ROSE-004-ROS-S",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_3",
+          "color": "Rosewood Botanical",
+          "size": "M",
+          "sku": "BTM-ROSE-004-ROS-M",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_4",
+          "color": "Rosewood Botanical",
+          "size": "L",
+          "sku": "BTM-ROSE-004-ROS-L",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_5",
+          "color": "Midnight Navy",
+          "size": "XS",
+          "sku": "BTM-ROSE-004-MID-XS",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_6",
+          "color": "Midnight Navy",
+          "size": "S",
+          "sku": "BTM-ROSE-004-MID-S",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_7",
+          "color": "Midnight Navy",
+          "size": "M",
+          "sku": "BTM-ROSE-004-MID-M",
+          "stock": 4,
+          "price": 290
+        },
+        {
+          "id": "var_004_8",
+          "color": "Midnight Navy",
+          "size": "L",
+          "sku": "BTM-ROSE-004-MID-L",
+          "stock": 4,
+          "price": 290
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_005",
+      "name": "Bohemian Drawstring Resort Trouser",
+      "slug": "bohemian-drawstring-resort-trouser",
+      "description": "Effortless resort-ready trousers cut in breezy linen-cotton with subtle palm motifs and contrast ribbon ties.",
+      "longDesc": "Engineered for balmy coastal evenings and relaxed city weekends. Cut from premium pre-washed linen twill with deep front slash pockets and an easy-adjust drawstring waist.",
+      "price": 240,
+      "comparePrice": 310,
+      "sku": "BTM-RESORT-005",
+      "stock": 28,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 5,
       "categoryId": "cat_004",
       "collectionId": "col_005",
       "category": {
@@ -283,17 +670,1036 @@
       },
       "images": [
         {
-          "id": "img_004_1",
-          "url": "https://images.unsplash.com/photo-1544441893-675973e31985?w=800",
-          "altText": "Silk Blouse",
+          "id": "img_005_1",
+          "url": "/uploads/products/bohemian-drawstring-resort-trouser/pant-front.jpg",
+          "altText": "Bohemian Drawstring Resort Trouser Front",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 3000,
+          "height": 4000
         }
       ],
-      "material": "100% Mulberry Silk",
-      "fit": "Relaxed",
+      "material": "100% Breathable Linen-Cotton Twill",
+      "fit": "Relaxed fit, elasticated waistband with woven drawstring",
+      "care": "Machine wash cold, air dry flat",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Olive Botanical",
+        "Ecru Sand"
+      ],
+      "tags": [
+        "bottoms",
+        "resort",
+        "linen",
+        "bohemian",
+        "casual"
+      ],
+      "variants": [
+        {
+          "id": "var_005_1",
+          "color": "Olive Botanical",
+          "size": "S",
+          "sku": "BTM-RESORT-005-OLI-S",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_2",
+          "color": "Olive Botanical",
+          "size": "M",
+          "sku": "BTM-RESORT-005-OLI-M",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_3",
+          "color": "Olive Botanical",
+          "size": "L",
+          "sku": "BTM-RESORT-005-OLI-L",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_4",
+          "color": "Olive Botanical",
+          "size": "XL",
+          "sku": "BTM-RESORT-005-OLI-XL",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_5",
+          "color": "Ecru Sand",
+          "size": "S",
+          "sku": "BTM-RESORT-005-ECR-S",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_6",
+          "color": "Ecru Sand",
+          "size": "M",
+          "sku": "BTM-RESORT-005-ECR-M",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_7",
+          "color": "Ecru Sand",
+          "size": "L",
+          "sku": "BTM-RESORT-005-ECR-L",
+          "stock": 5,
+          "price": 240
+        },
+        {
+          "id": "var_005_8",
+          "color": "Ecru Sand",
+          "size": "XL",
+          "sku": "BTM-RESORT-005-ECR-XL",
+          "stock": 5,
+          "price": 240
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_006",
+      "name": "Bronze Knit Resort Bikini Set",
+      "slug": "bronze-knit-resort-bikini-set",
+      "description": "A sun-drenched knit metallic two-piece bikini offering radiant shimmer and sculpting support for Mediterranean getaways.",
+      "longDesc": "Crafted from fine micro-knit lurex yarn with UV and chlorine resistance. The top features adjustable sliding triangles and halter ties, while the briefs deliver an elongating high-leg cut.",
+      "price": 195,
+      "comparePrice": 260,
+      "sku": "SWIM-BRONZE-006",
+      "stock": 35,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 6,
+      "categoryId": "cat_1772243766304",
+      "collectionId": "col_1772243821382",
+      "category": {
+        "id": "cat_1772243766304",
+        "name": "Bikini",
+        "slug": "bikini",
+        "description": null,
+        "imageUrl": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
+        "parentId": null,
+        "order": 7,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_1772243821382",
+        "name": "Bikini",
+        "slug": "bikini",
+        "description": null,
+        "imageUrl": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 0,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 9
+      },
+      "images": [
+        {
+          "id": "img_006_1",
+          "url": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
+          "altText": "Bronze Knit Resort Bikini Set Front",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        },
+        {
+          "id": "img_006_2",
+          "url": "/uploads/products/bronze-knit-resort-bikini-set/bikini-pose.jpg",
+          "altText": "Bronze Knit Resort Bikini Set Profile Pose",
+          "order": 1,
+          "isPrimary": false,
+          "width": 4000,
+          "height": 6000
+        }
+      ],
+      "material": "82% Recycled Lurex Polyamide, 18% Elastane with Quick-Dry Lining",
+      "fit": "Triangle bralette top with high-cut cheeky bottom",
+      "care": "Rinse thoroughly in cold water after use; lay flat in shade",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Metallic Bronze",
+        "Sunlit Amber"
+      ],
+      "tags": [
+        "bikini",
+        "swimwear",
+        "bronze",
+        "resort",
+        "metallic",
+        "summer"
+      ],
+      "variants": [
+        {
+          "id": "var_006_1",
+          "color": "Metallic Bronze",
+          "size": "XS",
+          "sku": "SWIM-BRONZE-006-MET-XS",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_2",
+          "color": "Metallic Bronze",
+          "size": "S",
+          "sku": "SWIM-BRONZE-006-MET-S",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_3",
+          "color": "Metallic Bronze",
+          "size": "M",
+          "sku": "SWIM-BRONZE-006-MET-M",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_4",
+          "color": "Metallic Bronze",
+          "size": "L",
+          "sku": "SWIM-BRONZE-006-MET-L",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_5",
+          "color": "Sunlit Amber",
+          "size": "XS",
+          "sku": "SWIM-BRONZE-006-SUN-XS",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_6",
+          "color": "Sunlit Amber",
+          "size": "S",
+          "sku": "SWIM-BRONZE-006-SUN-S",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_7",
+          "color": "Sunlit Amber",
+          "size": "M",
+          "sku": "SWIM-BRONZE-006-SUN-M",
+          "stock": 6,
+          "price": 195
+        },
+        {
+          "id": "var_006_8",
+          "color": "Sunlit Amber",
+          "size": "L",
+          "sku": "SWIM-BRONZE-006-SUN-L",
+          "stock": 6,
+          "price": 195
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_007",
+      "name": "Minimalist Monochrome Bikini Set",
+      "slug": "minimalist-monochrome-bikini-set",
+      "description": "Sculpting Italian swim fabric designed with architectural clean lines and UV SPF 50+ protection.",
+      "longDesc": "Emphasizing clean geometry and flattering contours, this two-piece set is cut from buttery regenerated nylon with seamless edges that will not dig into skin.",
+      "price": 175,
+      "comparePrice": 230,
+      "sku": "SWIM-MONO-007",
+      "stock": 30,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 7,
+      "categoryId": "cat_1772243766304",
+      "collectionId": "col_1772243821382",
+      "category": {
+        "id": "cat_1772243766304",
+        "name": "Bikini",
+        "slug": "bikini",
+        "description": null,
+        "imageUrl": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
+        "parentId": null,
+        "order": 7,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_1772243821382",
+        "name": "Bikini",
+        "slug": "bikini",
+        "description": null,
+        "imageUrl": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 0,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 9
+      },
+      "images": [
+        {
+          "id": "img_007_1",
+          "url": "/uploads/products/minimalist-monochrome-bikini-set/bikini-front.jpg",
+          "altText": "Minimalist Monochrome Bikini Set Front View",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        }
+      ],
+      "material": "78% ECONYL® Regenerated Nylon, 22% Elastane",
+      "fit": "Minimalist scoop bandeau with cheeky Brazilian cut",
+      "care": "Hand wash cold; do not wring or tumble dry",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Noir Black",
+        "Pure White"
+      ],
+      "tags": [
+        "bikini",
+        "swimwear",
+        "minimalist",
+        "resort"
+      ],
+      "variants": [
+        {
+          "id": "var_007_1",
+          "color": "Noir Black",
+          "size": "XS",
+          "sku": "SWIM-MONO-007-NOI-XS",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_2",
+          "color": "Noir Black",
+          "size": "S",
+          "sku": "SWIM-MONO-007-NOI-S",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_3",
+          "color": "Noir Black",
+          "size": "M",
+          "sku": "SWIM-MONO-007-NOI-M",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_4",
+          "color": "Noir Black",
+          "size": "L",
+          "sku": "SWIM-MONO-007-NOI-L",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_5",
+          "color": "Pure White",
+          "size": "XS",
+          "sku": "SWIM-MONO-007-PUR-XS",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_6",
+          "color": "Pure White",
+          "size": "S",
+          "sku": "SWIM-MONO-007-PUR-S",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_7",
+          "color": "Pure White",
+          "size": "M",
+          "sku": "SWIM-MONO-007-PUR-M",
+          "stock": 5,
+          "price": 175
+        },
+        {
+          "id": "var_007_8",
+          "color": "Pure White",
+          "size": "L",
+          "sku": "SWIM-MONO-007-PUR-L",
+          "stock": 5,
+          "price": 175
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_008",
+      "name": "Tailored Camel Wool Trench Coat",
+      "slug": "tailored-camel-wool-trench-coat",
+      "description": "A modern luxury icon cut from virgin wool-cashmere blend with structured epaulettes and horn buckle belt.",
+      "longDesc": "The pinnacle of cold-weather outerwear, this camel trench combines structural British tailoring with Italian cashmere softness. Features storm flap, deep welt pockets, and water-repellent finish.",
+      "price": 680,
+      "comparePrice": 890,
+      "sku": "OUT-TRENCH-008",
+      "stock": 22,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 8,
+      "categoryId": "cat_005",
+      "collectionId": "col_001",
+      "category": {
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+        "parentId": null,
+        "order": 5,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_001",
+        "name": "New Arrivals",
+        "slug": "new",
+        "description": "The latest additions to our collection",
+        "imageUrl": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 1
+      },
+      "images": [
+        {
+          "id": "img_008_1",
+          "url": "/uploads/products/tailored-camel-wool-trench-coat/trench-front.jpg",
+          "altText": "Tailored Camel Wool Trench Coat Standing Front",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        },
+        {
+          "id": "img_008_2",
+          "url": "/uploads/products/tailored-camel-wool-trench-coat/trench-walk.jpg",
+          "altText": "Tailored Camel Wool Trench Coat Dynamic Walk Look",
+          "order": 1,
+          "isPrimary": false,
+          "width": 4160,
+          "height": 6240
+        }
+      ],
+      "material": "90% Virgin Wool, 10% Cashmere with Cupro Lining",
+      "fit": "Double-breasted tailored fit with waist-cinching belt",
+      "care": "Dry clean only",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Camel Beige",
+        "Onyx Black"
+      ],
+      "tags": [
+        "outerwear",
+        "trench",
+        "wool",
+        "cashmere",
+        "tailored",
+        "new"
+      ],
+      "variants": [
+        {
+          "id": "var_008_1",
+          "color": "Camel Beige",
+          "size": "XS",
+          "sku": "OUT-TRENCH-008-CAM-XS",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_2",
+          "color": "Camel Beige",
+          "size": "S",
+          "sku": "OUT-TRENCH-008-CAM-S",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_3",
+          "color": "Camel Beige",
+          "size": "M",
+          "sku": "OUT-TRENCH-008-CAM-M",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_4",
+          "color": "Camel Beige",
+          "size": "L",
+          "sku": "OUT-TRENCH-008-CAM-L",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_5",
+          "color": "Camel Beige",
+          "size": "XL",
+          "sku": "OUT-TRENCH-008-CAM-XL",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_6",
+          "color": "Onyx Black",
+          "size": "XS",
+          "sku": "OUT-TRENCH-008-ONY-XS",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_7",
+          "color": "Onyx Black",
+          "size": "S",
+          "sku": "OUT-TRENCH-008-ONY-S",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_8",
+          "color": "Onyx Black",
+          "size": "M",
+          "sku": "OUT-TRENCH-008-ONY-M",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_9",
+          "color": "Onyx Black",
+          "size": "L",
+          "sku": "OUT-TRENCH-008-ONY-L",
+          "stock": 4,
+          "price": 680
+        },
+        {
+          "id": "var_008_10",
+          "color": "Onyx Black",
+          "size": "XL",
+          "sku": "OUT-TRENCH-008-ONY-XL",
+          "stock": 4,
+          "price": 680
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_009",
+      "name": "Artisanal Knit Wrap Cardigan",
+      "slug": "artisanal-knit-wrap-cardigan",
+      "description": "Handcrafted chunky alpaca knit cardigan featuring kaleidoscopic artisan yarn and soft scalloped edging.",
+      "longDesc": "Spun from Peruvian baby alpaca blended with mulberry silk, this tactile cardigan envelops you in weightless warmth. Ribbed cuffs and artisanal border crochet add refined depth.",
+      "price": 380,
+      "comparePrice": 490,
+      "sku": "TOP-KNIT-009",
+      "stock": 16,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 9,
+      "categoryId": "cat_004",
+      "collectionId": "col_006",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_006",
+        "name": "Crochet Artifacts",
+        "slug": "crochet",
+        "description": "Handcrafted crochet pieces",
+        "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 6
+      },
+      "images": [
+        {
+          "id": "img_009_1",
+          "url": "/uploads/products/artisanal-knit-wrap-cardigan/cardigan-front.jpg",
+          "altText": "Artisanal Knit Wrap Cardigan Portrait",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3840,
+          "height": 5760
+        },
+        {
+          "id": "img_009_2",
+          "url": "/uploads/products/artisanal-knit-wrap-cardigan/cardigan-detail.jpg",
+          "altText": "Artisanal Knit Wrap Cardigan Yarn Texture Detail",
+          "order": 1,
+          "isPrimary": false,
+          "width": 4000,
+          "height": 2667
+        }
+      ],
+      "material": "70% Alpaca Wool, 30% Mulberry Silk",
+      "fit": "Draped wrap silhouette with self-tie belt and scalloped hem",
+      "care": "Hand wash cold with wool detergent, dry flat",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Sunset Multico",
+        "Natural Melange"
+      ],
+      "tags": [
+        "knitwear",
+        "crochet",
+        "cardigan",
+        "alpaca",
+        "handcrafted"
+      ],
+      "variants": [
+        {
+          "id": "var_009_1",
+          "color": "Sunset Multico",
+          "size": "XS",
+          "sku": "TOP-KNIT-009-SUN-XS",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_2",
+          "color": "Sunset Multico",
+          "size": "S",
+          "sku": "TOP-KNIT-009-SUN-S",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_3",
+          "color": "Sunset Multico",
+          "size": "M",
+          "sku": "TOP-KNIT-009-SUN-M",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_4",
+          "color": "Sunset Multico",
+          "size": "L",
+          "sku": "TOP-KNIT-009-SUN-L",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_5",
+          "color": "Natural Melange",
+          "size": "XS",
+          "sku": "TOP-KNIT-009-NAT-XS",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_6",
+          "color": "Natural Melange",
+          "size": "S",
+          "sku": "TOP-KNIT-009-NAT-S",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_7",
+          "color": "Natural Melange",
+          "size": "M",
+          "sku": "TOP-KNIT-009-NAT-M",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_009_8",
+          "color": "Natural Melange",
+          "size": "L",
+          "sku": "TOP-KNIT-009-NAT-L",
+          "stock": 4,
+          "price": 380
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_010",
+      "name": "Crimson Rose Silk Slip Dress",
+      "slug": "crimson-rose-silk-slip-dress",
+      "description": "A sensuous 90s-inspired slip dress in lustrous crimson silk satin, designed to skim the body with intoxicating fluidity.",
+      "longDesc": "Draped on the bias to hug every natural curve without restriction. Features delicate spaghetti straps, an alluring low back, and a subtle side slit for ease of movement.",
+      "price": 420,
+      "comparePrice": 550,
+      "sku": "DRS-ROSE-010",
+      "stock": 25,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 10,
+      "categoryId": "cat_001",
+      "collectionId": "col_002",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_002",
+        "name": "Rose Collection",
+        "slug": "rose",
+        "description": "Inspired by the beauty of roses",
+        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 2
+      },
+      "images": [
+        {
+          "id": "img_010_1",
+          "url": "/uploads/products/crimson-rose-silk-slip-dress/dress-front.jpg",
+          "altText": "Crimson Rose Silk Slip Dress Model View",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        }
+      ],
+      "material": "100% 22-Momme Mulberry Silk Satin",
+      "fit": "Bias-cut silhouette with cowl neckline and adjustable straps",
+      "care": "Dry clean or gentle hand wash in cold water",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Crimson Rose",
+        "Champagne Gold"
+      ],
+      "tags": [
+        "dresses",
+        "silk",
+        "slip-dress",
+        "rose-collection",
+        "evening"
+      ],
+      "variants": [
+        {
+          "id": "var_010_1",
+          "color": "Crimson Rose",
+          "size": "XS",
+          "sku": "DRS-ROSE-010-CRI-XS",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_2",
+          "color": "Crimson Rose",
+          "size": "S",
+          "sku": "DRS-ROSE-010-CRI-S",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_3",
+          "color": "Crimson Rose",
+          "size": "M",
+          "sku": "DRS-ROSE-010-CRI-M",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_4",
+          "color": "Crimson Rose",
+          "size": "L",
+          "sku": "DRS-ROSE-010-CRI-L",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_5",
+          "color": "Champagne Gold",
+          "size": "XS",
+          "sku": "DRS-ROSE-010-CHA-XS",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_6",
+          "color": "Champagne Gold",
+          "size": "S",
+          "sku": "DRS-ROSE-010-CHA-S",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_7",
+          "color": "Champagne Gold",
+          "size": "M",
+          "sku": "DRS-ROSE-010-CHA-M",
+          "stock": 5,
+          "price": 420
+        },
+        {
+          "id": "var_010_8",
+          "color": "Champagne Gold",
+          "size": "L",
+          "sku": "DRS-ROSE-010-CHA-L",
+          "stock": 5,
+          "price": 420
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_011",
+      "name": "Emerald Satin Bias-Cut Gown",
+      "slug": "emerald-satin-bias-cut-gown",
+      "description": "Dramatic emerald silk gown cut on the bias to hug every contour, featuring a pooling train and plunging back.",
+      "longDesc": "An unforgettable evening centerpiece. The emerald hue glints under low gala lights, complemented by an asymmetrical drape and invisible side zip closure.",
+      "price": 590,
+      "comparePrice": 780,
+      "sku": "DRS-EMERALD-011",
+      "stock": 14,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 11,
+      "categoryId": "cat_001",
+      "collectionId": "col_003",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_003",
+        "name": "Editorial",
+        "slug": "editorial",
+        "description": "Bold statements for the fearless",
+        "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
+        "videoUrl": null,
+        "season": "Fall",
+        "year": 2025,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 3
+      },
+      "images": [
+        {
+          "id": "img_011_1",
+          "url": "/uploads/products/emerald-satin-bias-cut-gown/gown-front.jpg",
+          "altText": "Emerald Satin Bias-Cut Gown Editorial Stance",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3600,
+          "height": 4500
+        }
+      ],
+      "material": "100% Heavy Silk Morocain Satin",
+      "fit": "Floor-length mermaid drape with low-cut back",
+      "care": "Dry clean only",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Emerald Green",
+        "Noir Black"
+      ],
+      "tags": [
+        "dresses",
+        "gown",
+        "evening",
+        "satin",
+        "emerald",
+        "editorial"
+      ],
+      "variants": [
+        {
+          "id": "var_011_1",
+          "color": "Emerald Green",
+          "size": "XS",
+          "sku": "DRS-EMERALD-011-EME-XS",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_2",
+          "color": "Emerald Green",
+          "size": "S",
+          "sku": "DRS-EMERALD-011-EME-S",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_3",
+          "color": "Emerald Green",
+          "size": "M",
+          "sku": "DRS-EMERALD-011-EME-M",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_4",
+          "color": "Emerald Green",
+          "size": "L",
+          "sku": "DRS-EMERALD-011-EME-L",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_5",
+          "color": "Noir Black",
+          "size": "XS",
+          "sku": "DRS-EMERALD-011-NOI-XS",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_6",
+          "color": "Noir Black",
+          "size": "S",
+          "sku": "DRS-EMERALD-011-NOI-S",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_7",
+          "color": "Noir Black",
+          "size": "M",
+          "sku": "DRS-EMERALD-011-NOI-M",
+          "stock": 3,
+          "price": 590
+        },
+        {
+          "id": "var_011_8",
+          "color": "Noir Black",
+          "size": "L",
+          "sku": "DRS-EMERALD-011-NOI-L",
+          "stock": 3,
+          "price": 590
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_012",
+      "name": "Pleated Chiffon Summer Dress",
+      "slug": "pleated-chiffon-summer-dress",
+      "description": "Airy accordion-pleated silk chiffon dress floating effortlessly with each step, finished with delicate ribbon ties.",
+      "longDesc": "Crafted for effortless warm-weather opulence. Delicate knife pleats expand through the tiered skirt, while a tonal cotton lining provides modesty and comfort.",
+      "price": 360,
+      "comparePrice": 470,
+      "sku": "DRS-PLEAT-012",
+      "stock": 20,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 12,
+      "categoryId": "cat_001",
+      "collectionId": "col_005",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 5
+      },
+      "images": [
+        {
+          "id": "img_012_1",
+          "url": "/uploads/products/pleated-chiffon-summer-dress/dress-full.jpg",
+          "altText": "Pleated Chiffon Summer Dress Full Look",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4160,
+          "height": 6240
+        }
+      ],
+      "material": "100% Micro-Pleated Silk Chiffon with Cotton Slip",
+      "fit": "A-line babydoll tier with flutter cap sleeves",
       "care": "Dry clean recommended",
       "sizes": [
         "XS",
@@ -302,32 +1708,238 @@
         "L"
       ],
       "colors": [
-        "Ivory",
-        "Champagne",
-        "Navy"
+        "Ivory White",
+        "Blush Pink"
       ],
       "tags": [
-        "tops",
-        "silk",
+        "dresses",
+        "chiffon",
+        "pleated",
+        "summer",
         "minimal"
       ],
-      "createdAt": "2025-12-20T00:00:00.000Z",
-      "updatedAt": "2025-12-20T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_012_1",
+          "color": "Ivory White",
+          "size": "XS",
+          "sku": "DRS-PLEAT-012-IVO-XS",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_2",
+          "color": "Ivory White",
+          "size": "S",
+          "sku": "DRS-PLEAT-012-IVO-S",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_3",
+          "color": "Ivory White",
+          "size": "M",
+          "sku": "DRS-PLEAT-012-IVO-M",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_4",
+          "color": "Ivory White",
+          "size": "L",
+          "sku": "DRS-PLEAT-012-IVO-L",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_5",
+          "color": "Blush Pink",
+          "size": "XS",
+          "sku": "DRS-PLEAT-012-BLU-XS",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_6",
+          "color": "Blush Pink",
+          "size": "S",
+          "sku": "DRS-PLEAT-012-BLU-S",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_7",
+          "color": "Blush Pink",
+          "size": "M",
+          "sku": "DRS-PLEAT-012-BLU-M",
+          "stock": 4,
+          "price": 360
+        },
+        {
+          "id": "var_012_8",
+          "color": "Blush Pink",
+          "size": "L",
+          "sku": "DRS-PLEAT-012-BLU-L",
+          "stock": 4,
+          "price": 360
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_005",
-      "name": "Leather Jacket",
-      "slug": "leather-jacket",
-      "description": "Classic leather jacket with modern details. A timeless wardrobe staple.",
-      "longDesc": "This Leather Jacket is crafted from buttery soft lambskin leather. Features asymmetric zip closure, silver hardware, and quilted lining. A true investment piece.",
-      "price": 895,
-      "comparePrice": 1200,
-      "sku": "OUT-LEATHER-005",
-      "stock": 7,
-      "isFeatured": false,
+      "id": "prod_013",
+      "name": "Noir Lace Evening Slip Dress",
+      "slug": "noir-lace-evening-slip-dress",
+      "description": "Gothic romanticism reimagined in liquid noir silk charmeuse edged with scalloped French Chantilly lace.",
+      "longDesc": "Evoking dark romantic allure, this dress pairs lustrous heavy silk charmeuse with eyelash Chantilly lace framing the neckline and thigh-high slit.",
+      "price": 460,
+      "comparePrice": 600,
+      "sku": "DRS-NOIR-013",
+      "stock": 18,
+      "isFeatured": true,
       "isArchived": false,
       "isActive": true,
-      "order": 5,
+      "order": 13,
+      "categoryId": "cat_001",
+      "collectionId": "col_004",
+      "category": {
+        "id": "cat_001",
+        "name": "Dresses",
+        "slug": "dresses",
+        "description": "Elegant dresses for every occasion",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 1,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_004",
+        "name": "Dark Romance",
+        "slug": "dark",
+        "description": "Mysterious and alluring pieces",
+        "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+        "videoUrl": null,
+        "season": "Winter",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 4
+      },
+      "images": [
+        {
+          "id": "img_013_1",
+          "url": "/uploads/products/noir-lace-evening-slip-dress/dress-model.jpg",
+          "altText": "Noir Lace Evening Slip Dress Portrait",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        }
+      ],
+      "material": "Silk Charmeuse with French Chantilly Lace Inset",
+      "fit": "Slim body-skimming cut with side slit",
+      "care": "Specialist dry clean only",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Midnight Noir",
+        "Smoky Plum"
+      ],
+      "tags": [
+        "dresses",
+        "lace",
+        "dark-romance",
+        "noir",
+        "silk"
+      ],
+      "variants": [
+        {
+          "id": "var_013_1",
+          "color": "Midnight Noir",
+          "size": "XS",
+          "sku": "DRS-NOIR-013-MID-XS",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_2",
+          "color": "Midnight Noir",
+          "size": "S",
+          "sku": "DRS-NOIR-013-MID-S",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_3",
+          "color": "Midnight Noir",
+          "size": "M",
+          "sku": "DRS-NOIR-013-MID-M",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_4",
+          "color": "Midnight Noir",
+          "size": "L",
+          "sku": "DRS-NOIR-013-MID-L",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_5",
+          "color": "Smoky Plum",
+          "size": "XS",
+          "sku": "DRS-NOIR-013-SMO-XS",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_6",
+          "color": "Smoky Plum",
+          "size": "S",
+          "sku": "DRS-NOIR-013-SMO-S",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_7",
+          "color": "Smoky Plum",
+          "size": "M",
+          "sku": "DRS-NOIR-013-SMO-M",
+          "stock": 4,
+          "price": 460
+        },
+        {
+          "id": "var_013_8",
+          "color": "Smoky Plum",
+          "size": "L",
+          "sku": "DRS-NOIR-013-SMO-L",
+          "stock": 4,
+          "price": 460
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_014",
+      "name": "Tailored Noir Structured Blazer",
+      "slug": "tailored-noir-structured-blazer",
+      "description": "Impeccably sharp sartorial tailoring with sculpted shoulders, peak lapels, and horn button closure.",
+      "longDesc": "Power dressing refined. Cut with razor precision from dense Italian worsted wool, this blazer features internal canvas construction that molds to the body over time.",
+      "price": 520,
+      "comparePrice": 690,
+      "sku": "OUT-BLAZER-014",
+      "stock": 20,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 14,
       "categoryId": "cat_005",
       "collectionId": "col_004",
       "category": {
@@ -355,18 +1967,18 @@
       },
       "images": [
         {
-          "id": "img_005_1",
-          "url": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
-          "altText": "Leather Jacket",
+          "id": "img_014_1",
+          "url": "/uploads/products/tailored-noir-structured-blazer/blazer-front.jpg",
+          "altText": "Tailored Noir Structured Blazer Editorial",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 3456,
+          "height": 4320
         }
       ],
-      "material": "100% Lambskin Leather",
-      "fit": "Slim",
-      "care": "Professional leather cleaning",
+      "material": "100% Super 120s Italian Wool, Silk Lapel Trim",
+      "fit": "Structured shoulder pads, nipped waist silhouette",
+      "care": "Dry clean only",
       "sizes": [
         "XS",
         "S",
@@ -375,70 +1987,431 @@
         "XL"
       ],
       "colors": [
-        "Black",
-        "Brown"
+        "Raven Black",
+        "Charcoal Slate"
       ],
       "tags": [
         "outerwear",
-        "leather",
-        "winter"
+        "blazer",
+        "tailoring",
+        "noir",
+        "dark-romance"
       ],
-      "createdAt": "2025-11-15T00:00:00.000Z",
-      "updatedAt": "2025-11-15T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_014_1",
+          "color": "Raven Black",
+          "size": "XS",
+          "sku": "OUT-BLAZER-014-RAV-XS",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_2",
+          "color": "Raven Black",
+          "size": "S",
+          "sku": "OUT-BLAZER-014-RAV-S",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_3",
+          "color": "Raven Black",
+          "size": "M",
+          "sku": "OUT-BLAZER-014-RAV-M",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_4",
+          "color": "Raven Black",
+          "size": "L",
+          "sku": "OUT-BLAZER-014-RAV-L",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_5",
+          "color": "Raven Black",
+          "size": "XL",
+          "sku": "OUT-BLAZER-014-RAV-XL",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_6",
+          "color": "Charcoal Slate",
+          "size": "XS",
+          "sku": "OUT-BLAZER-014-CHA-XS",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_7",
+          "color": "Charcoal Slate",
+          "size": "S",
+          "sku": "OUT-BLAZER-014-CHA-S",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_8",
+          "color": "Charcoal Slate",
+          "size": "M",
+          "sku": "OUT-BLAZER-014-CHA-M",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_9",
+          "color": "Charcoal Slate",
+          "size": "L",
+          "sku": "OUT-BLAZER-014-CHA-L",
+          "stock": 4,
+          "price": 520
+        },
+        {
+          "id": "var_014_10",
+          "color": "Charcoal Slate",
+          "size": "XL",
+          "sku": "OUT-BLAZER-014-CHA-XL",
+          "stock": 4,
+          "price": 520
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_006",
-      "name": "Summer Floral Dress",
-      "slug": "summer-floral-dress",
-      "description": "Light and breezy summer dress with floral print. Perfect for warm days.",
-      "longDesc": "This Summer Floral Dress features a flattering A-line silhouette with adjustable straps. Made from breathable cotton blend with beautiful hand-drawn floral pattern.",
-      "price": 225,
-      "comparePrice": 0,
-      "sku": "DRS-FLORAL-006",
-      "stock": 30,
+      "id": "prod_015",
+      "name": "Minimalist Cashmere Overcoat",
+      "slug": "minimalist-cashmere-overcoat",
+      "description": "Ultra-refined minimalist winter overcoat spun from plush sustainable cashmere with a clean, concealed horn-button placket.",
+      "longDesc": "Understated luxury at its highest expression. Crafted in an unlined double-face finish that feels feather-light while insulating against harsh winter winds.",
+      "price": 750,
+      "comparePrice": 980,
+      "sku": "OUT-CASH-015",
+      "stock": 15,
       "isFeatured": false,
       "isArchived": false,
       "isActive": true,
-      "order": 6,
-      "categoryId": "cat_001",
-      "collectionId": "col_006",
+      "order": 15,
+      "categoryId": "cat_005",
+      "collectionId": "col_005",
       "category": {
-        "id": "cat_001",
-        "name": "Dresses",
-        "slug": "dresses",
-        "description": "Elegant dresses for every occasion",
-        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
         "parentId": null,
-        "order": 1,
+        "order": 5,
         "isActive": true
       },
       "collection": {
-        "id": "col_006",
-        "name": "Crochet Artifacts",
-        "slug": "crochet",
-        "description": "Handcrafted crochet pieces",
-        "imageUrl": "https://images.unsplash.com/photo-1583846783214-2f0ff6f0b233?w=1200",
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
         "videoUrl": null,
         "season": "Summer",
         "year": 2025,
         "isFeatured": false,
         "isActive": true,
-        "order": 6
+        "order": 5
       },
       "images": [
         {
-          "id": "img_1772220893272_0",
-          "url": "/uploads/1772220887446-998972016-hero_img.jpg",
-          "altText": null,
+          "id": "img_015_1",
+          "url": "/uploads/products/minimalist-cashmere-overcoat/overcoat-front.jpg",
+          "altText": "Minimalist Cashmere Overcoat Studio Look",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 4016,
+          "height": 6016
         }
       ],
-      "material": "70% Cotton, 30% Linen",
-      "fit": "Regular",
-      "care": "Machine wash cold",
+      "material": "80% Recycled Cashmere, 20% Virgin Wool",
+      "fit": "Single-breasted architectural drape with hidden placket",
+      "care": "Specialist dry clean",
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "colors": [
+        "Desert Sand",
+        "Heather Grey"
+      ],
+      "tags": [
+        "outerwear",
+        "cashmere",
+        "overcoat",
+        "minimal"
+      ],
+      "variants": [
+        {
+          "id": "var_015_1",
+          "color": "Desert Sand",
+          "size": "S",
+          "sku": "OUT-CASH-015-DES-S",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_2",
+          "color": "Desert Sand",
+          "size": "M",
+          "sku": "OUT-CASH-015-DES-M",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_3",
+          "color": "Desert Sand",
+          "size": "L",
+          "sku": "OUT-CASH-015-DES-L",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_4",
+          "color": "Desert Sand",
+          "size": "XL",
+          "sku": "OUT-CASH-015-DES-XL",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_5",
+          "color": "Heather Grey",
+          "size": "S",
+          "sku": "OUT-CASH-015-HEA-S",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_6",
+          "color": "Heather Grey",
+          "size": "M",
+          "sku": "OUT-CASH-015-HEA-M",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_7",
+          "color": "Heather Grey",
+          "size": "L",
+          "sku": "OUT-CASH-015-HEA-L",
+          "stock": 3,
+          "price": 750
+        },
+        {
+          "id": "var_015_8",
+          "color": "Heather Grey",
+          "size": "XL",
+          "sku": "OUT-CASH-015-HEA-XL",
+          "stock": 3,
+          "price": 750
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_016",
+      "name": "Tailored Ivory Wool Blazer",
+      "slug": "tailored-ivory-wool-blazer",
+      "description": "Luminous ivory wool blazer offering effortless polish for boardroom confidence or casual weekend styling.",
+      "longDesc": "Tailored from Italian merino wool flannel with a soft peach hand-feel. Flap pockets, vented back hem, and horn buttons complete the look.",
+      "price": 490,
+      "comparePrice": 640,
+      "sku": "OUT-IVORY-016",
+      "stock": 22,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 16,
+      "categoryId": "cat_005",
+      "collectionId": "col_001",
+      "category": {
+        "id": "cat_005",
+        "name": "Outerwear",
+        "slug": "outerwear",
+        "description": "Jackets, coats, and blazers",
+        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
+        "parentId": null,
+        "order": 5,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_001",
+        "name": "New Arrivals",
+        "slug": "new",
+        "description": "The latest additions to our collection",
+        "imageUrl": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 1
+      },
+      "images": [
+        {
+          "id": "img_016_1",
+          "url": "/uploads/products/tailored-ivory-wool-blazer/blazer-ivory.jpg",
+          "altText": "Tailored Ivory Wool Blazer Model View",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        }
+      ],
+      "material": "100% Merino Wool Flannel",
+      "fit": "Relaxed modern boyfriend silhouette with vented back",
+      "care": "Dry clean only",
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "colors": [
+        "Ivory Cream",
+        "Oatmeal"
+      ],
+      "tags": [
+        "outerwear",
+        "blazer",
+        "wool",
+        "ivory",
+        "new"
+      ],
+      "variants": [
+        {
+          "id": "var_016_1",
+          "color": "Ivory Cream",
+          "size": "XS",
+          "sku": "OUT-IVORY-016-IVO-XS",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_2",
+          "color": "Ivory Cream",
+          "size": "S",
+          "sku": "OUT-IVORY-016-IVO-S",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_3",
+          "color": "Ivory Cream",
+          "size": "M",
+          "sku": "OUT-IVORY-016-IVO-M",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_4",
+          "color": "Ivory Cream",
+          "size": "L",
+          "sku": "OUT-IVORY-016-IVO-L",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_5",
+          "color": "Oatmeal",
+          "size": "XS",
+          "sku": "OUT-IVORY-016-OAT-XS",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_6",
+          "color": "Oatmeal",
+          "size": "S",
+          "sku": "OUT-IVORY-016-OAT-S",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_7",
+          "color": "Oatmeal",
+          "size": "M",
+          "sku": "OUT-IVORY-016-OAT-M",
+          "stock": 4,
+          "price": 490
+        },
+        {
+          "id": "var_016_8",
+          "color": "Oatmeal",
+          "size": "L",
+          "sku": "OUT-IVORY-016-OAT-L",
+          "stock": 4,
+          "price": 490
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_017",
+      "name": "Relaxed Minimalist Linen Shirt",
+      "slug": "relaxed-minimalist-linen-shirt",
+      "description": "Air-washed French linen button-down designed with a relaxed slouch and clean tonal mother-of-pearl buttons.",
+      "longDesc": "The quintessential warm-weather staple. Washed with river stones for supreme softness, this piece softens further with every wear and wash.",
+      "price": 185,
+      "comparePrice": 240,
+      "sku": "TOP-LINEN-017",
+      "stock": 35,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 17,
+      "categoryId": "cat_004",
+      "collectionId": "col_005",
+      "category": {
+        "id": "cat_004",
+        "name": "Tops",
+        "slug": "tops",
+        "description": "Blouses, shirts, and sweaters",
+        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "parentId": null,
+        "order": 4,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 5
+      },
+      "images": [
+        {
+          "id": "img_017_1",
+          "url": "/uploads/products/relaxed-minimalist-linen-shirt/shirt-model.jpg",
+          "altText": "Relaxed Minimalist Linen Shirt Editorial",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3151,
+          "height": 4727
+        }
+      ],
+      "material": "100% Normandy French Flax Linen",
+      "fit": "Oversized boyfriend cut with dropped shoulders",
+      "care": "Machine wash cold; hang dry to preserve natural flax texture",
       "sizes": [
         "XS",
         "S",
@@ -447,31 +2420,115 @@
         "XL"
       ],
       "colors": [
-        "Floral Blue",
-        "Floral Pink"
+        "Natural Ecru",
+        "Washed Olive"
       ],
       "tags": [
-        "dresses",
-        "summer",
-        "floral"
+        "tops",
+        "linen",
+        "shirt",
+        "minimal",
+        "summer"
       ],
-      "createdAt": "2025-06-01T00:00:00.000Z",
-      "updatedAt": "2026-02-27T19:34:53.272Z"
+      "variants": [
+        {
+          "id": "var_017_1",
+          "color": "Natural Ecru",
+          "size": "XS",
+          "sku": "TOP-LINEN-017-NAT-XS",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_2",
+          "color": "Natural Ecru",
+          "size": "S",
+          "sku": "TOP-LINEN-017-NAT-S",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_3",
+          "color": "Natural Ecru",
+          "size": "M",
+          "sku": "TOP-LINEN-017-NAT-M",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_4",
+          "color": "Natural Ecru",
+          "size": "L",
+          "sku": "TOP-LINEN-017-NAT-L",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_5",
+          "color": "Natural Ecru",
+          "size": "XL",
+          "sku": "TOP-LINEN-017-NAT-XL",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_6",
+          "color": "Washed Olive",
+          "size": "XS",
+          "sku": "TOP-LINEN-017-WAS-XS",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_7",
+          "color": "Washed Olive",
+          "size": "S",
+          "sku": "TOP-LINEN-017-WAS-S",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_8",
+          "color": "Washed Olive",
+          "size": "M",
+          "sku": "TOP-LINEN-017-WAS-M",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_9",
+          "color": "Washed Olive",
+          "size": "L",
+          "sku": "TOP-LINEN-017-WAS-L",
+          "stock": 5,
+          "price": 185
+        },
+        {
+          "id": "var_017_10",
+          "color": "Washed Olive",
+          "size": "XL",
+          "sku": "TOP-LINEN-017-WAS-XL",
+          "stock": 5,
+          "price": 185
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_007",
-      "name": "Designer Crossbody Bag",
-      "slug": "designer-crossbody-bag",
-      "description": "Compact crossbody bag with chain strap. Elegant enough for evening wear.",
-      "longDesc": "This Designer Crossbody Bag features a sleek rectangular shape with interlocking clasp. The chain strap can be worn crossbody or doubled up as a shoulder bag.",
-      "price": 550,
-      "comparePrice": 700,
-      "sku": "BAG-CROSS-007",
-      "stock": 12,
+      "id": "prod_018",
+      "name": "Sculptural Leather Shoulder Bag",
+      "slug": "sculptural-leather-shoulder-bag",
+      "description": "Striking asymmetric curve shoulder bag crafted in Tuscany from vegetable-tanned calfskin with gold hardware.",
+      "longDesc": "Merging contemporary geometry with traditional Florentine leatherwork. Features a wide, comfortable ergonomic shoulder strap and custom gold-finish zip closure.",
+      "price": 480,
+      "comparePrice": 620,
+      "sku": "BAG-SCULPT-018",
+      "stock": 18,
       "isFeatured": true,
       "isArchived": false,
       "isActive": true,
-      "order": 7,
+      "order": 18,
       "categoryId": "cat_002",
       "collectionId": "col_008",
       "category": {
@@ -479,7 +2536,7 @@
         "name": "Bags",
         "slug": "bags",
         "description": "Luxury handbags and accessories",
-        "imageUrl": "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
         "parentId": null,
         "order": 2,
         "isActive": true
@@ -499,132 +2556,513 @@
       },
       "images": [
         {
-          "id": "img_007_1",
-          "url": "https://images.unsplash.com/photo-1608234807905-4466023792f5?w=800",
-          "altText": "Designer Handbag",
+          "id": "img_018_1",
+          "url": "/uploads/products/sculptural-leather-shoulder-bag/bag-front.jpg",
+          "altText": "Sculptural Leather Shoulder Bag Editorial Display",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 3762,
+          "height": 4702
         }
       ],
-      "material": "Leather with Gold Chain",
-      "fit": "Compact",
-      "care": "Store in dust bag",
+      "material": "100% Full-Grain Tuscan Calfskin with Suede Lining",
+      "fit": "Architectural curved shoulder silhouette",
+      "care": "Clean with soft damp cloth and apply leather conditioner",
       "sizes": [
         "One Size"
       ],
       "colors": [
-        "Black",
-        "Silver",
-        "Gold"
+        "Burgundy Wine",
+        "Onyx Black"
       ],
       "tags": [
         "bags",
-        "evening",
-        "featured"
+        "leather",
+        "shoulder-bag",
+        "sculptural"
       ],
-      "createdAt": "2026-01-05T00:00:00.000Z",
-      "updatedAt": "2026-01-05T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_018_1",
+          "color": "Burgundy Wine",
+          "size": "One Size",
+          "sku": "BAG-SCULPT-018-BUR-OneSize",
+          "stock": 11,
+          "price": 480
+        },
+        {
+          "id": "var_018_2",
+          "color": "Onyx Black",
+          "size": "One Size",
+          "sku": "BAG-SCULPT-018-ONY-OneSize",
+          "stock": 11,
+          "price": 480
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_008",
-      "name": "Cashmere Sweater",
-      "slug": "cashmere-sweater",
-      "description": "Ultra-soft cashmere sweater. A winter essential.",
-      "longDesc": "This Cashmere Sweater is made from 100% Mongolian cashmere. Features ribbed cuffs and hem, crew neckline, and relaxed fit. Perfect for layering.",
-      "price": 395,
-      "comparePrice": null,
-      "sku": "TOP-CASH-008",
+      "id": "prod_019",
+      "name": "Classic Taupe Leather Handbag",
+      "slug": "classic-taupe-leather-handbag",
+      "description": "An everyday luxury staple featuring dual compartments, protective metal feet, and timeless lock hardware.",
+      "longDesc": "Durable pebble grain leather resists scratches and rain. Includes an organized central divider pocket, phone sleeve, and detachable key clochette.",
+      "price": 540,
+      "comparePrice": 710,
+      "sku": "BAG-TAUPE-019",
       "stock": 20,
       "isFeatured": false,
       "isArchived": false,
       "isActive": true,
-      "order": 8,
-      "categoryId": "cat_004",
-      "collectionId": "col_004",
+      "order": 19,
+      "categoryId": "cat_002",
+      "collectionId": "col_008",
       "category": {
-        "id": "cat_004",
-        "name": "Tops",
-        "slug": "tops",
-        "description": "Blouses, shirts, and sweaters",
-        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
         "parentId": null,
-        "order": 4,
+        "order": 2,
         "isActive": true
       },
       "collection": {
-        "id": "col_004",
-        "name": "Dark Romance",
-        "slug": "dark",
-        "description": "Mysterious and alluring pieces",
-        "imageUrl": "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=1200",
+        "id": "col_008",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury bags collection",
+        "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
         "videoUrl": null,
-        "season": "Winter",
-        "year": 2025,
-        "isFeatured": false,
+        "season": "Resort",
+        "year": 2026,
+        "isFeatured": true,
         "isActive": true,
-        "order": 4
+        "order": 8
       },
       "images": [
         {
-          "id": "img_008_1",
-          "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800",
-          "altText": "Cashmere Sweater",
+          "id": "img_019_1",
+          "url": "/uploads/products/classic-taupe-leather-handbag/bag-main.jpg",
+          "altText": "Classic Taupe Leather Handbag Product Still",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 6000,
+          "height": 4000
         }
       ],
-      "material": "100% Cashmere",
-      "fit": "Relaxed",
-      "care": "Hand wash or dry clean",
+      "material": "Grained Pebble Leather with Palladium Hardware",
+      "fit": "Structured top-handle with detachable crossbody strap",
+      "care": "Store in provided cotton dust bag",
       "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL"
+        "One Size"
       ],
       "colors": [
-        "Cream",
-        "Grey",
-        "Camel",
-        "Black"
+        "Taupe Grey",
+        "Cognac Brown"
       ],
       "tags": [
-        "tops",
-        "cashmere",
-        "winter"
+        "bags",
+        "handbag",
+        "leather",
+        "taupe",
+        "classic"
       ],
-      "createdAt": "2025-10-20T00:00:00.000Z",
-      "updatedAt": "2025-10-20T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_019_1",
+          "color": "Taupe Grey",
+          "size": "One Size",
+          "sku": "BAG-TAUPE-019-TAU-OneSize",
+          "stock": 12,
+          "price": 540
+        },
+        {
+          "id": "var_019_2",
+          "color": "Cognac Brown",
+          "size": "One Size",
+          "sku": "BAG-TAUPE-019-COG-OneSize",
+          "stock": 12,
+          "price": 540
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_009",
-      "name": "Evening Gown",
-      "slug": "evening-gown",
-      "description": "Stunning evening gown with dramatic silhouette. Perfect for black-tie events.",
-      "longDesc": "This Evening Gown features a breathtaking floor-length silhouette with sheer illusion neckline and hand-sewn crystal embellishments. The velvet bodice flows into a dramatic tulle skirt.",
-      "price": 1850,
-      "comparePrice": null,
-      "sku": "DRS-EVE-009",
-      "stock": 3,
+      "id": "prod_020",
+      "name": "Minimalist Structured Bucket Bag",
+      "slug": "minimalist-structured-bucket-bag",
+      "description": "Clean Scandinavian-inspired cylindrical bucket bag with leather cord drawstring and internal slip pocket.",
+      "longDesc": "Structured smooth box leather holds its graceful cylindrical shape effortlessly. The internal linen-canvas pouch cinches securely to keep essentials safe.",
+      "price": 390,
+      "comparePrice": 495,
+      "sku": "BAG-BUCKET-020",
+      "stock": 25,
       "isFeatured": false,
       "isArchived": false,
       "isActive": true,
-      "order": 9,
-      "categoryId": "cat_001",
-      "collectionId": "col_003",
+      "order": 20,
+      "categoryId": "cat_002",
+      "collectionId": "col_008",
       "category": {
-        "id": "cat_001",
-        "name": "Dresses",
-        "slug": "dresses",
-        "description": "Elegant dresses for every occasion",
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
         "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
         "parentId": null,
-        "order": 1,
+        "order": 2,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_008",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury bags collection",
+        "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+        "videoUrl": null,
+        "season": "Resort",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 8
+      },
+      "images": [
+        {
+          "id": "img_020_1",
+          "url": "/uploads/products/minimalist-structured-bucket-bag/bucket-bag.jpg",
+          "altText": "Minimalist Structured Bucket Bag Showcase",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3456,
+          "height": 5184
+        }
+      ],
+      "material": "Smooth Box Calf Leather with Canvas Drawstring Insert",
+      "fit": "Cylindrical bucket structure with adjustable strap",
+      "care": "Wipe clean with dry cloth",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Tan Leather",
+        "Ebony Black"
+      ],
+      "tags": [
+        "bags",
+        "bucket-bag",
+        "leather",
+        "minimal"
+      ],
+      "variants": [
+        {
+          "id": "var_020_1",
+          "color": "Tan Leather",
+          "size": "One Size",
+          "sku": "BAG-BUCKET-020-TAN-OneSize",
+          "stock": 14,
+          "price": 390
+        },
+        {
+          "id": "var_020_2",
+          "color": "Ebony Black",
+          "size": "One Size",
+          "sku": "BAG-BUCKET-020-EBO-OneSize",
+          "stock": 14,
+          "price": 390
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_021",
+      "name": "Monochrome Leather Envelope Clutch",
+      "slug": "monochrome-leather-envelope-clutch",
+      "description": "Razor-sharp envelope clutch engineered with magnetic snap closure and 6 interior card slots.",
+      "longDesc": "The quintessential companion for evening affairs. Slender enough to tuck under your arm, yet spacious enough for your smartphone, cards, and lipstick.",
+      "price": 280,
+      "comparePrice": 360,
+      "sku": "BAG-CLUTCH-021",
+      "stock": 30,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 21,
+      "categoryId": "cat_002",
+      "collectionId": "col_008",
+      "category": {
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 2,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_008",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury bags collection",
+        "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+        "videoUrl": null,
+        "season": "Resort",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 8
+      },
+      "images": [
+        {
+          "id": "img_021_1",
+          "url": "/uploads/products/monochrome-leather-envelope-clutch/clutch-front.jpg",
+          "altText": "Monochrome Leather Envelope Clutch In Hand",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4443,
+          "height": 2962
+        }
+      ],
+      "material": "Semi-Gloss Calfskin with Magnetic Closure",
+      "fit": "Sleek hand-held envelope with card slots inside",
+      "care": "Keep away from moisture and heat",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Jet Black",
+        "Ivory Cream"
+      ],
+      "tags": [
+        "bags",
+        "clutch",
+        "leather",
+        "evening"
+      ],
+      "variants": [
+        {
+          "id": "var_021_1",
+          "color": "Jet Black",
+          "size": "One Size",
+          "sku": "BAG-CLUTCH-021-JET-OneSize",
+          "stock": 17,
+          "price": 280
+        },
+        {
+          "id": "var_021_2",
+          "color": "Ivory Cream",
+          "size": "One Size",
+          "sku": "BAG-CLUTCH-021-IVO-OneSize",
+          "stock": 17,
+          "price": 280
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_022",
+      "name": "Artisanal Leather Crossbody Bag",
+      "slug": "artisanal-leather-crossbody-bag",
+      "description": "Heritage saddle craftsmanship with contrast saddle-stitch detailing and brushed brass magnetic clasp.",
+      "longDesc": "Handmade using century-old saddlery techniques. Vegetable-tanned thick leather will age gracefully, developing rich character with years of wear.",
+      "price": 430,
+      "comparePrice": 560,
+      "sku": "BAG-CROSS-022",
+      "stock": 22,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 22,
+      "categoryId": "cat_002",
+      "collectionId": "col_008",
+      "category": {
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 2,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_008",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury bags collection",
+        "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+        "videoUrl": null,
+        "season": "Resort",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 8
+      },
+      "images": [
+        {
+          "id": "img_022_1",
+          "url": "/uploads/products/artisanal-leather-crossbody-bag/crossbody-front.jpg",
+          "altText": "Artisanal Leather Crossbody Bag Editorial",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3999,
+          "height": 5655
+        }
+      ],
+      "material": "Hand-Stitched Saddle Leather",
+      "fit": "Flap front with adjustable shoulder strap",
+      "care": "Condition annually with beeswax leather balm",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Caramel Suede",
+        "Dark Olive"
+      ],
+      "tags": [
+        "bags",
+        "crossbody",
+        "leather",
+        "artisan"
+      ],
+      "variants": [
+        {
+          "id": "var_022_1",
+          "color": "Caramel Suede",
+          "size": "One Size",
+          "sku": "BAG-CROSS-022-CAR-OneSize",
+          "stock": 13,
+          "price": 430
+        },
+        {
+          "id": "var_022_2",
+          "color": "Dark Olive",
+          "size": "One Size",
+          "sku": "BAG-CROSS-022-DAR-OneSize",
+          "stock": 13,
+          "price": 430
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_023",
+      "name": "Grand Weekender Leather Tote",
+      "slug": "grand-weekender-leather-tote",
+      "description": "Generously proportioned travel tote handcrafted for discerning globe-trotters with brass studs and laptop sleeve.",
+      "longDesc": "Ready for short escapes and long-haul travel. Featuring reinforced top handles, padded laptop compartment, and heavy-duty YKK brass zippers.",
+      "price": 650,
+      "comparePrice": 850,
+      "sku": "BAG-WEEKEND-023",
+      "stock": 15,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 23,
+      "categoryId": "cat_002",
+      "collectionId": "col_008",
+      "category": {
+        "id": "cat_002",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury handbags and accessories",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 2,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_008",
+        "name": "Bags",
+        "slug": "bags",
+        "description": "Luxury bags collection",
+        "imageUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1200",
+        "videoUrl": null,
+        "season": "Resort",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 8
+      },
+      "images": [
+        {
+          "id": "img_023_1",
+          "url": "/uploads/products/grand-weekender-leather-tote/tote-hero.jpg",
+          "altText": "Grand Weekender Leather Tote Display",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3072,
+          "height": 2048
+        }
+      ],
+      "material": "Full-Grain Waxed Pull-Up Cowhide",
+      "fit": "Oversized carryall with reinforced dual handles",
+      "care": "Wax treatment maintains water resistance",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Cognac Rust",
+        "Midnight Black"
+      ],
+      "tags": [
+        "bags",
+        "tote",
+        "weekender",
+        "travel",
+        "leather"
+      ],
+      "variants": [
+        {
+          "id": "var_023_1",
+          "color": "Cognac Rust",
+          "size": "One Size",
+          "sku": "BAG-WEEKEND-023-COG-OneSize",
+          "stock": 9,
+          "price": 650
+        },
+        {
+          "id": "var_023_2",
+          "color": "Midnight Black",
+          "size": "One Size",
+          "sku": "BAG-WEEKEND-023-MID-OneSize",
+          "stock": 9,
+          "price": 650
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_024",
+      "name": "Strappy Stiletto Leather Sandals",
+      "slug": "strappy-stiletto-leather-sandals",
+      "description": "Sculpted 90mm stiletto heels with razor-thin interlocking nappa straps that frame the foot like wearable sculpture.",
+      "longDesc": "Turn heads at any black-tie gala. Built on a cushioned footbed with Italian buffed leather soles and secure buckle ankle fastening.",
+      "price": 380,
+      "comparePrice": 495,
+      "sku": "SHOE-STIL-024",
+      "stock": 28,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 24,
+      "categoryId": "cat_003",
+      "collectionId": "col_003",
+      "category": {
+        "id": "cat_003",
+        "name": "Shoes",
+        "slug": "shoes",
+        "description": "Designer heels, boots, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 3,
         "isActive": true
       },
       "collection": {
@@ -642,50 +3080,152 @@
       },
       "images": [
         {
-          "id": "img_009_1",
-          "url": "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=800",
-          "altText": "Evening Gown",
+          "id": "img_024_1",
+          "url": "/uploads/products/strappy-stiletto-leather-sandals/sandals-feet.jpg",
+          "altText": "Strappy Stiletto Leather Sandals On Model",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 3200,
+          "height": 4800
         }
       ],
-      "material": "Velvet, Tulle, Crystals",
-      "fit": "Slim",
-      "care": "Professional preservation",
+      "material": "Nappa Leather Upper, Italian Leather Sole, 90mm Heel",
+      "fit": "True to European sizing, delicate ankle strap",
+      "care": "Wipe clean; heel tip replacements included",
       "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L"
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41"
       ],
       "colors": [
-        "Black",
-        "Burgundy"
+        "Noir Black",
+        "Metallic Gold"
       ],
       "tags": [
-        "dresses",
-        "evening",
-        "formal"
+        "shoes",
+        "sandals",
+        "heels",
+        "stiletto",
+        "evening"
       ],
-      "createdAt": "2025-09-10T00:00:00.000Z",
-      "updatedAt": "2025-09-10T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_024_1",
+          "color": "Noir Black",
+          "size": "36",
+          "sku": "SHOE-STIL-024-NOI-36",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_2",
+          "color": "Noir Black",
+          "size": "37",
+          "sku": "SHOE-STIL-024-NOI-37",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_3",
+          "color": "Noir Black",
+          "size": "38",
+          "sku": "SHOE-STIL-024-NOI-38",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_4",
+          "color": "Noir Black",
+          "size": "39",
+          "sku": "SHOE-STIL-024-NOI-39",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_5",
+          "color": "Noir Black",
+          "size": "40",
+          "sku": "SHOE-STIL-024-NOI-40",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_6",
+          "color": "Noir Black",
+          "size": "41",
+          "sku": "SHOE-STIL-024-NOI-41",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_7",
+          "color": "Metallic Gold",
+          "size": "36",
+          "sku": "SHOE-STIL-024-MET-36",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_8",
+          "color": "Metallic Gold",
+          "size": "37",
+          "sku": "SHOE-STIL-024-MET-37",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_9",
+          "color": "Metallic Gold",
+          "size": "38",
+          "sku": "SHOE-STIL-024-MET-38",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_10",
+          "color": "Metallic Gold",
+          "size": "39",
+          "sku": "SHOE-STIL-024-MET-39",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_11",
+          "color": "Metallic Gold",
+          "size": "40",
+          "sku": "SHOE-STIL-024-MET-40",
+          "stock": 4,
+          "price": 380
+        },
+        {
+          "id": "var_024_12",
+          "color": "Metallic Gold",
+          "size": "41",
+          "sku": "SHOE-STIL-024-MET-41",
+          "stock": 4,
+          "price": 380
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_010",
-      "name": "Classic Leather Boots",
-      "slug": "classic-leather-boots",
-      "description": "Timeless leather boots with comfortable block heel.",
-      "longDesc": "These Classic Leather Boots are crafted from premium leather with a comfortable 2-inch block heel. Features side zip closure and cushioned insole for all-day comfort.",
-      "price": 365,
-      "comparePrice": 450,
-      "sku": "SHO-BOOT-010",
-      "stock": 14,
+      "id": "prod_025",
+      "name": "Minimalist Leather Studio Sneakers",
+      "slug": "minimalist-leather-studio-sneakers",
+      "description": "Clean low-top court sneakers handcrafted in Civitanova Marche with stitched cupsole and calfskin lining.",
+      "longDesc": "The essential luxury sneaker. Crafted with minimal branding, waxed cotton laces, and a supportive anatomical insole for all-day city walks.",
+      "price": 260,
+      "comparePrice": 340,
+      "sku": "SHOE-SNEAK-025",
+      "stock": 32,
       "isFeatured": false,
       "isArchived": false,
       "isActive": true,
-      "order": 10,
+      "order": 25,
       "categoryId": "cat_003",
       "collectionId": "col_005",
       "category": {
@@ -693,7 +3233,7 @@
         "name": "Shoes",
         "slug": "shoes",
         "description": "Designer heels, boots, and more",
-        "imageUrl": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
         "parentId": null,
         "order": 3,
         "isActive": true
@@ -713,286 +3253,334 @@
       },
       "images": [
         {
-          "id": "img_010_1",
-          "url": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800",
-          "altText": "Classic Boots",
+          "id": "img_025_1",
+          "url": "/uploads/products/minimalist-leather-studio-sneakers/sneaker-side.jpg",
+          "altText": "Minimalist Leather Studio Sneakers Profile",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 2592,
+          "height": 4608
         }
       ],
-      "material": "Leather Upper, Rubber Sole",
-      "fit": "True to Size",
-      "care": "Condition regularly",
+      "material": "Full-Grain Italian Calfskin with Margom Rubber Sole",
+      "fit": "Standard European width, cushioned leather insole",
+      "care": "Clean with premium sneaker foam cleaner",
+      "sizes": [
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
+      "colors": [
+        "Triple White",
+        "White & Gum"
+      ],
+      "tags": [
+        "shoes",
+        "sneakers",
+        "leather",
+        "minimal"
+      ],
+      "variants": [
+        {
+          "id": "var_025_1",
+          "color": "Triple White",
+          "size": "37",
+          "sku": "SHOE-SNEAK-025-TRI-37",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_2",
+          "color": "Triple White",
+          "size": "38",
+          "sku": "SHOE-SNEAK-025-TRI-38",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_3",
+          "color": "Triple White",
+          "size": "39",
+          "sku": "SHOE-SNEAK-025-TRI-39",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_4",
+          "color": "Triple White",
+          "size": "40",
+          "sku": "SHOE-SNEAK-025-TRI-40",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_5",
+          "color": "Triple White",
+          "size": "41",
+          "sku": "SHOE-SNEAK-025-TRI-41",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_6",
+          "color": "Triple White",
+          "size": "42",
+          "sku": "SHOE-SNEAK-025-TRI-42",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_7",
+          "color": "Triple White",
+          "size": "43",
+          "sku": "SHOE-SNEAK-025-TRI-43",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_8",
+          "color": "White & Gum",
+          "size": "37",
+          "sku": "SHOE-SNEAK-025-WHI-37",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_9",
+          "color": "White & Gum",
+          "size": "38",
+          "sku": "SHOE-SNEAK-025-WHI-38",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_10",
+          "color": "White & Gum",
+          "size": "39",
+          "sku": "SHOE-SNEAK-025-WHI-39",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_11",
+          "color": "White & Gum",
+          "size": "40",
+          "sku": "SHOE-SNEAK-025-WHI-40",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_12",
+          "color": "White & Gum",
+          "size": "41",
+          "sku": "SHOE-SNEAK-025-WHI-41",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_13",
+          "color": "White & Gum",
+          "size": "42",
+          "sku": "SHOE-SNEAK-025-WHI-42",
+          "stock": 4,
+          "price": 260
+        },
+        {
+          "id": "var_025_14",
+          "color": "White & Gum",
+          "size": "43",
+          "sku": "SHOE-SNEAK-025-WHI-43",
+          "stock": 4,
+          "price": 260
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_026",
+      "name": "Sculptural Leather Heeled Mules",
+      "slug": "sculptural-leather-heeled-mules",
+      "description": "A fusion of modern art and footwear design featuring an architectural translucent block heel and soft square toe.",
+      "longDesc": "Wearable modernism. Pillow-soft lambskin straps hug the instep, elevated by a lightweight, shatterproof acrylic statement geometric heel.",
+      "price": 410,
+      "comparePrice": 530,
+      "sku": "SHOE-MULE-026",
+      "stock": 20,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 26,
+      "categoryId": "cat_003",
+      "collectionId": "col_007",
+      "category": {
+        "id": "cat_003",
+        "name": "Shoes",
+        "slug": "shoes",
+        "description": "Designer heels, boots, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 3,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_007",
+        "name": "Art Pieces",
+        "slug": "artifacts",
+        "description": "Wearable art",
+        "imageUrl": "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 7
+      },
+      "images": [
+        {
+          "id": "img_026_1",
+          "url": "/uploads/products/sculptural-leather-heeled-mules/mules-angle.jpg",
+          "altText": "Sculptural Leather Heeled Mules Studio Angle",
+          "order": 0,
+          "isPrimary": true,
+          "width": 2894,
+          "height": 3617
+        }
+      ],
+      "material": "Lambskin Leather with Architectural Acrylic 75mm Block Heel",
+      "fit": "Slip-on square-toe mule silhouette",
+      "care": "Condition upper leather; wipe acrylic heel with microfiber",
       "sizes": [
         "36",
         "37",
         "38",
         "39",
-        "40",
-        "41"
+        "40"
       ],
       "colors": [
-        "Black",
-        "Brown",
-        "Tan"
+        "Alabaster Cream",
+        "Espresso"
       ],
       "tags": [
         "shoes",
-        "boots",
-        "minimal"
+        "mules",
+        "heels",
+        "sculptural",
+        "art-pieces"
       ],
-      "createdAt": "2025-08-15T00:00:00.000Z",
-      "updatedAt": "2025-08-15T00:00:00.000Z"
+      "variants": [
+        {
+          "id": "var_026_1",
+          "color": "Alabaster Cream",
+          "size": "36",
+          "sku": "SHOE-MULE-026-ALA-36",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_2",
+          "color": "Alabaster Cream",
+          "size": "37",
+          "sku": "SHOE-MULE-026-ALA-37",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_3",
+          "color": "Alabaster Cream",
+          "size": "38",
+          "sku": "SHOE-MULE-026-ALA-38",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_4",
+          "color": "Alabaster Cream",
+          "size": "39",
+          "sku": "SHOE-MULE-026-ALA-39",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_5",
+          "color": "Alabaster Cream",
+          "size": "40",
+          "sku": "SHOE-MULE-026-ALA-40",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_6",
+          "color": "Espresso",
+          "size": "36",
+          "sku": "SHOE-MULE-026-ESP-36",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_7",
+          "color": "Espresso",
+          "size": "37",
+          "sku": "SHOE-MULE-026-ESP-37",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_8",
+          "color": "Espresso",
+          "size": "38",
+          "sku": "SHOE-MULE-026-ESP-38",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_9",
+          "color": "Espresso",
+          "size": "39",
+          "sku": "SHOE-MULE-026-ESP-39",
+          "stock": 4,
+          "price": 410
+        },
+        {
+          "id": "var_026_10",
+          "color": "Espresso",
+          "size": "40",
+          "sku": "SHOE-MULE-026-ESP-40",
+          "stock": 4,
+          "price": 410
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     },
     {
-      "id": "prod_011",
-      "name": "Essential Cotton T-Shirt",
-      "slug": "essential-cotton-tshirt",
-      "description": "Perfect everyday t-shirt in premium cotton.",
-      "longDesc": "This Essential Cotton T-Shirt is made from the finest pima cotton for exceptional softness and durability. Features relaxed fit and crew neck.",
-      "price": 85,
-      "comparePrice": null,
-      "sku": "TOP-TSHIRT-011",
-      "stock": 50,
+      "id": "prod_027",
+      "name": "Rugged Noir Combat Boots",
+      "slug": "rugged-noir-combat-boots",
+      "description": "Defiant combat boots engineered with military-spec lug soles, Goodyear welt construction, and polished leather.",
+      "longDesc": "Tough yet refined. Weather-treated kipskin upper withstands urban terrain, mounted onto an authentic Goodyear-welted shock-absorbing Vibram tread.",
+      "price": 450,
+      "comparePrice": 590,
+      "sku": "SHOE-BOOT-027",
+      "stock": 24,
       "isFeatured": false,
       "isArchived": false,
       "isActive": true,
-      "order": 11,
-      "categoryId": "cat_004",
-      "collectionId": "col_005",
-      "category": {
-        "id": "cat_004",
-        "name": "Tops",
-        "slug": "tops",
-        "description": "Blouses, shirts, and sweaters",
-        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
-        "parentId": null,
-        "order": 4,
-        "isActive": true
-      },
-      "collection": {
-        "id": "col_005",
-        "name": "Minimal",
-        "slug": "minimal",
-        "description": "Clean lines and timeless elegance",
-        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
-        "videoUrl": null,
-        "season": "Summer",
-        "year": 2025,
-        "isFeatured": false,
-        "isActive": true,
-        "order": 5
-      },
-      "images": [
-        {
-          "id": "img_011_1",
-          "url": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800",
-          "altText": "Cotton T-Shirt",
-          "order": 0,
-          "isPrimary": true,
-          "width": 800,
-          "height": 1000
-        }
-      ],
-      "material": "100% Pima Cotton",
-      "fit": "Relaxed",
-      "care": "Machine wash cold",
-      "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "colors": [
-        "White",
-        "Black",
-        "Grey",
-        "Navy"
-      ],
-      "tags": [
-        "tops",
-        "essentials",
-        "minimal"
-      ],
-      "createdAt": "2025-07-01T00:00:00.000Z",
-      "updatedAt": "2025-07-01T00:00:00.000Z"
-    },
-    {
-      "id": "prod_012",
-      "name": "Tailored Wool Blazer",
-      "slug": "tailored-wool-blazer",
-      "description": "Sharp tailored blazer in premium wool.",
-      "longDesc": "This Tailored Wool Blazer features a structured silhouette with peak lapels and double-breasted closure. Made from Italian wool with subtle texture.",
-      "price": 675,
-      "comparePrice": 850,
-      "sku": "OUT-BLAZER-012",
-      "stock": 10,
-      "isFeatured": true,
-      "isArchived": false,
-      "isActive": true,
-      "order": 12,
-      "categoryId": "cat_005",
-      "collectionId": "col_003",
-      "category": {
-        "id": "cat_005",
-        "name": "Outerwear",
-        "slug": "outerwear",
-        "description": "Jackets, coats, and blazers",
-        "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800",
-        "parentId": null,
-        "order": 5,
-        "isActive": true
-      },
-      "collection": {
-        "id": "col_003",
-        "name": "Editorial",
-        "slug": "editorial",
-        "description": "Bold statements for the fearless",
-        "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
-        "videoUrl": null,
-        "season": "Fall",
-        "year": 2025,
-        "isFeatured": true,
-        "isActive": true,
-        "order": 3
-      },
-      "images": [
-        {
-          "id": "img_012_1",
-          "url": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800",
-          "altText": "Tailored Blazer",
-          "order": 0,
-          "isPrimary": true,
-          "width": 800,
-          "height": 1000
-        }
-      ],
-      "material": "100% Italian Wool",
-      "fit": "Slim",
-      "care": "Dry clean only",
-      "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "colors": [
-        "Charcoal",
-        "Navy",
-        "Black"
-      ],
-      "tags": [
-        "outerwear",
-        "blazer",
-        "featured"
-      ],
-      "createdAt": "2025-11-01T00:00:00.000Z",
-      "updatedAt": "2025-11-01T00:00:00.000Z"
-    },
-    {
-      "id": "prod_1772244078078",
-      "name": "Black and White Strip bikini with red flag",
-      "slug": "black-and-white-strip-bikini-with-red-flag",
-      "description": "COmfortable, stylish, An elegant mini dress with long sleeves and a flattering silhouette. Perfect for both day and evening wear.",
-      "longDesc": "This bikini features a sophisticated mock neckline and bodycon fit. The stretch fabric ensures comfort while maintaining structure. Available in classic black and romantic blush pink.",
-      "price": 200,
-      "comparePrice": 190,
-      "sku": "",
-      "stock": 4,
-      "isFeatured": true,
-      "isArchived": true,
-      "isActive": false,
-      "order": 13,
-      "categoryId": "cat_1772243766304",
-      "collectionId": "col_1772243821382",
-      "category": {
-        "id": "cat_1772243766304",
-        "name": "Bikini",
-        "slug": "bikini",
-        "description": null,
-        "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "parentId": null,
-        "order": 7,
-        "isActive": true
-      },
-      "collection": {
-        "id": "col_1772243821382",
-        "name": "Bikini",
-        "slug": "bikini",
-        "description": null,
-        "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        "videoUrl": null,
-        "season": "Spring",
-        "year": 0,
-        "isFeatured": true,
-        "isActive": true,
-        "order": 9
-      },
-      "images": [
-        {
-          "id": "img_1772269046057_0",
-          "url": "/uploads/1772244068087-795913244-jernej-graj-AqBLbbqPDMM-unsplash.jpg",
-          "altText": null,
-          "order": 0,
-          "isPrimary": true,
-          "width": 800,
-          "height": 1000
-        },
-        {
-          "id": "img_1772269046057_1",
-          "url": "/uploads/1772244068084-103309898-jernej-graj-L-ROTbBDgTc-unsplash.jpg",
-          "altText": null,
-          "order": 1,
-          "isPrimary": false,
-          "width": 800,
-          "height": 1000
-        }
-      ],
-      "material": "70% Cotton, 30% Linen",
-      "fit": "Regular",
-      "care": "Store in dust bag",
-      "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "colors": [
-        "blank And white"
-      ],
-      "tags": [],
-      "createdAt": "2026-02-28T02:01:18.078Z",
-      "updatedAt": "2026-02-28T08:57:26.057Z"
-    },
-    {
-      "id": "prod_1776149451057",
-      "name": "Black Full Sleve Top",
-      "slug": "black-full-sleve-top",
-      "description": "Cotton silky luxary fabric. ",
-      "longDesc": "Cotton silky luxary fabric. with high quality ",
-      "price": 1223,
-      "comparePrice": 1200,
-      "sku": "BLACK-Silky-005",
-      "stock": 20,
-      "isFeatured": true,
-      "isArchived": false,
-      "isActive": true,
-      "order": 14,
-      "categoryId": "cat_004",
+      "order": 27,
+      "categoryId": "cat_003",
       "collectionId": "col_004",
       "category": {
-        "id": "cat_004",
-        "name": "Tops",
-        "slug": "tops",
-        "description": "Blouses, shirts, and sweaters",
-        "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800",
+        "id": "cat_003",
+        "name": "Shoes",
+        "slug": "shoes",
+        "description": "Designer heels, boots, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
         "parentId": null,
-        "order": 4,
+        "order": 3,
         "isActive": true
       },
       "collection": {
@@ -1010,35 +3598,660 @@
       },
       "images": [
         {
-          "id": "img_1776149451057_0",
-          "url": "/uploads/1776149246645-85524802-ivan-kazlouskij-1dkUMKQAEm0-unsplash.jpg",
-          "altText": "Black Full Sleve Top",
+          "id": "img_027_1",
+          "url": "/uploads/products/rugged-noir-combat-boots/boots-editorial.jpg",
+          "altText": "Rugged Noir Combat Boots In Editorial Shot",
           "order": 0,
           "isPrimary": true,
-          "width": 800,
-          "height": 1000
+          "width": 2999,
+          "height": 3749
         }
       ],
-      "material": "70% Cotton, 30% Linen",
-      "fit": "Regular",
-      "care": "Machine wash cold",
+      "material": "Waxed Kipskin Leather with Lugged Vibram® Outsole",
+      "fit": "Lace-up front with quick-release inner side zip",
+      "care": "Buff with black wax polish",
       "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL"
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42"
       ],
       "colors": [
-        "black"
+        "Polished Noir",
+        "Matte Charcoal"
       ],
       "tags": [
-        "black",
-        "luxary"
+        "shoes",
+        "boots",
+        "combat",
+        "noir",
+        "dark-romance"
       ],
-      "variants": [],
-      "createdAt": "2026-04-14T06:50:51.057Z",
-      "updatedAt": "2026-04-14T06:50:51.057Z"
+      "variants": [
+        {
+          "id": "var_027_1",
+          "color": "Polished Noir",
+          "size": "37",
+          "sku": "SHOE-BOOT-027-POL-37",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_2",
+          "color": "Polished Noir",
+          "size": "38",
+          "sku": "SHOE-BOOT-027-POL-38",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_3",
+          "color": "Polished Noir",
+          "size": "39",
+          "sku": "SHOE-BOOT-027-POL-39",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_4",
+          "color": "Polished Noir",
+          "size": "40",
+          "sku": "SHOE-BOOT-027-POL-40",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_5",
+          "color": "Polished Noir",
+          "size": "41",
+          "sku": "SHOE-BOOT-027-POL-41",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_6",
+          "color": "Polished Noir",
+          "size": "42",
+          "sku": "SHOE-BOOT-027-POL-42",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_7",
+          "color": "Matte Charcoal",
+          "size": "37",
+          "sku": "SHOE-BOOT-027-MAT-37",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_8",
+          "color": "Matte Charcoal",
+          "size": "38",
+          "sku": "SHOE-BOOT-027-MAT-38",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_9",
+          "color": "Matte Charcoal",
+          "size": "39",
+          "sku": "SHOE-BOOT-027-MAT-39",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_10",
+          "color": "Matte Charcoal",
+          "size": "40",
+          "sku": "SHOE-BOOT-027-MAT-40",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_11",
+          "color": "Matte Charcoal",
+          "size": "41",
+          "sku": "SHOE-BOOT-027-MAT-41",
+          "stock": 4,
+          "price": 450
+        },
+        {
+          "id": "var_027_12",
+          "color": "Matte Charcoal",
+          "size": "42",
+          "sku": "SHOE-BOOT-027-MAT-42",
+          "stock": 4,
+          "price": 450
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_028",
+      "name": "Handcrafted Cross-Strap Sandals",
+      "slug": "handcrafted-cross-strap-sandals",
+      "description": "Timeless Mediterranean leather slide sandals shaped from unlined Tuscan leather that molds to your feet over time.",
+      "longDesc": "Pure organic simplicity. Made without synthetic adhesives or hardware, celebrating raw artisanal leatherwork and anatomical arch support.",
+      "price": 190,
+      "comparePrice": 250,
+      "sku": "SHOE-SLIDE-028",
+      "stock": 30,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 28,
+      "categoryId": "cat_003",
+      "collectionId": "col_005",
+      "category": {
+        "id": "cat_003",
+        "name": "Shoes",
+        "slug": "shoes",
+        "description": "Designer heels, boots, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800",
+        "parentId": null,
+        "order": 3,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_005",
+        "name": "Minimal",
+        "slug": "minimal",
+        "description": "Clean lines and timeless elegance",
+        "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1200",
+        "videoUrl": null,
+        "season": "Summer",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 5
+      },
+      "images": [
+        {
+          "id": "img_028_1",
+          "url": "/uploads/products/handcrafted-cross-strap-sandals/sandals-flat.jpg",
+          "altText": "Handcrafted Cross-Strap Leather Sandals Top View",
+          "order": 0,
+          "isPrimary": true,
+          "width": 2000,
+          "height": 2000
+        }
+      ],
+      "material": "Vegetable-Tanned Cuoio Leather with Molded Footbed",
+      "fit": "Slip-on ergonomic slide",
+      "care": "Store in dry place; allow leather to age naturally with patina",
+      "sizes": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41"
+      ],
+      "colors": [
+        "Natural Tan",
+        "Dark Walnut"
+      ],
+      "tags": [
+        "shoes",
+        "sandals",
+        "slides",
+        "leather",
+        "summer"
+      ],
+      "variants": [
+        {
+          "id": "var_028_1",
+          "color": "Natural Tan",
+          "size": "36",
+          "sku": "SHOE-SLIDE-028-NAT-36",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_2",
+          "color": "Natural Tan",
+          "size": "37",
+          "sku": "SHOE-SLIDE-028-NAT-37",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_3",
+          "color": "Natural Tan",
+          "size": "38",
+          "sku": "SHOE-SLIDE-028-NAT-38",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_4",
+          "color": "Natural Tan",
+          "size": "39",
+          "sku": "SHOE-SLIDE-028-NAT-39",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_5",
+          "color": "Natural Tan",
+          "size": "40",
+          "sku": "SHOE-SLIDE-028-NAT-40",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_6",
+          "color": "Natural Tan",
+          "size": "41",
+          "sku": "SHOE-SLIDE-028-NAT-41",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_7",
+          "color": "Dark Walnut",
+          "size": "36",
+          "sku": "SHOE-SLIDE-028-DAR-36",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_8",
+          "color": "Dark Walnut",
+          "size": "37",
+          "sku": "SHOE-SLIDE-028-DAR-37",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_9",
+          "color": "Dark Walnut",
+          "size": "38",
+          "sku": "SHOE-SLIDE-028-DAR-38",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_10",
+          "color": "Dark Walnut",
+          "size": "39",
+          "sku": "SHOE-SLIDE-028-DAR-39",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_11",
+          "color": "Dark Walnut",
+          "size": "40",
+          "sku": "SHOE-SLIDE-028-DAR-40",
+          "stock": 4,
+          "price": 190
+        },
+        {
+          "id": "var_028_12",
+          "color": "Dark Walnut",
+          "size": "41",
+          "sku": "SHOE-SLIDE-028-DAR-41",
+          "stock": 4,
+          "price": 190
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_029",
+      "name": "Delicate 18K Gold Chain Necklace",
+      "slug": "delicate-18k-gold-chain-necklace",
+      "description": "Whisper-thin heirloom chain necklace featuring organic forged links designed to catch every ray of ambient light.",
+      "longDesc": "Cast in ethical 18k thick gold vermeil over recycled silver. Beautiful layered or worn solo as an understated everyday talisman.",
+      "price": 310,
+      "comparePrice": 420,
+      "sku": "ACC-GOLD-029",
+      "stock": 40,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 29,
+      "categoryId": "cat_006",
+      "collectionId": "col_007",
+      "category": {
+        "id": "cat_006",
+        "name": "Accessories",
+        "slug": "accessories",
+        "description": "Jewelry, scarves, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800",
+        "parentId": null,
+        "order": 6,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_007",
+        "name": "Art Pieces",
+        "slug": "artifacts",
+        "description": "Wearable art",
+        "imageUrl": "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2025,
+        "isFeatured": false,
+        "isActive": true,
+        "order": 7
+      },
+      "images": [
+        {
+          "id": "img_029_1",
+          "url": "/uploads/products/delicate-18k-gold-chain-necklace/necklace-detail.jpg",
+          "altText": "Delicate 18K Gold Chain Necklace Close-Up",
+          "order": 0,
+          "isPrimary": true,
+          "width": 6240,
+          "height": 4160
+        }
+      ],
+      "material": "Solid 18-Karat Gold Vermeil over 925 Sterling Silver",
+      "fit": "Adjustable cable chain with lobster clasp",
+      "care": "Polish with specialized jewelry cloth; keep away from perfumes",
+      "sizes": [
+        "45cm / 18in"
+      ],
+      "colors": [
+        "18K Yellow Gold",
+        "18K Rose Gold"
+      ],
+      "tags": [
+        "accessories",
+        "jewelry",
+        "gold",
+        "necklace",
+        "art-pieces"
+      ],
+      "variants": [
+        {
+          "id": "var_029_1",
+          "color": "18K Yellow Gold",
+          "size": "45cm / 18in",
+          "sku": "ACC-GOLD-029-18K-45cm/18in",
+          "stock": 22,
+          "price": 310
+        },
+        {
+          "id": "var_029_2",
+          "color": "18K Rose Gold",
+          "size": "45cm / 18in",
+          "sku": "ACC-GOLD-029-18K-45cm/18in",
+          "stock": 22,
+          "price": 310
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_030",
+      "name": "Rose Gold Architectural Earrings",
+      "slug": "rose-gold-architectural-earrings",
+      "description": "Sculptural drop earrings echoing floral silhouettes with clean modernist lines and mirror-polished finish.",
+      "longDesc": "Capturing the delicate geometry of budding petals. Hypoallergenic titanium posts ensure day-long comfort even for sensitive ears.",
+      "price": 220,
+      "comparePrice": 290,
+      "sku": "ACC-EAR-030",
+      "stock": 45,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 30,
+      "categoryId": "cat_006",
+      "collectionId": "col_002",
+      "category": {
+        "id": "cat_006",
+        "name": "Accessories",
+        "slug": "accessories",
+        "description": "Jewelry, scarves, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800",
+        "parentId": null,
+        "order": 6,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_002",
+        "name": "Rose Collection",
+        "slug": "rose",
+        "description": "Inspired by the beauty of roses",
+        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 2
+      },
+      "images": [
+        {
+          "id": "img_030_1",
+          "url": "/uploads/products/rose-gold-architectural-earrings/earrings-detail.jpg",
+          "altText": "Rose Gold Architectural Earrings Portrait",
+          "order": 0,
+          "isPrimary": true,
+          "width": 3456,
+          "height": 4608
+        }
+      ],
+      "material": "14K Rose Gold Plated Recycled Brass",
+      "fit": "Drop hoop with post and butterfly back",
+      "care": "Avoid contact with water and cosmetics",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Rose Gold",
+        "Brushed Silver"
+      ],
+      "tags": [
+        "accessories",
+        "jewelry",
+        "earrings",
+        "rose-collection"
+      ],
+      "variants": [
+        {
+          "id": "var_030_1",
+          "color": "Rose Gold",
+          "size": "One Size",
+          "sku": "ACC-EAR-030-ROS-OneSize",
+          "stock": 24,
+          "price": 220
+        },
+        {
+          "id": "var_030_2",
+          "color": "Brushed Silver",
+          "size": "One Size",
+          "sku": "ACC-EAR-030-BRU-OneSize",
+          "stock": 24,
+          "price": 220
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_031",
+      "name": "Ethereal Mulberry Silk Scarf",
+      "slug": "ethereal-mulberry-silk-scarf",
+      "description": "Versatile square silk foulard with hand-rolled hems, perfect styled around the neck, hair, or handbag handle.",
+      "longDesc": "Screen-printed on luxurious 16-momme silk twill with vibrant watercolor flora motifs and rolled by hand by master artisans in Como.",
+      "price": 160,
+      "comparePrice": 210,
+      "sku": "ACC-SCARF-031",
+      "stock": 35,
+      "isFeatured": false,
+      "isArchived": false,
+      "isActive": true,
+      "order": 31,
+      "categoryId": "cat_006",
+      "collectionId": "col_002",
+      "category": {
+        "id": "cat_006",
+        "name": "Accessories",
+        "slug": "accessories",
+        "description": "Jewelry, scarves, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800",
+        "parentId": null,
+        "order": 6,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_002",
+        "name": "Rose Collection",
+        "slug": "rose",
+        "description": "Inspired by the beauty of roses",
+        "imageUrl": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200",
+        "videoUrl": null,
+        "season": "Spring",
+        "year": 2026,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 2
+      },
+      "images": [
+        {
+          "id": "img_031_1",
+          "url": "/uploads/products/ethereal-mulberry-silk-scarf/scarf-lifestyle.jpg",
+          "altText": "Ethereal Mulberry Silk Scarf Lifestyle Styling",
+          "order": 0,
+          "isPrimary": true,
+          "width": 1726,
+          "height": 2048
+        }
+      ],
+      "material": "100% Mulberry Silk Twill (16 Momme) with Hand-Rolled Edges",
+      "fit": "Classic 90cm square foulard",
+      "care": "Dry clean only or delicate cold hand wash",
+      "sizes": [
+        "90cm x 90cm"
+      ],
+      "colors": [
+        "Blush Rose Petal",
+        "Celestial Blue"
+      ],
+      "tags": [
+        "accessories",
+        "scarf",
+        "silk",
+        "rose-collection"
+      ],
+      "variants": [
+        {
+          "id": "var_031_1",
+          "color": "Blush Rose Petal",
+          "size": "90cm x 90cm",
+          "sku": "ACC-SCARF-031-BLU-90cmx90cm",
+          "stock": 19,
+          "price": 160
+        },
+        {
+          "id": "var_031_2",
+          "color": "Celestial Blue",
+          "size": "90cm x 90cm",
+          "sku": "ACC-SCARF-031-CEL-90cmx90cm",
+          "stock": 19,
+          "price": 160
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
+    },
+    {
+      "id": "prod_032",
+      "name": "Noir Silhouette Sunglasses",
+      "slug": "noir-silhouette-sunglasses",
+      "description": "Statement editorial sunglasses sculpted from premium Italian bio-acetate with category-3 optical grade sun lenses.",
+      "longDesc": "Chic cat-eye architecture meeting modern eco-conscious luxury. Fitted with shatter-resistant anti-reflective lenses from Carl Zeiss Vision.",
+      "price": 240,
+      "comparePrice": 320,
+      "sku": "ACC-SHADES-032",
+      "stock": 30,
+      "isFeatured": true,
+      "isArchived": false,
+      "isActive": true,
+      "order": 32,
+      "categoryId": "cat_006",
+      "collectionId": "col_003",
+      "category": {
+        "id": "cat_006",
+        "name": "Accessories",
+        "slug": "accessories",
+        "description": "Jewelry, scarves, and more",
+        "imageUrl": "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=800",
+        "parentId": null,
+        "order": 6,
+        "isActive": true
+      },
+      "collection": {
+        "id": "col_003",
+        "name": "Editorial",
+        "slug": "editorial",
+        "description": "Bold statements for the fearless",
+        "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200",
+        "videoUrl": null,
+        "season": "Fall",
+        "year": 2025,
+        "isFeatured": true,
+        "isActive": true,
+        "order": 3
+      },
+      "images": [
+        {
+          "id": "img_032_1",
+          "url": "/uploads/products/noir-silhouette-sunglasses/sunglasses-editorial.jpg",
+          "altText": "Noir Silhouette Sunglasses High Fashion Look",
+          "order": 0,
+          "isPrimary": true,
+          "width": 4000,
+          "height": 6000
+        }
+      ],
+      "material": "Mazzucchelli Bio-Acetate with Carl Zeiss® Category 3 CR-39 Lenses",
+      "fit": "Bold angular cat-eye silhouette with 100% UV400 protection",
+      "care": "Clean with microfiber cloth; store in hard leather case",
+      "sizes": [
+        "One Size"
+      ],
+      "colors": [
+        "Gloss Noir",
+        "Tortoiseshell"
+      ],
+      "tags": [
+        "accessories",
+        "sunglasses",
+        "eyewear",
+        "noir",
+        "editorial"
+      ],
+      "variants": [
+        {
+          "id": "var_032_1",
+          "color": "Gloss Noir",
+          "size": "One Size",
+          "sku": "ACC-SHADES-032-GLO-OneSize",
+          "stock": 17,
+          "price": 240
+        },
+        {
+          "id": "var_032_2",
+          "color": "Tortoiseshell",
+          "size": "One Size",
+          "sku": "ACC-SHADES-032-TOR-OneSize",
+          "stock": 17,
+          "price": 240
+        }
+      ],
+      "createdAt": "2026-03-01T00:00:00.000Z",
+      "updatedAt": "2026-03-15T00:00:00.000Z"
     }
   ],
   "categories": [
@@ -1107,7 +4320,7 @@
       "name": "Bikini",
       "slug": "bikini",
       "description": null,
-      "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageUrl": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
       "parentId": null,
       "order": 7,
       "isActive": true
@@ -1223,7 +4436,7 @@
       "name": "Bikini",
       "slug": "bikini",
       "description": null,
-      "imageUrl": "https://images.unsplash.com/photo-1650940556361-a754be9d7cc1?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageUrl": "/uploads/products/bronze-knit-resort-bikini-set/bikini-front.jpg",
       "videoUrl": null,
       "season": "Spring",
       "year": 0,
